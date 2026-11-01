@@ -1,0 +1,4 @@
+node_modules/
+analytics_financeira.sqlite
+analytics_financeira.sqlite-shm
+analytics_financeira.sqlite-wal

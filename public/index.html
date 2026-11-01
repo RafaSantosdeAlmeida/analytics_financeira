@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f4">
+    <title>Analytics Financeira</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/vendor/chart.umd.js" defer></script>
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Analytics Financeira, início">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">analytics<span>financeira</span></span>
+      </a>
+      <div class="topbar-meta">
+        <span class="environment"><span class="status-dot"></span>SQLite local</span>
+        <span class="topbar-divider"></span>
+        <span class="today" id="today-label"></span>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">DEMONSTRAÇÕES FINANCEIRAS</p>
+          <h1>Analytics Financeira</h1>
+        </div>
+        <div class="database-state"><span class="state-pip"></span><span id="database-label">Conectando ao banco</span></div>
+      </section>
+
+      <nav class="tabs" aria-label="Áreas do sistema" role="tablist">
+        <button class="tab is-active" id="tab-ingestion" role="tab" aria-selected="true" aria-controls="view-ingestion" data-view="ingestion">
+          <span class="tab-number">01</span>Ingestão
+        </button>
+        <button class="tab" id="tab-individual" role="tab" aria-selected="false" aria-controls="view-individual" data-view="individual">
+          <span class="tab-number">02</span>Análise individual
+        </button>
+        <button class="tab" id="tab-comparative" role="tab" aria-selected="false" aria-controls="view-comparative" data-view="comparative">
+          <span class="tab-number">03</span>Análise comparativa
+        </button>
+      </nav>
+
+      <section class="view is-active" id="view-ingestion" role="tabpanel" aria-labelledby="tab-ingestion">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow">PIPELINE DE DADOS</p>
+            <h2>Carregar demonstrações</h2>
+          </div>
+          <p class="section-description">Importe um CSV e acompanhe cada etapa até a persistência no core.</p>
+        </div>
+
+        <div class="ingestion-layout">
+          <div class="ingestion-main">
+            <form class="upload-panel" id="upload-form">
+              <input id="file-input" name="file" type="file" accept=".csv,text/csv" hidden>
+              <div class="upload-copy">
+                <span class="upload-icon" aria-hidden="true">↑</span>
+                <div>
+                  <h3>Solte seu arquivo CSV aqui</h3>
+                  <p>ou <button class="text-button" type="button" id="choose-file">selecione no computador</button></p>
+                </div>
+              </div>
+              <div class="upload-action">
+                <span class="file-name" id="file-name">Nenhum arquivo selecionado</span>
+                <button class="button button-primary" id="upload-button" type="submit" disabled>
+                  <span class="button-icon" aria-hidden="true">↑</span>Carregar arquivo
+                </button>
+              </div>
+              <div class="upload-footnote"><span>CSV</span> Até 100 MB <span class="footnote-separator">·</span> Tipo identificado pelo cabeçalho</div>
+            </form>
+
+            <section class="batch-panel" id="batch-panel" hidden>
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">LOTE SELECIONADO</p>
+                  <h3 id="batch-title">Arquivo</h3>
+                </div>
+                <span class="batch-tag" id="batch-type"></span>
+              </div>
+              <div class="pipeline" aria-label="Etapas do lote">
+                <div class="pipeline-step is-current" id="step-raw"><span class="step-index">1</span><span><b>Raw</b><small>Origem preservada</small></span></div>
+                <span class="pipeline-connector" id="connector-raw"></span>
+                <div class="pipeline-step" id="step-staging"><span class="step-index">2</span><span><b>Staging</b><small>Validação e tipos</small></span></div>
+                <span class="pipeline-connector" id="connector-staging"></span>
+                <div class="pipeline-step" id="step-core"><span class="step-index">3</span><span><b>Core</b><small>Dados persistidos</small></span></div>
+              </div>
+              <div class="batch-stats" id="batch-stats"></div>
+              <div class="table-toolbar">
+                <div>
+                  <h4 id="grid-title">Tabela raw</h4>
+                  <span class="muted" id="grid-caption"></span>
+                </div>
+                <div class="table-actions" id="batch-actions"></div>
+              </div>
+              <div class="table-frame" id="batch-grid" aria-live="polite"></div>
+            </section>
+          </div>
+
+          <aside class="history-panel">
+            <div class="panel-heading compact-heading">
+              <div><p class="eyebrow">ATIVIDADE</p><h3>Lotes recentes</h3></div>
+              <span class="count-badge" id="batch-count">0</span>
+            </div>
+            <div class="batch-list" id="batch-list"><div class="empty-state">Nenhum lote carregado.</div></div>
+            <div class="layout-note">
+              <span class="note-mark" aria-hidden="true">i</span>
+              <p>Os cinco formatos suportados são reconhecidos pelo cabeçalho, independentemente do nome do arquivo.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view analysis-view" id="view-individual" role="tabpanel" aria-labelledby="tab-individual" hidden>
+        <div class="section-intro analysis-intro">
+          <div><p class="eyebrow">DESEMPENHO POR EMPRESA</p><h2>Análise individual</h2></div>
+          <p class="section-description">Acompanhe a evolução de uma conta e explore a composição do período.</p>
+        </div>
+        <div class="filter-panel" data-mode="individual">
+          <div class="filter-grid">
+            <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
+            <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
+            <label class="filter-field"><span>Segmento</span><select data-filter="segmento"><option value="">Todos</option></select></label>
+            <label class="filter-field"><span>Empresa</span><select data-filter="companyId"><option value="">Selecione</option></select></label>
+            <label class="filter-field"><span>Conta da empresa</span><select data-filter="accountCode"><option value="">Selecione</option></select></label>
+            <label class="filter-field"><span>Modalidade</span><select data-filter="grupoDfp"><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></label>
+            <label class="filter-field"><span>Tipo de período</span><select data-filter="tipoPeriodo"><option value="">Selecione</option></select></label>
+            <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
+            <label class="filter-field date-field"><span>Até</span><input data-filter="periodEnd" type="date"></label>
+          </div>
+          <div class="filter-footer">
+            <label class="axis-toggle axis-toggle-hidden"><input type="checkbox" disabled><span class="toggle-track"></span><span>Eixo secundário</span></label>
+            <button class="button button-primary run-analysis" type="button"><span class="button-icon" aria-hidden="true">↗</span>Gerar análise</button>
+          </div>
+        </div>
+        <div class="analysis-results" hidden>
+          <div class="chart-grid">
+            <article class="chart-panel line-panel">
+              <div class="chart-heading"><div><p class="eyebrow">SÉRIE HISTÓRICA</p><h3>Evolução da conta</h3></div><span class="chart-unit" data-chart-currency></span></div>
+              <div class="chart-canvas line-canvas"><canvas aria-label="Gráfico de linha com histórico da conta" role="img"></canvas></div>
+            </article>
+            <article class="chart-panel bar-panel">
+              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DO PERÍODO</p><h3>Contas por valor</h3></div><span class="chart-period" data-chart-period></span></div>
+              <div class="chart-canvas bar-canvas"><canvas aria-label="Gráfico de barras horizontais por conta" role="img"></canvas></div>
+            </article>
+          </div>
+          <section class="data-panel">
+            <div class="data-heading">
+              <div><p class="eyebrow">DADOS FILTRADOS</p><h3>Detalhamento</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div class="export-actions">
+                <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>
+                <button class="button button-secondary export-xlsx" type="button"><span class="button-icon" aria-hidden="true">↓</span>Excel</button>
+              </div>
+            </div>
+            <div class="table-frame analysis-table"></div>
+          </section>
+        </div>
+        <div class="analysis-empty"><span class="empty-graphic" aria-hidden="true">↗</span><p>Selecione os filtros para consultar a série histórica.</p></div>
+      </section>
+
+      <section class="view analysis-view" id="view-comparative" role="tabpanel" aria-labelledby="tab-comparative" hidden>
+        <div class="section-intro analysis-intro">
+          <div><p class="eyebrow">LEITURA ENTRE EMPRESAS</p><h2>Análise comparativa</h2></div>
+          <p class="section-description">Compare a mesma conta de segmento em diferentes empresas.</p>
+        </div>
+        <div class="filter-panel" data-mode="comparative">
+          <div class="filter-grid">
+            <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
+            <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
+            <label class="filter-field"><span>Segmento</span><select data-filter="segmento"><option value="">Todos</option></select></label>
+            <label class="filter-field multi-field"><span>Empresas <small>Ctrl ou ⌘ para múltiplas</small></span><select data-filter="companyIds" multiple size="3"></select></label>
+            <label class="filter-field"><span>Conta do segmento</span><select data-filter="accountCode"><option value="">Selecione</option></select></label>
+            <label class="filter-field"><span>Modalidade</span><select data-filter="grupoDfp"><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></label>
+            <label class="filter-field"><span>Tipo de período</span><select data-filter="tipoPeriodo"><option value="">Selecione</option></select></label>
+            <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
+            <label class="filter-field date-field"><span>Até</span><input data-filter="periodEnd" type="date"></label>
+          </div>
+          <div class="filter-footer">
+            <label class="axis-toggle" data-axis-control><input type="checkbox" data-filter="axisSecondary" disabled><span class="toggle-track"></span><span>Eixo secundário</span></label>
+            <span class="filter-hint" id="company-hint" data-company-hint>Selecione pelo menos duas empresas.</span>
+            <button class="button button-primary run-analysis" type="button"><span class="button-icon" aria-hidden="true">↗</span>Gerar comparação</button>
+          </div>
+        </div>
+        <div class="analysis-results" hidden>
+          <div class="chart-grid">
+            <article class="chart-panel line-panel">
+              <div class="chart-heading"><div><p class="eyebrow">SÉRIE HISTÓRICA</p><h3>Comparativo da conta</h3></div><span class="chart-unit" data-chart-currency></span></div>
+              <div class="chart-canvas line-canvas"><canvas aria-label="Gráfico de linha comparativo" role="img"></canvas></div>
+            </article>
+            <article class="chart-panel bar-panel">
+              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DO PERÍODO</p><h3>Contas por empresa</h3></div><span class="chart-period" data-chart-period></span></div>
+              <div class="chart-canvas bar-canvas"><canvas aria-label="Gráfico de barras horizontais comparativo" role="img"></canvas></div>
+            </article>
+          </div>
+          <section class="data-panel">
+            <div class="data-heading">
+              <div><p class="eyebrow">DADOS FILTRADOS</p><h3>Detalhamento</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div class="export-actions">
+                <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>
+                <button class="button button-secondary export-xlsx" type="button"><span class="button-icon" aria-hidden="true">↓</span>Excel</button>
+              </div>
+            </div>
+            <div class="table-frame analysis-table"></div>
+          </section>
+        </div>
+        <div class="analysis-empty"><span class="empty-graphic" aria-hidden="true">↗</span><p>Selecione os filtros para comparar empresas.</p></div>
+      </section>
+    </main>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>

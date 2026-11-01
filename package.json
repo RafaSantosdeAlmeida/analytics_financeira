@@ -1,0 +1,22 @@
+{
+  "name": "analytics-financeira",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicacao local para ingestao e analise de demonstracoes financeiras",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "csv-parse": "^7.0.3",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}
