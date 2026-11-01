@@ -267,6 +267,9 @@ export function stageRow(type, source) {
     if (!data.versao || data.versao < 1) errors.push('versão inválida');
     if (!data.grupo_dfp) errors.push('grupo DFP deve indicar individual ou consolidado');
     if (!data.tipo_periodo) errors.push('intervalo não corresponde a período anual/trimestral');
+    if (data.ordem_exerc !== 'ULTIMO') {
+      errors.push('ordem_exerc deve ser ULTIMO para persistir a demonstração financeira');
+    }
     if (!Number.isFinite(data.vl_conta)) errors.push('valor da conta inválido');
     if (data.st_conta_fixa === null) errors.push('indicador de conta fixa deve ser S ou N');
     if (!/^\d+(?:\.\d+)+$/.test(data.cd_conta)) errors.push('código da conta inválido');
@@ -276,10 +279,7 @@ export function stageRow(type, source) {
 }
 
 function groupOrder(value) {
-  const normalized = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
-  if (normalized.includes('PENULTIMO')) return 'PENULTIMO';
-  if (normalized.includes('ULTIMO')) return 'ULTIMO';
-  return normalized;
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
 }
 
 export function parseAndStageCsv(buffer) {

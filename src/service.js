@@ -234,6 +234,10 @@ function persistHierarchy(database, row) {
 }
 
 function persistDre(database, row, batchId) {
+  if (row.ordem_exerc !== 'ULTIMO') {
+    throw new Error('Somente linhas com ordem_exerc ULTIMO podem ser persistidas.');
+  }
+
   const company = requireRow(
     database,
     'SELECT id_empresa, id_segmento FROM empresas WHERE cnpj_cia = ?',

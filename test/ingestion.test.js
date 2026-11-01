@@ -65,6 +65,24 @@ test('decodes Windows-1252 DRE text and classifies annual periods', () => {
   assert.equal(result.stagedRows[0].data.grupo_dfp, 'CONSOLIDADO');
 });
 
+test('rejects DRE rows whose exercise order is not exactly ULTIMO', () => {
+  const header = [
+    'CNPJ_CIA', 'DT_REFER', 'VERSAO', 'DENOM_CIA', 'CD_CVM', 'GRUPO_DFP',
+    'MOEDA', 'ESCALA_MOEDA', 'ORDEM_EXERC', 'DT_INI_EXERC', 'DT_FIM_EXERC',
+    'CD_CONTA', 'DS_CONTA', 'VL_CONTA', 'ST_CONTA_FIXA',
+  ].join(';');
+  const row = [
+    cnpj, '2025-12-31', '1', 'Banco A', '001023',
+    'DF Consolidado - Demonstração do Resultado', 'REAL', 'MIL', 'PENÚLTIMO',
+    '2025-01-01', '2025-12-31', '3.01', 'Receita', '1250.50', 'S',
+  ].join(';');
+  const result = parseAndStageCsv(Buffer.from(`${header}\n${row}\n`, 'utf8'));
+
+  assert.equal(result.stagedRows[0].data.ordem_exerc, 'PENULTIMO');
+  assert.equal(result.stagedRows[0].status, 'INVALIDO');
+  assert.match(result.stagedRows[0].error, /ordem_exerc deve ser ULTIMO/);
+});
+
 test('marks empty DRE values invalid instead of converting them to zero', () => {
   const header = [
     'CNPJ_CIA', 'DT_REFER', 'VERSAO', 'DENOM_CIA', 'CD_CVM', 'GRUPO_DFP',

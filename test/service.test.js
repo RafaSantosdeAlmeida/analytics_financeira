@@ -14,7 +14,7 @@ function upload(database, type, content, filename = `${type}.csv`) {
   });
 }
 
-function annualDre(group = 'DF Consolidado - Demonstracao do Resultado') {
+function annualDre(group = 'DF Consolidado - Demonstracao do Resultado', order = 'ULTIMO') {
   const header = [
     'CNPJ_CIA', 'DT_REFER', 'VERSAO', 'DENOM_CIA', 'CD_CVM', 'GRUPO_DFP',
     'MOEDA', 'ESCALA_MOEDA', 'ORDEM_EXERC', 'DT_INI_EXERC', 'DT_FIM_EXERC',
@@ -25,7 +25,7 @@ function annualDre(group = 'DF Consolidado - Demonstracao do Resultado') {
       const [code, description, amount] = account.split(';');
       return [
     cnpj, '2025-12-31', '1', 'Empresa A', '001234', group, 'REAL', 'MIL',
-        'ULTIMO', '2025-01-01', '2025-12-31', code, description, amount, 'S',
+        order, '2025-01-01', '2025-12-31', code, description, amount, 'S',
       ].join(';');
     });
   return `${header}\n${rows.join('\n')}\n`;
@@ -143,5 +143,33 @@ test('keeps DRE in review until missing account plans are loaded, then retries i
   const retry = persistBatch(database, dreBatch.id_lote);
   assert.equal(retry.persistidas, 2);
   assert.equal(retry.lote.contagem_status.VALIDO, 2);
+  database.close();
+});
+
+test('never persists DRE rows whose exercise order is not ULTIMO', () => {
+  const database = new DatabaseSync(':memory:');
+  initializeDatabase(database);
+  loadDimensions(database);
+
+  const batch = upload(database, 'DFP_DRE', annualDre(undefined, 'PENÚLTIMO'), 'dre.csv');
+  stageBatch(database, batch.id_lote);
+  assert.equal(getBatch(database, batch.id_lote).contagem_status.INVALIDO, 2);
+
+  const invalidRows = database.prepare(`
+    SELECT id_stg_linha, dados_json FROM stg_linha WHERE id_lote = ?
+  `).all(batch.id_lote);
+  const forceValid = database.prepare(`
+    UPDATE stg_linha SET status_validacao = 'VALIDO', dados_json = ? WHERE id_stg_linha = ?
+  `);
+  for (const row of invalidRows) {
+    forceValid.run(row.dados_json, row.id_stg_linha);
+  }
+
+  const result = persistBatch(database, batch.id_lote);
+
+  assert.equal(result.persistidas, 0);
+  assert.equal(result.revisar, 2);
+  assert.equal(database.prepare('SELECT COUNT(*) AS count FROM demonstracao_financeira')
+    .get().count, 0);
   database.close();
 });
