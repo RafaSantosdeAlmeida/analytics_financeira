@@ -297,6 +297,7 @@ export function parseAndStageCsv(buffer) {
       delimiter,
       skip_empty_lines: true,
       relax_column_count: false,
+      relax_quotes: true,
     });
   } catch (error) {
     throw new Error(`CSV inválido: ${error.message}`);

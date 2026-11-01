@@ -65,6 +65,27 @@ test('decodes Windows-1252 DRE text and classifies annual periods', () => {
   assert.equal(result.stagedRows[0].data.grupo_dfp, 'CONSOLIDADO');
 });
 
+test('accepts unescaped quotes inside DRE account descriptions', () => {
+  const header = [
+    'CNPJ_CIA', 'DT_REFER', 'VERSAO', 'DENOM_CIA', 'CD_CVM', 'GRUPO_DFP',
+    'MOEDA', 'ESCALA_MOEDA', 'ORDEM_EXERC', 'DT_INI_EXERC', 'DT_FIM_EXERC',
+    'CD_CONTA', 'DS_CONTA', 'VL_CONTA', 'ST_CONTA_FIXA',
+  ].join(';');
+  const row = [
+    cnpj, '2020-12-31', '2', 'SIMPAR S.A.', '025003',
+    'DF Consolidado - Demonstração do Resultado', 'REAL', 'MIL', 'ÚLTIMO',
+    '2020-01-01', '2020-12-31', '3.04.03.01',
+    'Provisão de perdas esperadas ("impairment") de contas a receber', '-78667', 'N',
+  ].join(';');
+  const result = parseAndStageCsv(Buffer.from(`${header}\n${row}\n`, 'latin1'));
+
+  assert.equal(result.stagedRows[0].status, 'VALIDO');
+  assert.equal(
+    result.stagedRows[0].data.ds_conta,
+    'Provisão de perdas esperadas ("impairment") de contas a receber',
+  );
+});
+
 test('rejects DRE rows whose exercise order is not exactly ULTIMO', () => {
   const header = [
     'CNPJ_CIA', 'DT_REFER', 'VERSAO', 'DENOM_CIA', 'CD_CVM', 'GRUPO_DFP',
