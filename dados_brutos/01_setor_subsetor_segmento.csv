@@ -1,0 +1,83 @@
+SETOR;SUBSETOR;SEGMENTO
+Bens Industriais;Comércio Varejista;Material de Transporte
+Bens Industriais;Construção e Engenharia;Construção Pesada
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva
+Bens Industriais;Construção e Engenharia;Produtos para Construção
+Bens Industriais;Construção e Engenharia;Serviços Diversos
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa
+Bens Industriais;Material de Transporte;Material Rodoviário
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais
+Bens Industriais;Serviços;Serviços Diversos
+Bens Industriais;Transporte;Exploração de Rodovias
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem
+Bens Industriais;Transporte;Transporte Ferroviário
+Bens Industriais;Transporte;Transporte Hidroviário
+Bens Industriais;Transporte;Transporte Rodoviário
+Comunicações;Telecomunicações;Telecomunicações
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos
+Consumo Cíclico;Comércio Varejista;Produtos Diversos
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados
+Consumo Cíclico;Construção Civil;Incorporações
+Consumo Cíclico;Diversos;Aluguel de carros
+Consumo Cíclico;Diversos;Programas de Fidelização
+Consumo Cíclico;Diversos;Serviços Educacionais
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos
+Consumo Cíclico;Utilidades Domésticas;Móveis
+Consumo Cíclico;Utilidades Domésticas;Utensílios Domésticos
+Consumo Cíclico;Viagens e Lazer;Atividades Esportivas
+Consumo Cíclico;Viagens e Lazer;Bicicletas
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos
+Consumo Cíclico;Viagens e Lazer;Produção de Eventos e Shows
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo
+Consumo não Cíclico;Agropecuária;Agricultura
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes
+Consumo não Cíclico;Comércio e Distribuição;Alimentos
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza
+Financeiro;Exploração de Imóveis;Exploração de Imóveis
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária
+Financeiro;Holdings Diversificadas;Holdings Diversificadas
+Financeiro;Intermediários Financeiros;Bancos
+Financeiro;Intermediários Financeiros;Outros Intermediarios Financeiros
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros
+Financeiro;Previdência e Seguros;Resseguradoras
+Financeiro;Previdência e Seguros;Seguradoras
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos
+Materiais Básicos;Embalagens;Embalagens
+Materiais Básicos;Madeira e Papel;Madeira
+Materiais Básicos;Madeira e Papel;Papel e Celulose
+Materiais Básicos;Materiais Diversos;Materiais Diversos
+Materiais Básicos;Mineração;Minerais Metálicos
+Materiais Básicos;Químicos;Fertilizantes e Defensivos
+Materiais Básicos;Químicos;Petroquímicos
+Materiais Básicos;Químicos;Químicos Diversos
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia
+Outros;Outros;Outros
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos
+Saúde;Equipamentos;Equipamentos
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços
+Utilidade Pública;Energia Elétrica;Energia Elétrica
+Utilidade Pública;Gás;Gás
+Utilidade Pública;Água e Saneamento;Água e Saneamento

@@ -1,0 +1,929 @@
+﻿SETOR;SUBSETOR;SEGMENTO;CD_CONTA;NIVEL_CONTA;DS_CONTA_SEGMENTO
+Bens Industriais;Comércio Varejista;Material de Transporte;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Comércio Varejista;Material de Transporte;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Comércio Varejista;Material de Transporte;3.03;1;Resultado Bruto
+Bens Industriais;Comércio Varejista;Material de Transporte;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Comércio Varejista;Material de Transporte;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Comércio Varejista;Material de Transporte;3.06;1;Resultado Financeiro
+Bens Industriais;Comércio Varejista;Material de Transporte;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Comércio Varejista;Material de Transporte;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Comércio Varejista;Material de Transporte;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Comércio Varejista;Material de Transporte;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Comércio Varejista;Material de Transporte;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Comércio Varejista;Material de Transporte;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.03;1;Resultado Bruto
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.06;1;Resultado Financeiro
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Construção e Engenharia;Construção Pesada;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.03;1;Resultado Bruto
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.06;1;Resultado Financeiro
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Construção e Engenharia;Engenharia Consultiva;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.03;1;Resultado Bruto
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.06;1;Resultado Financeiro
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Construção e Engenharia;Produtos para Construção;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.03;1;Resultado Bruto
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.06;1;Resultado Financeiro
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Construção e Engenharia;Serviços Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.03;1;Resultado Bruto
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.06;1;Resultado Financeiro
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Material de Transporte;Material Aeronáutico e de Defesa;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Material de Transporte;Material Rodoviário;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Material de Transporte;Material Rodoviário;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Material de Transporte;Material Rodoviário;3.03;1;Resultado Bruto
+Bens Industriais;Material de Transporte;Material Rodoviário;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Material de Transporte;Material Rodoviário;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Material de Transporte;Material Rodoviário;3.06;1;Resultado Financeiro
+Bens Industriais;Material de Transporte;Material Rodoviário;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Material de Transporte;Material Rodoviário;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Material de Transporte;Material Rodoviário;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Material de Transporte;Material Rodoviário;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Material de Transporte;Material Rodoviário;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Material de Transporte;Material Rodoviário;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.03;1;Resultado Bruto
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.06;1;Resultado Financeiro
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Máquinas e Equipamentos;Armas e Munições;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.03;1;Resultado Bruto
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.06;1;Resultado Financeiro
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Máquinas e Equipamentos;Motores , Compressores e Outros;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.03;1;Resultado Bruto
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.06;1;Resultado Financeiro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Construção e Agrícolas;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.03;1;Resultado Bruto
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.06;1;Resultado Financeiro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Máquinas e Equipamentos;Máq. e Equip. Industriais;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Serviços;Serviços Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Serviços;Serviços Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Serviços;Serviços Diversos;3.03;1;Resultado Bruto
+Bens Industriais;Serviços;Serviços Diversos;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Serviços;Serviços Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Serviços;Serviços Diversos;3.06;1;Resultado Financeiro
+Bens Industriais;Serviços;Serviços Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Serviços;Serviços Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Serviços;Serviços Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Serviços;Serviços Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Serviços;Serviços Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Serviços;Serviços Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Exploração de Rodovias;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Exploração de Rodovias;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Exploração de Rodovias;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Exploração de Rodovias;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Exploração de Rodovias;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Exploração de Rodovias;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Exploração de Rodovias;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Exploração de Rodovias;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Exploração de Rodovias;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Exploração de Rodovias;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Exploração de Rodovias;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Exploração de Rodovias;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Linhas Aéreas de Passageiros;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Serviços de Apoio e Armazenagem;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Transporte Ferroviário;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Transporte Ferroviário;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Transporte Ferroviário;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Transporte Ferroviário;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Transporte Ferroviário;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Transporte Ferroviário;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Transporte Ferroviário;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Transporte Ferroviário;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Transporte Ferroviário;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Transporte Ferroviário;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Transporte Ferroviário;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Transporte Ferroviário;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Transporte Hidroviário;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Transporte Hidroviário;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Transporte Hidroviário;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Transporte Hidroviário;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Transporte Hidroviário;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Transporte Hidroviário;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Transporte Hidroviário;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Transporte Hidroviário;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Transporte Hidroviário;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Transporte Hidroviário;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Transporte Hidroviário;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Transporte Hidroviário;3.99;1;Lucro por Ação - (Reais / Ação)
+Bens Industriais;Transporte;Transporte Rodoviário;3.01;1;Receita de Venda de Bens e/ou Serviços
+Bens Industriais;Transporte;Transporte Rodoviário;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Bens Industriais;Transporte;Transporte Rodoviário;3.03;1;Resultado Bruto
+Bens Industriais;Transporte;Transporte Rodoviário;3.04;1;Despesas/Receitas Operacionais
+Bens Industriais;Transporte;Transporte Rodoviário;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Bens Industriais;Transporte;Transporte Rodoviário;3.06;1;Resultado Financeiro
+Bens Industriais;Transporte;Transporte Rodoviário;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Bens Industriais;Transporte;Transporte Rodoviário;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Bens Industriais;Transporte;Transporte Rodoviário;3.09;1;Resultado Líquido das Operações Continuadas
+Bens Industriais;Transporte;Transporte Rodoviário;3.10;1;Resultado Líquido de Operações Descontinuadas
+Bens Industriais;Transporte;Transporte Rodoviário;3.11;1;Lucro/Prejuízo Consolidado do Período
+Bens Industriais;Transporte;Transporte Rodoviário;3.99;1;Lucro por Ação - (Reais / Ação)
+Comunicações;Telecomunicações;Telecomunicações;3.01;1;Receita de Venda de Bens e/ou Serviços
+Comunicações;Telecomunicações;Telecomunicações;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Comunicações;Telecomunicações;Telecomunicações;3.03;1;Resultado Bruto
+Comunicações;Telecomunicações;Telecomunicações;3.04;1;Despesas/Receitas Operacionais
+Comunicações;Telecomunicações;Telecomunicações;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Comunicações;Telecomunicações;Telecomunicações;3.06;1;Resultado Financeiro
+Comunicações;Telecomunicações;Telecomunicações;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Comunicações;Telecomunicações;Telecomunicações;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Comunicações;Telecomunicações;Telecomunicações;3.09;1;Resultado Líquido das Operações Continuadas
+Comunicações;Telecomunicações;Telecomunicações;3.10;1;Resultado Líquido de Operações Descontinuadas
+Comunicações;Telecomunicações;Telecomunicações;3.11;1;Lucro/Prejuízo Consolidado do Período
+Comunicações;Telecomunicações;Telecomunicações;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.03;1;Resultado Bruto
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.06;1;Resultado Financeiro
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Automóveis e Motocicletas;Automóveis e Motocicletas;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.03;1;Resultado Bruto
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.06;1;Resultado Financeiro
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Comércio Varejista;Eletrodomésticos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.03;1;Resultado Bruto
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.06;1;Resultado Financeiro
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Comércio Varejista;Produtos Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.03;1;Resultado Bruto
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.06;1;Resultado Financeiro
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Comércio Varejista;Tecidos, Vestuário e Calçados;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Construção Civil;Incorporações;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Construção Civil;Incorporações;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Construção Civil;Incorporações;3.03;1;Resultado Bruto
+Consumo Cíclico;Construção Civil;Incorporações;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Construção Civil;Incorporações;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Construção Civil;Incorporações;3.06;1;Resultado Financeiro
+Consumo Cíclico;Construção Civil;Incorporações;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Construção Civil;Incorporações;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Construção Civil;Incorporações;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Construção Civil;Incorporações;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Construção Civil;Incorporações;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Construção Civil;Incorporações;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Diversos;Aluguel de carros;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Diversos;Aluguel de carros;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Diversos;Aluguel de carros;3.03;1;Resultado Bruto
+Consumo Cíclico;Diversos;Aluguel de carros;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Diversos;Aluguel de carros;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Diversos;Aluguel de carros;3.06;1;Resultado Financeiro
+Consumo Cíclico;Diversos;Aluguel de carros;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Diversos;Aluguel de carros;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Diversos;Aluguel de carros;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Diversos;Aluguel de carros;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Diversos;Aluguel de carros;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Diversos;Aluguel de carros;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Diversos;Programas de Fidelização;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Diversos;Programas de Fidelização;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Diversos;Programas de Fidelização;3.03;1;Resultado Bruto
+Consumo Cíclico;Diversos;Programas de Fidelização;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Diversos;Programas de Fidelização;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Diversos;Programas de Fidelização;3.06;1;Resultado Financeiro
+Consumo Cíclico;Diversos;Programas de Fidelização;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Diversos;Programas de Fidelização;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Diversos;Programas de Fidelização;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Diversos;Programas de Fidelização;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Diversos;Programas de Fidelização;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Diversos;Programas de Fidelização;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Diversos;Serviços Educacionais;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Diversos;Serviços Educacionais;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Diversos;Serviços Educacionais;3.03;1;Resultado Bruto
+Consumo Cíclico;Diversos;Serviços Educacionais;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Diversos;Serviços Educacionais;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Diversos;Serviços Educacionais;3.06;1;Resultado Financeiro
+Consumo Cíclico;Diversos;Serviços Educacionais;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Diversos;Serviços Educacionais;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Diversos;Serviços Educacionais;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Diversos;Serviços Educacionais;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Diversos;Serviços Educacionais;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Diversos;Serviços Educacionais;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.03;1;Resultado Bruto
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.06;1;Resultado Financeiro
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Hoteis e Restaurantes;Hotelaria;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.03;1;Resultado Bruto
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.06;1;Resultado Financeiro
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Hoteis e Restaurantes;Restaurante e Similares;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.03;1;Resultado Bruto
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.06;1;Resultado Financeiro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Acessórios;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.03;1;Resultado Bruto
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.06;1;Resultado Financeiro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Calçados;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.03;1;Resultado Bruto
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.06;1;Resultado Financeiro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Fios e Tecidos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.03;1;Resultado Bruto
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.06;1;Resultado Financeiro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Tecidos, Vestuário e Calçados;Vestuário;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.03;1;Resultado Bruto
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.06;1;Resultado Financeiro
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Utilidades Domésticas;Eletrodomésticos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.03;1;Resultado Bruto
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.06;1;Resultado Financeiro
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Utilidades Domésticas;Móveis;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.03;1;Resultado Bruto
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.06;1;Resultado Financeiro
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Viagens e Lazer;Brinquedos e Jogos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.03;1;Resultado Bruto
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.04;1;Despesas/Receitas Operacionais
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.06;1;Resultado Financeiro
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo Cíclico;Viagens e Lazer;Viagens e Turismo;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Agropecuária;Agricultura;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Agropecuária;Agricultura;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Agropecuária;Agricultura;3.03;1;Resultado Bruto
+Consumo não Cíclico;Agropecuária;Agricultura;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Agropecuária;Agricultura;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Agropecuária;Agricultura;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Agropecuária;Agricultura;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Agropecuária;Agricultura;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Agropecuária;Agricultura;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Agropecuária;Agricultura;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Agropecuária;Agricultura;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Agropecuária;Agricultura;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.03;1;Resultado Bruto
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Alimentos Processados;Alimentos Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.03;1;Resultado Bruto
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Alimentos Processados;Açucar e Alcool;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.03;1;Resultado Bruto
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Alimentos Processados;Carnes e Derivados;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.03;1;Resultado Bruto
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Bebidas;Cervejas e Refrigerantes;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.03;1;Resultado Bruto
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Comércio e Distribuição;Alimentos;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.03;1;Resultado Bruto
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Cuidado Pessoal;3.99;1;Lucro por Ação - (Reais / Ação)
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.01;1;Receita de Venda de Bens e/ou Serviços
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.03;1;Resultado Bruto
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.04;1;Despesas/Receitas Operacionais
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.06;1;Resultado Financeiro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.09;1;Resultado Líquido das Operações Continuadas
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.10;1;Resultado Líquido de Operações Descontinuadas
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.11;1;Lucro/Prejuízo Consolidado do Período
+Consumo não Cíclico;Produtos de Cuidado Pessoal e de Limpeza;Produtos de Limpeza;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.03;1;Resultado Bruto
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.06;1;Resultado Financeiro
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Exploração de Imóveis;Exploração de Imóveis;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.03;1;Resultado Bruto
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.06;1;Resultado Financeiro
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Exploração de Imóveis;Intermediação Imobiliária;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.03;1;Resultado Bruto
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.06;1;Resultado Financeiro
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Holdings Diversificadas;Holdings Diversificadas;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Intermediários Financeiros;Bancos;3.01;1;Receitas de Intermediação Financeira
+Financeiro;Intermediários Financeiros;Bancos;3.02;1;Despesas de Intermediação Financeira
+Financeiro;Intermediários Financeiros;Bancos;3.03;1;Resultado Bruto de Intermediação Financeira
+Financeiro;Intermediários Financeiros;Bancos;3.04;1;Outras Despesas e Receitas Operacionais
+Financeiro;Intermediários Financeiros;Bancos;3.05;1;Resultado antes dos Tributos sobre o Lucro
+Financeiro;Intermediários Financeiros;Bancos;3.06;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Intermediários Financeiros;Bancos;3.07;1;Lucro ou Prejuízo das Operações Continuadas
+Financeiro;Intermediários Financeiros;Bancos;3.08;1;Resultado Líquido das Operações Descontinuadas
+Financeiro;Intermediários Financeiros;Bancos;3.09;1;Lucro ou Prejuízo antes das Participações e Contribuições Estatutárias
+Financeiro;Intermediários Financeiros;Bancos;3.10;1;Participações nos Lucros e Contribuições Estatutárias
+Financeiro;Intermediários Financeiros;Bancos;3.11;1;Lucro ou Prejuízo Líquido Consolidado do Período
+Financeiro;Intermediários Financeiros;Bancos;3.99;1;Lucro por Ação (R$/Ação)
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.03;1;Resultado Bruto
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.06;1;Resultado Financeiro
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Previdência e Seguros;Corretoras de Seguros e Resseguros;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Previdência e Seguros;Resseguradoras;3.01;1;Receitas das Atividades Seguradoras/Resseguradoras
+Financeiro;Previdência e Seguros;Resseguradoras;3.02;1;Despesas da Atividade Seguradora/Resseguradora
+Financeiro;Previdência e Seguros;Resseguradoras;3.03;1;Resultado Bruto
+Financeiro;Previdência e Seguros;Resseguradoras;3.04;1;Despesas Administrativas
+Financeiro;Previdência e Seguros;Resseguradoras;3.05;1;Outras Receitas e Despesas Operacionais
+Financeiro;Previdência e Seguros;Resseguradoras;3.06;1;Resultado de Equivalência Patrimonial
+Financeiro;Previdência e Seguros;Resseguradoras;3.07;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Previdência e Seguros;Resseguradoras;3.08;1;Resultado Financeiro
+Financeiro;Previdência e Seguros;Resseguradoras;3.09;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Previdência e Seguros;Resseguradoras;3.10;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Previdência e Seguros;Resseguradoras;3.11;1;Resultado Líquido das Operações Continuadas
+Financeiro;Previdência e Seguros;Resseguradoras;3.12;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Previdência e Seguros;Resseguradoras;3.13;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Previdência e Seguros;Resseguradoras;3.99;1;Lucro por Ação - (R$ / Ação)
+Financeiro;Previdência e Seguros;Seguradoras;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Previdência e Seguros;Seguradoras;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Previdência e Seguros;Seguradoras;3.03;1;Resultado Bruto
+Financeiro;Previdência e Seguros;Seguradoras;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Previdência e Seguros;Seguradoras;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Previdência e Seguros;Seguradoras;3.06;1;Resultado Financeiro
+Financeiro;Previdência e Seguros;Seguradoras;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Previdência e Seguros;Seguradoras;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Previdência e Seguros;Seguradoras;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Previdência e Seguros;Seguradoras;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Previdência e Seguros;Seguradoras;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Previdência e Seguros;Seguradoras;3.12;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Previdência e Seguros;Seguradoras;3.13;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Previdência e Seguros;Seguradoras;3.99;1;Lucro por Ação - (Reais / Ação)
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.03;1;Resultado Bruto
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.04;1;Despesas/Receitas Operacionais
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.06;1;Resultado Financeiro
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Financeiro;Serviços Financeiros Diversos;Serviços Financeiros Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Embalagens;Embalagens;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Embalagens;Embalagens;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Embalagens;Embalagens;3.03;1;Resultado Bruto
+Materiais Básicos;Embalagens;Embalagens;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Embalagens;Embalagens;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Embalagens;Embalagens;3.06;1;Resultado Financeiro
+Materiais Básicos;Embalagens;Embalagens;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Embalagens;Embalagens;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Embalagens;Embalagens;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Embalagens;Embalagens;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Embalagens;Embalagens;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Embalagens;Embalagens;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Madeira e Papel;Madeira;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Madeira e Papel;Madeira;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Madeira e Papel;Madeira;3.03;1;Resultado Bruto
+Materiais Básicos;Madeira e Papel;Madeira;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Madeira e Papel;Madeira;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Madeira e Papel;Madeira;3.06;1;Resultado Financeiro
+Materiais Básicos;Madeira e Papel;Madeira;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Madeira e Papel;Madeira;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Madeira e Papel;Madeira;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Madeira e Papel;Madeira;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Madeira e Papel;Madeira;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Madeira e Papel;Madeira;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.03;1;Resultado Bruto
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.06;1;Resultado Financeiro
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Madeira e Papel;Papel e Celulose;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.03;1;Resultado Bruto
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.06;1;Resultado Financeiro
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Materiais Diversos;Materiais Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Mineração;Minerais Metálicos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Mineração;Minerais Metálicos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Mineração;Minerais Metálicos;3.03;1;Resultado Bruto
+Materiais Básicos;Mineração;Minerais Metálicos;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Mineração;Minerais Metálicos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Mineração;Minerais Metálicos;3.06;1;Resultado Financeiro
+Materiais Básicos;Mineração;Minerais Metálicos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Mineração;Minerais Metálicos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Mineração;Minerais Metálicos;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Mineração;Minerais Metálicos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Mineração;Minerais Metálicos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Mineração;Minerais Metálicos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.03;1;Resultado Bruto
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.06;1;Resultado Financeiro
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Químicos;Fertilizantes e Defensivos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Químicos;Petroquímicos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Químicos;Petroquímicos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Químicos;Petroquímicos;3.03;1;Resultado Bruto
+Materiais Básicos;Químicos;Petroquímicos;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Químicos;Petroquímicos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Químicos;Petroquímicos;3.06;1;Resultado Financeiro
+Materiais Básicos;Químicos;Petroquímicos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Químicos;Petroquímicos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Químicos;Petroquímicos;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Químicos;Petroquímicos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Químicos;Petroquímicos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Químicos;Petroquímicos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Químicos;Químicos Diversos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Químicos;Químicos Diversos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Químicos;Químicos Diversos;3.03;1;Resultado Bruto
+Materiais Básicos;Químicos;Químicos Diversos;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Químicos;Químicos Diversos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Químicos;Químicos Diversos;3.06;1;Resultado Financeiro
+Materiais Básicos;Químicos;Químicos Diversos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Químicos;Químicos Diversos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Químicos;Químicos Diversos;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Químicos;Químicos Diversos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Químicos;Químicos Diversos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Químicos;Químicos Diversos;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.03;1;Resultado Bruto
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.06;1;Resultado Financeiro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Cobre;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.03;1;Resultado Bruto
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.06;1;Resultado Financeiro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Siderurgia e Metalurgia;Artefatos de Ferro e Aço;3.99;1;Lucro por Ação - (Reais / Ação)
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.01;1;Receita de Venda de Bens e/ou Serviços
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.03;1;Resultado Bruto
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.04;1;Despesas/Receitas Operacionais
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.06;1;Resultado Financeiro
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.09;1;Resultado Líquido das Operações Continuadas
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.10;1;Resultado Líquido de Operações Descontinuadas
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.11;1;Lucro/Prejuízo Consolidado do Período
+Materiais Básicos;Siderurgia e Metalurgia;Siderurgia;3.99;1;Lucro por Ação - (Reais / Ação)
+Outros;Outros;Outros;3.01;1;Receita de Venda de Bens e/ou Serviços
+Outros;Outros;Outros;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Outros;Outros;Outros;3.03;1;Resultado Bruto
+Outros;Outros;Outros;3.04;1;Despesas/Receitas Operacionais
+Outros;Outros;Outros;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Outros;Outros;Outros;3.06;1;Resultado Financeiro
+Outros;Outros;Outros;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Outros;Outros;Outros;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Outros;Outros;Outros;3.09;1;Resultado Líquido das Operações Continuadas
+Outros;Outros;Outros;3.10;1;Resultado Líquido de Operações Descontinuadas
+Outros;Outros;Outros;3.11;1;Lucro/Prejuízo Consolidado do Período
+Outros;Outros;Outros;3.99;1;Lucro por Ação - (Reais / Ação)
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.01;1;Receita de Venda de Bens e/ou Serviços
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.03;1;Resultado Bruto
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.04;1;Despesas/Receitas Operacionais
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.06;1;Resultado Financeiro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.09;1;Resultado Líquido das Operações Continuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.10;1;Resultado Líquido de Operações Descontinuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.11;1;Lucro/Prejuízo Consolidado do Período
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Distribuição de Combustíveis;3.99;1;Lucro por Ação - (Reais / Ação)
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.01;1;Receita de Venda de Bens e/ou Serviços
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.03;1;Resultado Bruto
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.04;1;Despesas/Receitas Operacionais
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.06;1;Resultado Financeiro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.09;1;Resultado Líquido das Operações Continuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.10;1;Resultado Líquido de Operações Descontinuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.11;1;Lucro/Prejuízo Consolidado do Período
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Equipamentos e Serviços;3.99;1;Lucro por Ação - (Reais / Ação)
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.01;1;Receita de Venda de Bens e/ou Serviços
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.03;1;Resultado Bruto
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.04;1;Despesas/Receitas Operacionais
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.06;1;Resultado Financeiro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.09;1;Resultado Líquido das Operações Continuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.10;1;Resultado Líquido de Operações Descontinuadas
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.11;1;Lucro/Prejuízo Consolidado do Período
+Petróleo, Gás e Biocombustíveis;Petróleo, Gás e Biocombustíveis;Exploração, Refino e Distribuição;3.99;1;Lucro por Ação - (Reais / Ação)
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.03;1;Resultado Bruto
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.04;1;Despesas/Receitas Operacionais
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.06;1;Resultado Financeiro
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.09;1;Resultado Líquido das Operações Continuadas
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Saúde;Comércio e Distribuição;Medicamentos e Outros Produtos;3.99;1;Lucro por Ação - (Reais / Ação)
+Saúde;Equipamentos;Equipamentos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Saúde;Equipamentos;Equipamentos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Saúde;Equipamentos;Equipamentos;3.03;1;Resultado Bruto
+Saúde;Equipamentos;Equipamentos;3.04;1;Despesas/Receitas Operacionais
+Saúde;Equipamentos;Equipamentos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Saúde;Equipamentos;Equipamentos;3.06;1;Resultado Financeiro
+Saúde;Equipamentos;Equipamentos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Saúde;Equipamentos;Equipamentos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Saúde;Equipamentos;Equipamentos;3.09;1;Resultado Líquido das Operações Continuadas
+Saúde;Equipamentos;Equipamentos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Saúde;Equipamentos;Equipamentos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Saúde;Equipamentos;Equipamentos;3.99;1;Lucro por Ação - (Reais / Ação)
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.03;1;Resultado Bruto
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.04;1;Despesas/Receitas Operacionais
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.06;1;Resultado Financeiro
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.09;1;Resultado Líquido das Operações Continuadas
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Saúde;Medicamentos e Outros Produtos;Medicamentos e Outros Produtos;3.99;1;Lucro por Ação - (Reais / Ação)
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.03;1;Resultado Bruto
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.04;1;Despesas/Receitas Operacionais
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.06;1;Resultado Financeiro
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.09;1;Resultado Líquido das Operações Continuadas
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Saúde;Serv.Méd.Hospit.,Análises e Diagnósticos;Serv.Méd.Hospit.,Análises e Diagnósticos;3.99;1;Lucro por Ação - (Reais / Ação)
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.01;1;Receita de Venda de Bens e/ou Serviços
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.03;1;Resultado Bruto
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.04;1;Despesas/Receitas Operacionais
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.06;1;Resultado Financeiro
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.09;1;Resultado Líquido das Operações Continuadas
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.10;1;Resultado Líquido de Operações Descontinuadas
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.11;1;Lucro/Prejuízo Consolidado do Período
+Tecnologia da Informação;Computadores e Equipamentos;Computadores e Equipamentos;3.99;1;Lucro por Ação - (Reais / Ação)
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.01;1;Receita de Venda de Bens e/ou Serviços
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.03;1;Resultado Bruto
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.04;1;Despesas/Receitas Operacionais
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.06;1;Resultado Financeiro
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.09;1;Resultado Líquido das Operações Continuadas
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.10;1;Resultado Líquido de Operações Descontinuadas
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.11;1;Lucro/Prejuízo Consolidado do Período
+Tecnologia da Informação;Programas e Serviços;Programas e Serviços;3.99;1;Lucro por Ação - (Reais / Ação)
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.01;1;Receita de Venda de Bens e/ou Serviços
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.03;1;Resultado Bruto
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.04;1;Despesas/Receitas Operacionais
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.06;1;Resultado Financeiro
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.09;1;Resultado Líquido das Operações Continuadas
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.10;1;Resultado Líquido de Operações Descontinuadas
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.11;1;Lucro/Prejuízo Consolidado do Período
+Utilidade Pública;Energia Elétrica;Energia Elétrica;3.99;1;Lucro por Ação - (Reais / Ação)
+Utilidade Pública;Gás;Gás;3.01;1;Receita de Venda de Bens e/ou Serviços
+Utilidade Pública;Gás;Gás;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Utilidade Pública;Gás;Gás;3.03;1;Resultado Bruto
+Utilidade Pública;Gás;Gás;3.04;1;Despesas/Receitas Operacionais
+Utilidade Pública;Gás;Gás;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Utilidade Pública;Gás;Gás;3.06;1;Resultado Financeiro
+Utilidade Pública;Gás;Gás;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Utilidade Pública;Gás;Gás;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Utilidade Pública;Gás;Gás;3.09;1;Resultado Líquido das Operações Continuadas
+Utilidade Pública;Gás;Gás;3.10;1;Resultado Líquido de Operações Descontinuadas
+Utilidade Pública;Gás;Gás;3.11;1;Lucro/Prejuízo Consolidado do Período
+Utilidade Pública;Gás;Gás;3.99;1;Lucro por Ação - (Reais / Ação)
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.01;1;Receita de Venda de Bens e/ou Serviços
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.02;1;Custo dos Bens e/ou Serviços Vendidos
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.03;1;Resultado Bruto
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.04;1;Despesas/Receitas Operacionais
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.05;1;Resultado Antes do Resultado Financeiro e dos Tributos
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.06;1;Resultado Financeiro
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.07;1;Resultado Antes dos Tributos sobre o Lucro
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.08;1;Imposto de Renda e Contribuição Social sobre o Lucro
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.09;1;Resultado Líquido das Operações Continuadas
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.10;1;Resultado Líquido de Operações Descontinuadas
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.11;1;Lucro/Prejuízo Consolidado do Período
+Utilidade Pública;Água e Saneamento;Água e Saneamento;3.99;1;Lucro por Ação - (Reais / Ação)
