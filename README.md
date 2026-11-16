@@ -45,4 +45,4 @@ A ingestão reconhece UTF-8/UTF-8 BOM e Windows-1252/Latin-1, vírgula ou ponto 
 
 Na DRE, somente registros com `ORDEM_EXERC` normalizado como `ULTIMO` são válidos para persistência; registros `PENULTIMO` continuam na raw/staging como inválidos e não são gravados na `demonstracao_financeira`.
 
-Olá sou o Rafa
+Olá sou o Davy so que não
