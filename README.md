@@ -44,3 +44,5 @@ O plano de contas por segmento contém contas de nível 1. A DRE é associada ao
 A ingestão reconhece UTF-8/UTF-8 BOM e Windows-1252/Latin-1, vírgula ou ponto e vírgula. Linhas que não encontram empresa ou conta correspondente ficam em `REVISAR`, com a causa registrada.
 
 Na DRE, somente registros com `ORDEM_EXERC` normalizado como `ULTIMO` são válidos para persistência; registros `PENULTIMO` continuam na raw/staging como inválidos e não são gravados na `demonstracao_financeira`.
+
+olá sou o Davy
