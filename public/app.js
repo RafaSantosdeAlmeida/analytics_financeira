@@ -1,6 +1,6 @@
 const palette = ['#176b53', '#e47d61', '#477a99', '#d7a643', '#745e8b', '#64a58d'];
 const analysisHeaders = [
-  ['cnpj_cia', 'CNPJ'],
+  ['cnpj_cia', 'CNPJ'],    
   ['denom_cia', 'Empresa'],
   ['codigo_negociacao', 'Código'],
   ['setor', 'Setor'],
@@ -550,17 +550,30 @@ function downloadExport(mode, format) {
 }
 
 function switchView(name) {
-  for (const tab of document.querySelectorAll('.tab')) {
+  for (const tab of document.querySelectorAll('.sidebar-link')) {
     const active = tab.dataset.view === name;
     tab.classList.toggle('is-active', active);
-    tab.setAttribute('aria-selected', String(active));
+    tab.setAttribute('aria-current', active ? 'page' : 'false');
   }
-  for (const view of document.querySelectorAll('.view')) {
+  for (const view of document.querySelectorAll('.primary-view')) {
     const active = view.id === `view-${name}`;
     view.classList.toggle('is-active', active);
     view.hidden = !active;
   }
-  if (name !== 'ingestion') refreshAnalysisOptions().catch((error) => showToast(error.message, true));
+  if (name === 'dashboard') refreshAnalysisOptions().catch((error) => showToast(error.message, true));
+}
+
+function switchDashboardMode(name) {
+  for (const tab of document.querySelectorAll('.dashboard-tab')) {
+    const active = tab.dataset.dashboardMode === name;
+    tab.classList.toggle('is-active', active);
+    tab.setAttribute('aria-selected', String(active));
+    tab.tabIndex = active ? 0 : -1;
+  }
+  for (const panel of document.querySelectorAll('.dashboard-mode-panel')) {
+    const active = panel.id === `view-${name}`;
+    panel.hidden = !active;
+  }
 }
 
 function bindUpload() {
@@ -643,8 +656,25 @@ async function initialize() {
   byId('today-label').textContent = new Intl.DateTimeFormat('pt-BR', {
     day: '2-digit', month: 'short', year: 'numeric',
   }).format(new Date());
-  for (const tab of document.querySelectorAll('.tab')) {
+  for (const tab of document.querySelectorAll('.sidebar-link')) {
     tab.addEventListener('click', () => switchView(tab.dataset.view));
+  }
+  for (const button of document.querySelectorAll('[data-open-view]')) {
+    button.addEventListener('click', () => switchView(button.dataset.openView));
+  }
+  const dashboardTabs = [...document.querySelectorAll('.dashboard-tab')];
+  for (const tab of dashboardTabs) {
+    tab.addEventListener('click', () => switchDashboardMode(tab.dataset.dashboardMode));
+    tab.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const currentIndex = dashboardTabs.indexOf(tab);
+      const nextIndex = event.key === 'Home' ? 0
+        : event.key === 'End' ? dashboardTabs.length - 1
+          : (currentIndex + (event.key === 'ArrowRight' ? 1 : dashboardTabs.length - 1)) % dashboardTabs.length;
+      dashboardTabs[nextIndex].focus();
+      switchDashboardMode(dashboardTabs[nextIndex].dataset.dashboardMode);
+    });
   }
   bindUpload();
   bindFilters();

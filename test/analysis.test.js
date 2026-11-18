@@ -4,7 +4,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { initializeDatabase } from '../src/database.js';
 import { queryAnalysis } from '../src/analysis.js';
 import { ingestCsv, persistBatch, stageBatch } from '../src/service.js';
-
+  
 const companies = [
   ['00.000.000/0001-91', 'Empresa A', 'A'],
   ['00.000.000/0002-72', 'Empresa B', 'B'],

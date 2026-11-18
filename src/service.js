@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { parseAndStageCsv, stageRow } from './ingestion.js';
-
+   
 const supportedTypes = new Set([
   'EMPRESAS',
   'SETOR_SUBSETOR_SEGMENTO',

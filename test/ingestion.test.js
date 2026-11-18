@@ -3,7 +3,7 @@ import test from 'node:test';
 import { parseAndStageCsv } from '../src/ingestion.js';
 
 const cnpj = '00.000.000/0001-91';
-
+      
 test('detects the five supported CSV layouts by their headers', () => {
   const fixtures = [
     [

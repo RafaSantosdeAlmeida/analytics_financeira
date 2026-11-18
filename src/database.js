@@ -1,7 +1,7 @@
 export function initializeDatabase(database) {
   database.exec(`
     PRAGMA foreign_keys = ON;
-
+    
     CREATE TABLE IF NOT EXISTS ingestion_lote (
       id_lote INTEGER PRIMARY KEY AUTOINCREMENT,
       tipo_arquivo TEXT NOT NULL,

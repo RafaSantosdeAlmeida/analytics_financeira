@@ -5,7 +5,7 @@ import { initializeDatabase } from '../src/database.js';
 
 test('initializes the complete SQLite schema with foreign keys enabled', () => {
   const database = new DatabaseSync(':memory:');
-
+   
   initializeDatabase(database);
 
   const tableNames = database

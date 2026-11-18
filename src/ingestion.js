@@ -1,5 +1,5 @@
 import { parse } from 'csv-parse/sync';
-
+   
 const layouts = [
   {
     type: 'EMPRESAS',

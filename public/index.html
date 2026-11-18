@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f7f4">
     <title>Analytics Financeira</title>
@@ -14,19 +14,44 @@
     <script src="/app.js" type="module"></script>
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Analytics Financeira, início">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="brand-name">analytics<span>financeira</span></span>
-      </a>
-      <div class="topbar-meta">
-        <span class="environment"><span class="status-dot"></span>SQLite local</span>
-        <span class="topbar-divider"></span>
-        <span class="today" id="today-label"></span>
-      </div>
-    </header>
+    <div class="app-frame">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Analytics Financeira, início">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand-name">analytics<span>financeira</span></span>
+        </a>
+        <div class="sidebar-caption">ESPAÇO DE TRABALHO</div>
+        <nav class="sidebar-nav" aria-label="Navegação principal">
+          <button class="sidebar-link" id="tab-documentation" aria-current="false" aria-controls="view-documentation" data-view="documentation">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.75A1.75 1.75 0 0 1 6.75 3H20v15H7a2 2 0 0 0-2 2V4.75Z"/><path d="M5 19.5A1.5 1.5 0 0 1 6.5 18H20M9 7h7M9 10h7"/></svg>
+            <span>Documentação</span>
+          </button>
+          <button class="sidebar-link" id="tab-ingestion" aria-current="false" aria-controls="view-ingestion" data-view="ingestion">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>
+            <span>Inserir Dados</span>
+          </button>
+          <button class="sidebar-link is-active" id="tab-dashboard" aria-current="page" aria-controls="view-dashboard" data-view="dashboard">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V5m0 14h17"/><path d="m7 15 4-4 3 2 6-7"/><path d="M16 6h4v4"/></svg>
+            <span>Dashboard</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <span class="sidebar-footer-mark" aria-hidden="true">AF</span>
+          <span><strong>Analytics Financeira</strong><small>Banco SQLite local</small></span>
+        </div>
+      </aside>
 
-    <main class="app-shell">
+      <div class="app-main">
+        <header class="topbar">
+          <div class="topbar-context"><span class="topbar-context-dot"></span>PLATAFORMA DE ANÁLISE</div>
+          <div class="topbar-meta">
+            <span class="environment"><span class="status-dot"></span>SQLite local</span>
+            <span class="topbar-divider"></span>
+            <span class="today" id="today-label"></span>
+          </div>
+        </header>
+
+      <main class="app-shell">
       <section class="page-heading">
         <div>
           <p class="eyebrow">DEMONSTRAÇÕES FINANCEIRAS</p>
@@ -35,23 +60,43 @@
         <div class="database-state"><span class="state-pip"></span><span id="database-label">Conectando ao banco</span></div>
       </section>
 
-      <nav class="tabs" aria-label="Áreas do sistema" role="tablist">
-        <button class="tab is-active" id="tab-ingestion" role="tab" aria-selected="true" aria-controls="view-ingestion" data-view="ingestion">
-          <span class="tab-number">01</span>Ingestão
-        </button>
-        <button class="tab" id="tab-individual" role="tab" aria-selected="false" aria-controls="view-individual" data-view="individual">
-          <span class="tab-number">02</span>Análise individual
-        </button>
-        <button class="tab" id="tab-comparative" role="tab" aria-selected="false" aria-controls="view-comparative" data-view="comparative">
-          <span class="tab-number">03</span>Análise comparativa
-        </button>
-      </nav>
+      <section class="view primary-view" id="view-documentation" aria-labelledby="documentation-title" hidden>
+        <div class="section-intro">
+          <div><p class="eyebrow">GUIA DA PLATAFORMA</p><h2 id="documentation-title">Documentação</h2></div>
+          <p class="section-description">Entenda como carregar demonstrações financeiras e explorar os dados.</p>
+        </div>
+        <section class="documentation-welcome">
+          <span class="documentation-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 4.75A1.75 1.75 0 0 1 6.75 3H20v15H7a2 2 0 0 0-2 2V4.75Z"/><path d="M5 19.5A1.5 1.5 0 0 1 6.5 18H20M9 7h7M9 10h7"/></svg>
+          </span>
+          <div><p class="eyebrow">COMECE POR AQUI</p><h3>Da origem aos insights, em um só lugar.</h3><p>Carregue seus arquivos CSV, acompanhe as etapas de validação e consulte os resultados em análises financeiras.</p></div>
+          <button class="button button-primary" type="button" data-open-view="ingestion">Ir para Inserir Dados <span class="button-icon" aria-hidden="true">→</span></button>
+        </section>
+        <div class="documentation-grid">
+          <article class="documentation-card">
+            <div class="documentation-card-heading"><span class="documentation-step">01</span><div><p class="eyebrow">IMPORTAÇÃO</p><h3>Prepare os dados</h3></div></div>
+            <p>Envie arquivos CSV de até 100 MB. O sistema reconhece cada formato pelo cabeçalho, mesmo que o nome do arquivo seja diferente.</p>
+            <div class="documentation-tip"><strong>Ordem recomendada</strong><span>Setores → empresas → planos de contas → demonstrações DRE</span></div>
+          </article>
+          <article class="documentation-card">
+            <div class="documentation-card-heading"><span class="documentation-step">02</span><div><p class="eyebrow">VALIDAÇÃO</p><h3>Acompanhe o pipeline</h3></div></div>
+            <p>Cada lote passa por três etapas. Revise as linhas de origem antes de avançar e confira os registros inválidos ou que precisam de revisão.</p>
+            <div class="pipeline-legend"><span><i class="legend-dot raw"></i>Raw <small>original</small></span><span><i class="legend-dot staging"></i>Staging <small>validado</small></span><span><i class="legend-dot core"></i>Core <small>persistido</small></span></div>
+          </article>
+          <article class="documentation-card">
+            <div class="documentation-card-heading"><span class="documentation-step">03</span><div><p class="eyebrow">ANÁLISE</p><h3>Explore os resultados</h3></div></div>
+            <p>Filtre por setor, empresa, conta e período para visualizar séries históricas, comparar empresas e exportar os dados.</p>
+            <button class="documentation-link" type="button" data-open-view="dashboard">Explorar o Dashboard <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+        <section class="documentation-note"><span class="note-mark" aria-hidden="true">i</span><p><strong>Sobre os dados:</strong> períodos e modalidades (individual e consolidado) são mantidos separados. Valores em moedas diferentes não são convertidos e não podem ser comparados diretamente.</p></section>
+      </section>
 
-      <section class="view is-active" id="view-ingestion" role="tabpanel" aria-labelledby="tab-ingestion">
+      <section class="view primary-view" id="view-ingestion" aria-labelledby="ingestion-title" hidden>
         <div class="section-intro">
           <div>
             <p class="eyebrow">PIPELINE DE DADOS</p>
-            <h2>Carregar demonstrações</h2>
+            <h2 id="ingestion-title">Inserir Dados</h2>
           </div>
           <p class="section-description">Importe um CSV e acompanhe cada etapa até a persistência no core.</p>
         </div>
@@ -117,7 +162,16 @@
         </div>
       </section>
 
-      <section class="view analysis-view" id="view-individual" role="tabpanel" aria-labelledby="tab-individual" hidden>
+      <section class="view primary-view" id="view-dashboard" aria-labelledby="dashboard-title">
+        <div class="section-intro analysis-intro">
+          <div><p class="eyebrow">VISÃO GERAL</p><h2 id="dashboard-title">Dashboard</h2></div>
+          <p class="section-description">Explore as demonstrações financeiras com filtros por empresa, conta e período.</p>
+        </div>
+        <nav class="dashboard-tabs" aria-label="Tipo de análise" role="tablist">
+          <button class="dashboard-tab is-active" id="tab-individual" role="tab" aria-selected="true" aria-controls="view-individual" data-dashboard-mode="individual">Análise individual</button>
+          <button class="dashboard-tab" id="tab-comparative" role="tab" aria-selected="false" aria-controls="view-comparative" data-dashboard-mode="comparative" tabindex="-1">Análise comparativa</button>
+        </nav>
+        <section class="dashboard-mode-panel analysis-view" id="view-individual" role="tabpanel" aria-labelledby="tab-individual">
         <div class="section-intro analysis-intro">
           <div><p class="eyebrow">DESEMPENHO POR EMPRESA</p><h2>Análise individual</h2></div>
           <p class="section-description">Acompanhe a evolução de uma conta e explore a composição do período.</p>
@@ -164,7 +218,7 @@
         <div class="analysis-empty"><span class="empty-graphic" aria-hidden="true">↗</span><p>Selecione os filtros para consultar a série histórica.</p></div>
       </section>
 
-      <section class="view analysis-view" id="view-comparative" role="tabpanel" aria-labelledby="tab-comparative" hidden>
+      <section class="dashboard-mode-panel analysis-view" id="view-comparative" role="tabpanel" aria-labelledby="tab-comparative" hidden>
         <div class="section-intro analysis-intro">
           <div><p class="eyebrow">LEITURA ENTRE EMPRESAS</p><h2>Análise comparativa</h2></div>
           <p class="section-description">Compare a mesma conta de segmento em diferentes empresas.</p>
@@ -211,8 +265,11 @@
         </div>
         <div class="analysis-empty"><span class="empty-graphic" aria-hidden="true">↗</span><p>Selecione os filtros para comparar empresas.</p></div>
       </section>
+    </section>
     </main>
 
     <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    </div>
+    </div>
   </body>
 </html>

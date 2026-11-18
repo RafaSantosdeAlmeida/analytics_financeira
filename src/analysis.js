@@ -1,5 +1,5 @@
 import { scaleMultiplier } from './ingestion.js';
-
+    
 function placeholders(count) {
   return Array.from({ length: count }, () => '?').join(', ');
 }

@@ -6,7 +6,7 @@ import { queryAnalysis } from '../src/analysis.js';
 import { getBatch, ingestCsv, persistBatch, stageBatch } from '../src/service.js';
 
 const cnpj = '00.000.000/0001-91';
-
+     
 function upload(database, type, content, filename = `${type}.csv`) {
   return ingestCsv(database, {
     buffer: Buffer.from(content, 'utf8'),

@@ -20,6 +20,10 @@ Abra `http://localhost:3000`. Para desenvolvimento com reinício automático, us
 
 O banco `analytics_financeira.sqlite` é criado ao iniciar o servidor. Para usar outro caminho, defina `DATABASE_PATH`; para usar outra porta, defina `PORT`.
 
+## Navegação
+
+A aplicação é organizada em três áreas: **Documentação**, com orientações sobre o fluxo; **Inserir Dados**, para carregar e acompanhar arquivos CSV; e **Dashboard**, com análises individuais ou comparativas, filtros e exportação. Em telas menores, a navegação lateral se adapta para uma barra horizontal.
+
 ## Fluxo de ingestão
 
 1. Envie um CSV, de até 100 MB. O tipo é identificado pelos cabeçalhos, não pelo nome do arquivo.
@@ -39,7 +43,7 @@ Carregue as referências na ordem `setor_subsetor_segmento`, `empresas`, `plano_
 
 ## Observações
 
-O plano de contas por segmento contém contas de nível 1. A DRE é associada ao plano de segmento somente quando existe o mesmo código de conta; contas empresariais detalhadas sem correspondência ficam com a conta de segmento nula. A DRE preserva individual/consolidado e os valores/escala originais para consulta e exportação.
+O plano de contas por segmento contém contas de nível 1. A DRE é associada ao plano de segmento somente quando existe o mesmo código de conta; contas empresariais detalhadas sem correspondência ficam com a conta de segmento nula. A DRE preserva individual/consolidado e os valores/escala originais para consulta e exportação.  
 
 A ingestão reconhece UTF-8/UTF-8 BOM e Windows-1252/Latin-1, vírgula ou ponto e vírgula. Linhas que não encontram empresa ou conta correspondente ficam em `REVISAR`, com a causa registrada.
 

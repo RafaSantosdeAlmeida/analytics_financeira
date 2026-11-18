@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { initializeDatabase } from '../src/database.js';
 import { ingestCsv, persistBatch, stageBatch } from '../src/service.js';
-
+    
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const referenceFiles = [
   ['SETOR_SUBSETOR_SEGMENTO', 'dados/setor_subsetor_segmento.csv'],
