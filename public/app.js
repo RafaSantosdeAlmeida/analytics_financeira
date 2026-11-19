@@ -26,6 +26,7 @@ const state = {
   activeBatchLayer: 'raw',
   batches: [],
   analysisParams: { individual: null, comparative: null },
+  analysisPeriods: { individual: null, comparative: null },
   charts: { individual: {}, comparative: {} },
 };
 
@@ -69,7 +70,7 @@ function safeCell(value) {
   return String(value);
 }
 
-function makeTable(headers, rows, { statusField = null } = {}) {
+function makeTable(headers, rows, { statusField = null, formatValue = null } = {}) {
   const table = document.createElement('table');
   const head = document.createElement('thead');
   const headerRow = document.createElement('tr');
@@ -77,6 +78,7 @@ function makeTable(headers, rows, { statusField = null } = {}) {
     const cell = document.createElement('th');
     cell.scope = 'col';
     cell.textContent = header.label;
+    if (header.key === 'vl_conta') cell.classList.add('numeric-header');
     headerRow.append(cell);
   }
   head.append(headerRow);
@@ -93,9 +95,11 @@ function makeTable(headers, rows, { statusField = null } = {}) {
         pill.textContent = safeCell(value);
         cell.append(pill);
       } else {
-        cell.textContent = header.key === 'cd_conta_segmento' && value == null
+        const formatted = formatValue?.(header.key, value);
+        cell.textContent = formatted ?? (header.key === 'cd_conta_segmento' && value == null
           ? 'NULL'
-          : safeCell(value);
+          : safeCell(value));
+        if (header.key === 'vl_conta') cell.classList.add('numeric-cell');
       }
       tableRow.append(cell);
     }
@@ -396,6 +400,21 @@ async function loadOptions(panel) {
     'Selecione uma conta', filters.accountCode);
 
   updateComparativeControls(panel);
+  updateFilterSummary(panel);
+}
+
+function updateFilterSummary(panel) {
+  const controls = [...panel.querySelectorAll('[data-filter]')];
+  const count = controls.reduce((total, control) => {
+    if (control.dataset.filter === 'axisSecondary') return total;
+    return total + (control.multiple ? selectedValues(control).length : Number(Boolean(control.value)));
+  }, 0);
+  for (const control of controls) {
+    const active = control.multiple ? selectedValues(control).length > 0 : Boolean(control.value);
+    control.closest('.filter-field')?.classList.toggle('has-value', active);
+  }
+  const output = panel.querySelector('[data-filter-count]');
+  output.textContent = `${count} ${count === 1 ? 'critério ativo' : 'critérios ativos'}`;
 }
 
 function updateComparativeControls(panel) {
@@ -434,18 +453,24 @@ function analysisQuery(panel) {
 function chartLine(mode, result, axisSecondary) {
   const panel = byId(`view-${mode}`);
   const canvas = panel.querySelector('.line-canvas canvas');
+  const currencyLabel = result.moeda ? ` ${result.moeda}` : '';
+  const pointsBySeries = result.series.map((series) =>
+    new Map(series.data.map((point) => [point.x, point])));
+  const periods = [...new Map(result.series.flatMap((series) =>
+    series.data.map((point) => [point.x, point.periodo])))]
+    .sort(([left], [right]) => left.localeCompare(right));
   const datasets = result.series.map((series, index) => ({
     label: series.label,
-    data: series.data.map((point) => point.y),
+    data: periods.map(([period]) => pointsBySeries[index].get(period)?.y ?? null),
     borderColor: palette[index % palette.length],
     backgroundColor: palette[index % palette.length],
-    borderWidth: 2,
-    pointRadius: 3,
+    borderWidth: 2.5,
+    pointRadius: 2.5,
     pointHoverRadius: 5,
     tension: 0.26,
     yAxisID: axisSecondary && index === 1 ? 'y1' : 'y',
   }));
-  const labels = result.series[0]?.data.map((point) => point.periodo) ?? [];
+  const labels = periods.map(([, label]) => label);
   state.charts[mode].line?.destroy();
   state.charts[mode].line = new Chart(canvas, {
     type: 'line',
@@ -455,8 +480,13 @@ function chartLine(mode, result, axisSecondary) {
       maintainAspectRatio: false,
       interaction: { intersect: false, mode: 'index' },
       plugins: {
-        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 7, boxHeight: 7, color: '#66746d', font: { family: 'DM Sans', size: 10 } } },
-        tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${formatNumber(context.parsed.y)}` } },
+        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, boxHeight: 8, padding: 18, color: '#53665c', font: { family: 'DM Sans', size: 11 } } },
+        tooltip: {
+          padding: 10,
+          titleFont: { family: 'DM Sans', size: 12, weight: '600' },
+          bodyFont: { family: 'DM Sans', size: 11 },
+          callbacks: { label: (context) => `${context.dataset.label}: ${formatNumber(context.parsed.y)}${currencyLabel}` },
+        },
       },
       scales: {
         x: { grid: { display: false }, ticks: { color: '#829087', maxRotation: 0, font: { family: 'DM Mono', size: 9 } } },
@@ -478,9 +508,12 @@ function compact(value) {
 function chartBars(mode, result) {
   const panel = byId(`view-${mode}`);
   const canvas = panel.querySelector('.bar-canvas canvas');
-  const bars = [...result.barras].sort((left, right) =>
-    left.cdConta.localeCompare(right.cdConta, 'pt-BR', { numeric: true })
-      || left.empresa.localeCompare(right.empresa, 'pt-BR'));
+  const currencyLabel = result.moeda ? ` ${result.moeda}` : '';
+  const bars = [...result.barras]
+    .sort((left, right) => Math.abs(right.valorNormalizado) - Math.abs(left.valorNormalizado)
+      || left.cdConta.localeCompare(right.cdConta, 'pt-BR', { numeric: true })
+      || left.empresa.localeCompare(right.empresa, 'pt-BR'))
+    .slice(0, 12);
   const labels = bars.map((row) => mode === 'comparative'
     ? `${row.cdConta} · ${row.empresa}`
     : `${row.cdConta} · ${row.descricao}`);
@@ -492,18 +525,36 @@ function chartBars(mode, result) {
   state.charts[mode].bar?.destroy();
   state.charts[mode].bar = new Chart(canvas, {
     type: 'bar',
-    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 2, barThickness: 15, maxBarThickness: 19 }] },
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 4, barThickness: 17, maxBarThickness: 22 }] },
     options: {
       indexAxis: 'y',
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: (context) => formatNumber(context.parsed.x) } },
+        tooltip: {
+          padding: 10,
+          bodyFont: { family: 'DM Sans', size: 11 },
+          callbacks: {
+            title: (items) => labels[items[0]?.dataIndex] ?? '',
+            label: (context) => `${formatNumber(context.parsed.x)}${currencyLabel}`,
+          },
+        },
       },
       scales: {
         x: { grid: { color: '#edf1ee' }, ticks: { color: '#829087', callback: compact, font: { family: 'DM Mono', size: 9 } } },
-        y: { grid: { display: false }, ticks: { color: '#65736b', autoSkip: false, font: { family: 'DM Mono', size: 9 } } },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: '#53665c',
+            autoSkip: false,
+            font: { family: 'DM Sans', size: 10 },
+            callback(value) {
+              const label = this.getLabelForValue(value);
+              return label.length > 30 ? `${label.slice(0, 27)}…` : label;
+            },
+          },
+        },
       },
     },
   });
@@ -513,12 +564,119 @@ function renderAnalysisTable(container, rows) {
   container.replaceChildren(makeTable(
     analysisHeaders.map(([key, label]) => ({ key, label })),
     rows,
+    {
+      formatValue: (key, value) => {
+        if (['dt_ini_exerc', 'dt_fim_exerc', 'dt_refer'].includes(key) && value) return formatDate(value);
+        if (key === 'vl_conta' && value !== null && value !== '') return formatNumber(value);
+        return null;
+      },
+    },
   ));
+}
+
+function uniqueSeriesPoints(series) {
+  const pointsByPeriod = new Map();
+  for (const point of series?.data ?? []) {
+    pointsByPeriod.set(point.periodo || point.x, point);
+  }
+  return [...pointsByPeriod.values()].sort((left, right) => left.x.localeCompare(right.x));
+}
+
+function kpiCard(label, value, detail, { trend = null, exactValue = '' } = {}) {
+  const card = document.createElement('article');
+  card.className = `kpi-card${trend === null ? '' : trend >= 0 ? ' is-positive' : ' is-negative'}`;
+  const labelNode = document.createElement('span');
+  labelNode.className = 'kpi-label';
+  labelNode.textContent = label;
+  const valueNode = document.createElement('strong');
+  valueNode.className = 'kpi-value';
+  valueNode.textContent = value;
+  if (exactValue) valueNode.title = exactValue;
+  const detailNode = document.createElement('span');
+  detailNode.className = 'kpi-detail';
+  detailNode.textContent = detail;
+  card.append(labelNode, valueNode, detailNode);
+  return card;
+}
+
+function formattedKpiValue(value, currency) {
+  return value == null ? '—' : `${compact(value)} ${currency ?? ''}`.trim();
+}
+
+function markAnalysisDirty(panel) {
+  const mode = panel.dataset.mode;
+  const hasPreviousAnalysis = Boolean(state.analysisParams[mode]);
+  const status = panel.querySelector('[data-analysis-status]');
+  status.textContent = hasPreviousAnalysis
+    ? 'Filtros alterados · gere novamente para atualizar os resultados.'
+    : 'Ajuste os filtros e gere uma análise.';
+  status.classList.toggle('is-stale', hasPreviousAnalysis);
+  byId(`view-${mode}`).querySelector('.analysis-results').classList.toggle('is-stale', hasPreviousAnalysis);
+  for (const button of byId(`view-${mode}`).querySelectorAll('.export-actions .button')) {
+    button.disabled = hasPreviousAnalysis;
+  }
+  updateFilterSummary(panel);
+}
+
+function renderKpis(mode, result) {
+  const container = byId(`view-${mode}`).querySelector('[data-kpis]');
+  const currency = result.moeda;
+
+  if (mode === 'comparative') {
+    const cards = result.series.map((series) => {
+      const points = uniqueSeriesPoints(series);
+      const latest = points.at(-1);
+      const previous = points.at(-2);
+      const variation = latest && previous && previous.y !== 0
+        ? ((latest.y - previous.y) / Math.abs(previous.y)) * 100
+        : null;
+      const detail = [
+        latest ? formatDate(latest.x) : 'Sem observações no período',
+        variation === null ? null : `${variation > 0 ? '+' : ''}${formatNumber(variation)}% vs. período anterior`,
+      ].filter(Boolean).join(' · ');
+      return kpiCard(series.label, formattedKpiValue(latest?.y, currency), detail, {
+        trend: variation,
+        exactValue: latest ? `${formatNumber(latest.y)} ${currency ?? ''}`.trim() : '',
+      });
+    });
+    if (!cards.length) cards.push(kpiCard('Empresas selecionadas', '—', 'Nenhuma observação encontrada.'));
+    container.replaceChildren(...cards);
+    return;
+  }
+
+  const points = uniqueSeriesPoints(result.series[0]);
+  const latest = points.at(-1);
+  const previous = points.at(-2);
+  const variation = latest && previous && previous.y !== 0
+    ? ((latest.y - previous.y) / Math.abs(previous.y)) * 100
+    : null;
+  const latestValue = formattedKpiValue(latest?.y, currency);
+  const variationText = variation === null
+    ? 'Sem base comparativa'
+    : `${variation > 0 ? '+' : ''}${formatNumber(variation)}%`;
+  const variationDetail = variation === null
+    ? 'Necessário um período anterior com valor diferente de zero'
+    : `vs. ${previous.periodo}`;
+  container.replaceChildren(
+    kpiCard('Valor mais recente', latestValue,
+      latest ? latest.periodo : 'Nenhuma observação encontrada.', {
+        exactValue: latest ? `${formatNumber(latest.y)} ${currency ?? ''}`.trim() : '',
+      }),
+    kpiCard('Variação entre períodos', variationText, variationDetail, { trend: variation }),
+    kpiCard('Períodos observados', formatNumber(points.length), 'Na série histórica da conta'),
+    kpiCard('Registros no recorte', formatNumber(result.linhas.length), 'Inclui todas as contas do período'),
+  );
 }
 
 async function runAnalysis(panel) {
   const mode = panel.dataset.mode;
   const { values, query } = analysisQuery(panel);
+  const button = panel.querySelector('.run-analysis');
+  const status = panel.querySelector('[data-analysis-status]');
+  button.disabled = true;
+  button.classList.add('is-loading');
+  status.textContent = 'Consultando a base financeira...';
+  status.classList.remove('is-stale', 'is-error');
   try {
     const result = await request(`/api/analysis/${mode}?${query}`);
     const resultsPanel = byId(`view-${mode}`).querySelector('.analysis-results');
@@ -527,14 +685,31 @@ async function runAnalysis(panel) {
     empty.hidden = true;
     chartLine(mode, result, Boolean(values.axisSecondary));
     chartBars(mode, result);
+    renderKpis(mode, result);
     byId(`view-${mode}`).querySelector('[data-chart-currency]').textContent = result.moeda ?? 'Sem dados';
     byId(`view-${mode}`).querySelector('[data-chart-period]').textContent = result.dataBarras ? formatDate(result.dataBarras) : 'Sem dados';
     byId(`view-${mode}`).querySelector('[data-row-count]').textContent = `${result.linhas.length} registros`;
     renderAnalysisTable(byId(`view-${mode}`).querySelector('.analysis-table'), result.linhas);
     state.analysisParams[mode] = query;
+    state.analysisPeriods[mode] = result.dataBarras ? formatDate(result.dataBarras) : 'Sem dados no período';
+    byId('view-dashboard').querySelector('[data-reference-date]').textContent =
+      state.analysisPeriods[mode];
+    status.textContent = result.linhas.length
+      ? `${formatNumber(result.linhas.length)} registros · análise atualizada`
+      : 'Consulta concluída · nenhum registro encontrado.';
+    status.classList.remove('is-stale', 'is-error');
+    resultsPanel.classList.remove('is-stale');
+    for (const exportButton of byId(`view-${mode}`).querySelectorAll('.export-actions .button')) {
+      exportButton.disabled = false;
+    }
     showToast(result.linhas.length ? 'Análise atualizada.' : 'Nenhum registro encontrado para esses filtros.');
   } catch (error) {
+    status.textContent = error.message;
+    status.classList.add('is-error');
     showToast(error.message, true);
+  } finally {
+    button.disabled = false;
+    button.classList.remove('is-loading');
   }
 }
 
@@ -550,6 +725,7 @@ function downloadExport(mode, format) {
 }
 
 function switchView(name) {
+  byId('app-shell').classList.toggle('is-dashboard', name === 'dashboard');
   for (const tab of document.querySelectorAll('.sidebar-link')) {
     const active = tab.dataset.view === name;
     tab.classList.toggle('is-active', active);
@@ -564,6 +740,8 @@ function switchView(name) {
 }
 
 function switchDashboardMode(name) {
+  byId('view-dashboard').querySelector('[data-reference-date]').textContent =
+    state.analysisPeriods[name] ?? 'Aguardando consulta';
   for (const tab of document.querySelectorAll('.dashboard-tab')) {
     const active = tab.dataset.dashboardMode === name;
     tab.classList.toggle('is-active', active);
@@ -633,13 +811,33 @@ function bindUpload() {
 function bindFilters() {
   for (const panel of document.querySelectorAll('.filter-panel')) {
     panel.addEventListener('change', (event) => {
-      if (event.target.matches('[data-filter="axisSecondary"]')) return;
+      if (event.target.matches('[data-filter="axisSecondary"]')) {
+        markAnalysisDirty(panel);
+        return;
+      }
+      markAnalysisDirty(panel);
       if (event.target.matches('[data-filter="companyIds"]')) {
         updateComparativeControls(panel);
       }
       loadOptions(panel).catch((error) => showToast(error.message, true));
     });
     panel.querySelector('.run-analysis').addEventListener('click', () => runAnalysis(panel));
+    panel.querySelector('[data-clear-filters]').addEventListener('click', () => {
+      for (const control of panel.querySelectorAll('[data-filter]')) {
+        if (control.multiple) {
+          for (const option of control.options) option.selected = false;
+        } else if (control.dataset.filter === 'grupoDfp') {
+          control.value = 'CONSOLIDADO';
+        } else if (control.type === 'checkbox') {
+          control.checked = false;
+        } else {
+          control.value = '';
+        }
+      }
+      updateComparativeControls(panel);
+      markAnalysisDirty(panel);
+      loadOptions(panel).catch((error) => showToast(error.message, true));
+    });
   }
 }
 
@@ -653,6 +851,7 @@ function bindExports() {
 }
 
 async function initialize() {
+  byId('app-shell').classList.add('is-dashboard');
   byId('today-label').textContent = new Intl.DateTimeFormat('pt-BR', {
     day: '2-digit', month: 'short', year: 'numeric',
   }).format(new Date());

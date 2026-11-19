@@ -51,7 +51,7 @@
           </div>
         </header>
 
-      <main class="app-shell">
+      <main class="app-shell" id="app-shell">
       <section class="page-heading">
         <div>
           <p class="eyebrow">DEMONSTRAÇÕES FINANCEIRAS</p>
@@ -163,20 +163,27 @@
       </section>
 
       <section class="view primary-view" id="view-dashboard" aria-labelledby="dashboard-title">
-        <div class="section-intro analysis-intro">
-          <div><p class="eyebrow">VISÃO GERAL</p><h2 id="dashboard-title">Dashboard</h2></div>
-          <p class="section-description">Explore as demonstrações financeiras com filtros por empresa, conta e período.</p>
+        <div class="dashboard-hero">
+          <div class="dashboard-hero-copy">
+            <p class="eyebrow">INTELIGÊNCIA FINANCEIRA <span class="hero-eyebrow-divider">/</span> ANÁLISE DE DEMONSTRAÇÕES</p>
+            <h1 id="dashboard-title">Visão Geral Financeira</h1>
+            <p>Explore desempenho, tendências e composição financeira com dados da sua base.</p>
+          </div>
+          <div class="dashboard-reference" aria-live="polite">
+            <span class="reference-icon" aria-hidden="true">◷</span>
+            <span><small>PERÍODO DA ÚLTIMA CONSULTA</small><strong data-reference-date>Aguardando consulta</strong></span>
+          </div>
         </div>
         <nav class="dashboard-tabs" aria-label="Tipo de análise" role="tablist">
-          <button class="dashboard-tab is-active" id="tab-individual" role="tab" aria-selected="true" aria-controls="view-individual" data-dashboard-mode="individual">Análise individual</button>
-          <button class="dashboard-tab" id="tab-comparative" role="tab" aria-selected="false" aria-controls="view-comparative" data-dashboard-mode="comparative" tabindex="-1">Análise comparativa</button>
+          <button class="dashboard-tab is-active" id="tab-individual" role="tab" aria-selected="true" aria-controls="view-individual" data-dashboard-mode="individual"><span class="tab-index">01</span>Análise individual</button>
+          <button class="dashboard-tab" id="tab-comparative" role="tab" aria-selected="false" aria-controls="view-comparative" data-dashboard-mode="comparative" tabindex="-1"><span class="tab-index">02</span>Análise comparativa</button>
         </nav>
         <section class="dashboard-mode-panel analysis-view" id="view-individual" role="tabpanel" aria-labelledby="tab-individual">
-        <div class="section-intro analysis-intro">
-          <div><p class="eyebrow">DESEMPENHO POR EMPRESA</p><h2>Análise individual</h2></div>
-          <p class="section-description">Acompanhe a evolução de uma conta e explore a composição do período.</p>
-        </div>
         <div class="filter-panel" data-mode="individual">
+          <div class="dashboard-filter-heading">
+            <div class="filter-title"><span class="filter-title-icon" aria-hidden="true">⌕</span><div><p class="eyebrow">CONFIGURE O RECORTE</p><h3>Filtros da análise</h3></div></div>
+            <div class="filter-tools"><span class="filter-count" data-filter-count>0 critérios ativos</span><button class="clear-filters" type="button" data-clear-filters>Limpar filtros</button></div>
+          </div>
           <div class="filter-grid">
             <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
             <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
@@ -189,24 +196,28 @@
             <label class="filter-field date-field"><span>Até</span><input data-filter="periodEnd" type="date"></label>
           </div>
           <div class="filter-footer">
-            <label class="axis-toggle axis-toggle-hidden"><input type="checkbox" disabled><span class="toggle-track"></span><span>Eixo secundário</span></label>
+            <span class="analysis-status" data-analysis-status role="status" aria-live="polite">Ajuste os filtros e gere uma análise.</span>
             <button class="button button-primary run-analysis" type="button"><span class="button-icon" aria-hidden="true">↗</span>Gerar análise</button>
           </div>
         </div>
         <div class="analysis-results" hidden>
+          <section class="kpi-section" aria-label="Indicadores-chave">
+            <div class="kpi-heading"><p class="eyebrow">RESUMO FINANCEIRO</p><span>Valores normalizados para comparação</span></div>
+            <div class="kpi-grid" data-kpis></div>
+          </section>
           <div class="chart-grid">
             <article class="chart-panel line-panel">
-              <div class="chart-heading"><div><p class="eyebrow">SÉRIE HISTÓRICA</p><h3>Evolução da conta</h3></div><span class="chart-unit" data-chart-currency></span></div>
+              <div class="chart-heading"><div><p class="eyebrow">TENDÊNCIA AO LONGO DO TEMPO</p><h3>Evolução da conta</h3><span class="chart-description">Valores reportados por período</span></div><span class="chart-unit" data-chart-currency></span></div>
               <div class="chart-canvas line-canvas"><canvas aria-label="Gráfico de linha com histórico da conta" role="img"></canvas></div>
             </article>
             <article class="chart-panel bar-panel">
-              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DO PERÍODO</p><h3>Contas por valor</h3></div><span class="chart-period" data-chart-period></span></div>
+              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DA DRE</p><h3>Contas de maior impacto</h3><span class="chart-description">Até 12 maiores valores absolutos · tabela completa abaixo</span></div><span class="chart-period" data-chart-period></span></div>
               <div class="chart-canvas bar-canvas"><canvas aria-label="Gráfico de barras horizontais por conta" role="img"></canvas></div>
             </article>
           </div>
           <section class="data-panel">
             <div class="data-heading">
-              <div><p class="eyebrow">DADOS FILTRADOS</p><h3>Detalhamento</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div><p class="eyebrow">BASE ANALÍTICA</p><h3>Detalhamento dos registros</h3><span class="muted" data-row-count>0 registros</span></div>
               <div class="export-actions">
                 <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>
                 <button class="button button-secondary export-xlsx" type="button"><span class="button-icon" aria-hidden="true">↓</span>Excel</button>
@@ -224,6 +235,10 @@
           <p class="section-description">Compare a mesma conta de segmento em diferentes empresas.</p>
         </div>
         <div class="filter-panel" data-mode="comparative">
+          <div class="dashboard-filter-heading">
+            <div class="filter-title"><span class="filter-title-icon" aria-hidden="true">⌕</span><div><p class="eyebrow">CONFIGURE O RECORTE</p><h3>Filtros da análise</h3></div></div>
+            <div class="filter-tools"><span class="filter-count" data-filter-count>0 critérios ativos</span><button class="clear-filters" type="button" data-clear-filters>Limpar filtros</button></div>
+          </div>
           <div class="filter-grid">
             <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
             <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
@@ -238,23 +253,28 @@
           <div class="filter-footer">
             <label class="axis-toggle" data-axis-control><input type="checkbox" data-filter="axisSecondary" disabled><span class="toggle-track"></span><span>Eixo secundário</span></label>
             <span class="filter-hint" id="company-hint" data-company-hint>Selecione pelo menos duas empresas.</span>
+            <span class="analysis-status" data-analysis-status role="status" aria-live="polite">Ajuste os filtros e gere uma análise.</span>
             <button class="button button-primary run-analysis" type="button"><span class="button-icon" aria-hidden="true">↗</span>Gerar comparação</button>
           </div>
         </div>
         <div class="analysis-results" hidden>
+          <section class="kpi-section" aria-label="Indicadores-chave por empresa">
+            <div class="kpi-heading"><p class="eyebrow">RESUMO FINANCEIRO</p><span>Valores mais recentes por empresa</span></div>
+            <div class="kpi-grid" data-kpis></div>
+          </section>
           <div class="chart-grid">
             <article class="chart-panel line-panel">
-              <div class="chart-heading"><div><p class="eyebrow">SÉRIE HISTÓRICA</p><h3>Comparativo da conta</h3></div><span class="chart-unit" data-chart-currency></span></div>
+              <div class="chart-heading"><div><p class="eyebrow">TENDÊNCIA AO LONGO DO TEMPO</p><h3>Comparativo da conta</h3><span class="chart-description">Evolução das empresas selecionadas</span></div><span class="chart-unit" data-chart-currency></span></div>
               <div class="chart-canvas line-canvas"><canvas aria-label="Gráfico de linha comparativo" role="img"></canvas></div>
             </article>
             <article class="chart-panel bar-panel">
-              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DO PERÍODO</p><h3>Contas por empresa</h3></div><span class="chart-period" data-chart-period></span></div>
+              <div class="chart-heading"><div><p class="eyebrow">COMPOSIÇÃO DA DRE</p><h3>Contas de maior impacto</h3><span class="chart-description">Até 12 maiores valores absolutos · tabela completa abaixo</span></div><span class="chart-period" data-chart-period></span></div>
               <div class="chart-canvas bar-canvas"><canvas aria-label="Gráfico de barras horizontais comparativo" role="img"></canvas></div>
             </article>
           </div>
           <section class="data-panel">
             <div class="data-heading">
-              <div><p class="eyebrow">DADOS FILTRADOS</p><h3>Detalhamento</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div><p class="eyebrow">BASE ANALÍTICA</p><h3>Detalhamento dos registros</h3><span class="muted" data-row-count>0 registros</span></div>
               <div class="export-actions">
                 <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>
                 <button class="button button-secondary export-xlsx" type="button"><span class="button-icon" aria-hidden="true">↓</span>Excel</button>
