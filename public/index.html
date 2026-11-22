@@ -137,12 +137,62 @@
                 <div class="pipeline-step" id="step-core"><span class="step-index">3</span><span><b>Core</b><small>Dados persistidos</small></span></div>
               </div>
               <div class="batch-stats" id="batch-stats"></div>
+              <section class="batch-errors" id="batch-errors" hidden aria-labelledby="batch-errors-title">
+                <div class="batch-errors-heading">
+                  <div>
+                    <h4 id="batch-errors-title">Erros por etapa</h4>
+                    <span class="muted">Linhas afetadas por motivo</span>
+                  </div>
+                </div>
+                <div class="empty-state" id="batch-errors-empty" hidden></div>
+                <section class="batch-error-block" id="batch-invalid-block" aria-labelledby="batch-invalid-title" hidden>
+                  <div class="batch-error-heading">
+                    <h5 id="batch-invalid-title">Inválidas · erros de validação</h5>
+                    <span class="batch-errors-total" id="batch-invalid-total"></span>
+                  </div>
+                  <div class="batch-error-canvas chart-canvas" id="batch-invalid-canvas" hidden>
+                    <canvas role="img" aria-label="Quantidade de linhas inválidas por erro de validação"></canvas>
+                  </div>
+                  <div class="empty-state" id="batch-invalid-empty" hidden></div>
+                </section>
+                <section class="batch-error-block" id="batch-review-block" aria-labelledby="batch-review-title" hidden>
+                  <div class="batch-error-heading">
+                    <h5 id="batch-review-title">Em revisão · falhas de persistência</h5>
+                    <span class="batch-errors-total" id="batch-review-total"></span>
+                  </div>
+                  <div class="batch-error-canvas chart-canvas" id="batch-review-canvas" hidden>
+                    <canvas role="img" aria-label="Quantidade de linhas em revisão por motivo de persistência"></canvas>
+                  </div>
+                  <div class="empty-state" id="batch-review-empty" hidden></div>
+                </section>
+              </section>
               <div class="table-toolbar">
                 <div>
                   <h4 id="grid-title">Tabela raw</h4>
                   <span class="muted" id="grid-caption"></span>
                 </div>
                 <div class="table-actions" id="batch-actions"></div>
+              </div>
+              <div class="staging-controls" id="staging-controls" hidden>
+                <label class="staging-page-size" for="staging-page-size">
+                  Linhas por página
+                  <select id="staging-page-size">
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100" selected>100</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                  </select>
+                </label>
+                <div class="staging-pagination" aria-label="Paginação da tabela staging">
+                  <button class="button button-secondary" id="staging-previous" type="button" aria-label="Página anterior" title="Página anterior">
+                    <span aria-hidden="true">←</span>
+                  </button>
+                  <span id="staging-page-label" aria-live="polite"></span>
+                  <button class="button button-secondary" id="staging-next" type="button" aria-label="Próxima página" title="Próxima página">
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
               </div>
               <div class="table-frame" id="batch-grid" aria-live="polite"></div>
             </section>

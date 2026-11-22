@@ -7,6 +7,7 @@ import ExcelJS from 'exceljs';
 import { getFilterOptions, queryAnalysis } from './src/analysis.js';
 import { initializeDatabase } from './src/database.js';
 import {
+  countBatchRows,
   getBatch,
   getBatchRows,
   ingestCsv,
@@ -61,25 +62,65 @@ app.post('/api/ingestions', upload.single('file'), (request, response, next) => 
 
 app.get('/api/ingestions/:id', (request, response) => {
   const batchId = Number(request.params.id);
+  const layer = request.query.layer === 'raw' ? 'raw' : 'staging';
+  const limit = Math.max(1, Math.min(500, Number(request.query.limit) || 100));
+  const offset = Math.max(0, Number(request.query.offset) || 0);
+  let filters = {};
+  if (layer === 'staging' && request.query.filters !== undefined) {
+    try {
+      const parsed = JSON.parse(request.query.filters);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error();
+      filters = Object.fromEntries(Object.entries(parsed)
+        .filter(([key, value]) => key.length <= 256 && typeof value === 'string' && value.trim())
+        .slice(0, 40));
+    } catch {
+      response.status(400).json({ error: 'Filtros de staging inválidos.' });
+      return;
+    }
+  }
+
+  const table = layer === 'raw' ? 'raw_linha' : 'stg_linha';
+  if (request.query.rowsOnly === 'true') {
+    const batchTotals = database.prepare(`
+      SELECT qtd_linhas_raw, qtd_linhas_staging FROM ingestion_lote WHERE id_lote = ?
+    `).get(batchId);
+    if (!batchTotals) {
+      response.status(404).json({ error: 'Lote não encontrado.' });
+      return;
+    }
+    const totalGeral = layer === 'raw' ? batchTotals.qtd_linhas_raw : batchTotals.qtd_linhas_staging;
+    const total = Object.keys(filters).length
+      ? countBatchRows(database, batchId, layer, filters)
+      : totalGeral;
+    response.json({
+      camada: layer,
+      total,
+      totalGeral,
+      limite: limit,
+      deslocamento: offset,
+      linhas: getBatchRows(database, batchId, layer, limit, offset, filters),
+    });
+    return;
+  }
+
   const batch = getBatch(database, batchId);
   if (!batch) {
     response.status(404).json({ error: 'Lote não encontrado.' });
     return;
   }
-
-  const layer = request.query.layer === 'raw' ? 'raw' : 'staging';
-  const limit = Math.max(1, Math.min(500, Number(request.query.limit) || 100));
-  const offset = Math.max(0, Number(request.query.offset) || 0);
-  const table = layer === 'raw' ? 'raw_linha' : 'stg_linha';
-  const total = database.prepare(`SELECT COUNT(*) AS count FROM ${table} WHERE id_lote = ?`)
+  const totalGeral = database.prepare(`SELECT COUNT(*) AS count FROM ${table} WHERE id_lote = ?`)
     .get(batchId).count;
+  const total = Object.keys(filters).length
+    ? countBatchRows(database, batchId, layer, filters)
+    : totalGeral;
   response.json({
     lote: batch,
     camada: layer,
     total,
+    totalGeral,
     limite: limit,
     deslocamento: offset,
-    linhas: getBatchRows(database, batchId, layer, limit, offset),
+    linhas: getBatchRows(database, batchId, layer, limit, offset, filters),
   });
 });
 

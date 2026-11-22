@@ -25,6 +25,15 @@ const state = {
   activeBatchId: null,
   activeBatchLayer: 'raw',
   batches: [],
+  batchErrorCharts: { invalid: null, review: null },
+  batchTable: {
+    columns: [],
+    filters: {},
+    filterTimer: null,
+    offset: 0,
+    pageSize: 100,
+    requestId: 0,
+  },
   analysisParams: { individual: null, comparative: null },
   analysisPeriods: { individual: null, comparative: null },
   charts: { individual: {}, comparative: {} },
@@ -70,7 +79,11 @@ function safeCell(value) {
   return String(value);
 }
 
-function makeTable(headers, rows, { statusField = null, formatValue = null } = {}) {
+function makeTable(headers, rows, {
+  statusField = null,
+  formatValue = null,
+  columnFilters = null,
+} = {}) {
   const table = document.createElement('table');
   const head = document.createElement('thead');
   const headerRow = document.createElement('tr');
@@ -82,6 +95,45 @@ function makeTable(headers, rows, { statusField = null, formatValue = null } = {
     headerRow.append(cell);
   }
   head.append(headerRow);
+  if (columnFilters) {
+    const filterRow = document.createElement('tr');
+    filterRow.className = 'table-filter-row';
+    for (const header of headers) {
+      const cell = document.createElement('th');
+      cell.scope = 'col';
+      if (header.key === 'status_validacao') {
+        const select = document.createElement('select');
+        select.className = 'column-filter';
+        select.dataset.columnFilter = header.key;
+        select.setAttribute('aria-label', `Filtrar ${header.label}`);
+        for (const [value, label] of [
+          ['', 'Todos'],
+          ['PENDENTE', 'Pendente'],
+          ['VALIDO', 'Válido'],
+          ['INVALIDO', 'Inválido'],
+          ['REVISAR', 'Revisar'],
+        ]) {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label;
+          select.append(option);
+        }
+        select.value = columnFilters[header.key] ?? '';
+        cell.append(select);
+      } else {
+        const input = document.createElement('input');
+        input.type = 'search';
+        input.className = 'column-filter';
+        input.dataset.columnFilter = header.key;
+        input.placeholder = 'Filtrar';
+        input.setAttribute('aria-label', `Filtrar ${header.label}`);
+        input.value = columnFilters[header.key] ?? '';
+        cell.append(input);
+      }
+      filterRow.append(cell);
+    }
+    head.append(filterRow);
+  }
   const body = document.createElement('tbody');
 
   for (const row of rows) {
@@ -136,9 +188,11 @@ function renderRawTable(container, rows) {
 
 function renderStagingTable(container, rows) {
   const columns = [...new Set(rows.flatMap((row) => Object.keys(row.dados ?? {})))];
+  if (columns.length) state.batchTable.columns = columns;
+  const visibleColumns = columns.length ? columns : state.batchTable.columns;
   const headers = [
     { key: 'id_raw_linha', label: 'Raw ID' },
-    ...columns.map((key) => ({ key: `dados.${key}`, label: key })),
+    ...visibleColumns.map((key) => ({ key: `dados.${key}`, label: key })),
     { key: 'status_validacao', label: 'Status' },
     { key: 'erro_validacao', label: 'Erro de validação' },
   ];
@@ -148,10 +202,27 @@ function renderStagingTable(container, rows) {
       status_validacao: row.status_validacao,
       erro_validacao: row.erro_validacao,
     };
-    for (const key of columns) output[`dados.${key}`] = row.dados?.[key];
+    for (const key of visibleColumns) output[`dados.${key}`] = row.dados?.[key];
     return output;
   });
-  container.replaceChildren(makeTable(headers, normalized, { statusField: 'status_validacao' }));
+  const activeFilter = container.contains(document.activeElement)
+    ? document.activeElement.dataset.columnFilter
+    : null;
+  const selectionStart = document.activeElement instanceof HTMLInputElement
+    ? document.activeElement.selectionStart
+    : null;
+  container.replaceChildren(makeTable(headers, normalized, {
+    statusField: 'status_validacao',
+    columnFilters: state.batchTable.filters,
+  }));
+  if (activeFilter) {
+    const replacement = [...container.querySelectorAll('[data-column-filter]')]
+      .find((field) => field.dataset.columnFilter === activeFilter);
+    replacement?.focus({ preventScroll: true });
+    if (replacement instanceof HTMLInputElement && selectionStart !== null) {
+      replacement.setSelectionRange(selectionStart, selectionStart);
+    }
+  }
 }
 
 function statCard(label, value, isError = false) {
@@ -173,12 +244,128 @@ function renderStats(batch) {
     ['Linhas raw', batch.qtd_linhas_raw],
     ['Na staging', stagingReady ? batch.qtd_linhas_staging : '—'],
     ['Válidas', stagingReady ? batch.contagem_status?.VALIDO ?? 0 : '—'],
-    ['Inválidas / revisar', stagingReady
-      ? (batch.contagem_status?.INVALIDO ?? 0) + (batch.contagem_status?.REVISAR ?? 0)
-      : '—'],
+    ['Inválidas', stagingReady ? batch.contagem_status?.INVALIDO ?? 0 : '—'],
+    ['Revisar', stagingReady ? batch.contagem_status?.REVISAR ?? 0 : '—'],
   ];
   byId('batch-stats').replaceChildren(...cards.map(([label, count], index) =>
-    statCard(label, count, index === 3 && stagingReady && count > 0)));
+    statCard(label, count, index >= 3 && stagingReady && count > 0)));
+}
+
+function wrapChartLabel(value, maxLength = 34) {
+  const lines = [];
+  let line = '';
+  for (const word of value.split(/\s+/)) {
+    if (line && `${line} ${word}`.length > maxLength) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = line ? `${line} ${word}` : word;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function renderErrorChart({ key, errors, canvasId, emptyId, totalId, emptyMessage, color }) {
+  const canvasPanel = byId(canvasId);
+  const empty = byId(emptyId);
+  const total = byId(totalId);
+  canvasPanel.hidden = !errors.length;
+  empty.hidden = Boolean(errors.length);
+  total.textContent = `${errors.length} ${errors.length === 1 ? 'motivo' : 'motivos'}`;
+  if (!errors.length) {
+    empty.textContent = emptyMessage;
+    return;
+  }
+
+  canvasPanel.hidden = false;
+  const chartWidth = canvasPanel.clientWidth
+    || window.innerWidth * (window.innerWidth <= 700 ? 0.8 : 0.43);
+  const maxLabelLength = Math.min(34, Math.max(18, Math.floor(chartWidth * 0.42 / 6)));
+  const labels = errors.map((error) => error.tipo);
+  const values = errors.map((error) => error.quantidade);
+  canvasPanel.style.height = `${Math.max(190, errors.reduce((height, error) =>
+    height + Math.max(38, wrapChartLabel(error.tipo, maxLabelLength).length * 14 + 18), 0))}px`;
+  const canvas = canvasPanel.querySelector('canvas');
+  state.batchErrorCharts[key] = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: color,
+        borderRadius: 4,
+        barThickness: 18,
+        maxBarThickness: 22,
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (context) => `${formatNumber(context.parsed.x)} linhas` } },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: '#edf1ee' },
+          ticks: { precision: 0, color: '#829087', font: { family: 'DM Mono', size: 9 } },
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            autoSkip: false,
+            color: '#53665c',
+            font: { family: 'DM Sans', size: 10 },
+            callback: (value) => wrapChartLabel(labels[Number(value)] ?? '', maxLabelLength),
+          },
+        },
+      },
+    },
+  });
+}
+
+function renderBatchErrors(batch, layer) {
+  const section = byId('batch-errors');
+  const empty = byId('batch-errors-empty');
+  const invalidBlock = byId('batch-invalid-block');
+  const reviewBlock = byId('batch-review-block');
+  for (const chart of Object.values(state.batchErrorCharts)) chart?.destroy();
+  state.batchErrorCharts = { invalid: null, review: null };
+  section.hidden = layer !== 'staging';
+  empty.hidden = true;
+  invalidBlock.hidden = true;
+  reviewBlock.hidden = true;
+  if (section.hidden) return;
+
+  if (!batch.qtd_linhas_staging) {
+    empty.textContent = 'Envie o lote para staging para ver as contagens por etapa.';
+    empty.hidden = false;
+    return;
+  }
+
+  invalidBlock.hidden = false;
+  reviewBlock.hidden = false;
+  renderErrorChart({
+    key: 'invalid',
+    errors: batch.contagem_erros_validacao ?? [],
+    canvasId: 'batch-invalid-canvas',
+    emptyId: 'batch-invalid-empty',
+    totalId: 'batch-invalid-total',
+    emptyMessage: 'Nenhuma linha inválida neste lote.',
+    color: '#d16f51',
+  });
+  renderErrorChart({
+    key: 'review',
+    errors: batch.contagem_erros_revisao ?? [],
+    canvasId: 'batch-review-canvas',
+    emptyId: 'batch-review-empty',
+    totalId: 'batch-review-total',
+    emptyMessage: 'Nenhuma linha aguardando revisão neste lote.',
+    color: '#d7a643',
+  });
 }
 
 function renderPipeline(batch) {
@@ -236,13 +423,114 @@ async function refreshBatches() {
 }
 
 async function selectBatch(batchId, layer = null) {
-  state.activeBatchId = Number(batchId);
+  const nextBatchId = Number(batchId);
+  if (state.activeBatchId !== nextBatchId) {
+    window.clearTimeout(state.batchTable.filterTimer);
+    state.batchTable.columns = [];
+    state.batchTable.filters = {};
+    state.batchTable.offset = 0;
+  }
+  state.activeBatchId = nextBatchId;
   const requestedLayer = layer ?? 'raw';
-  const result = await request(`/api/ingestions/${batchId}?layer=${requestedLayer}&limit=100`);
+  const requestId = ++state.batchTable.requestId;
+  const params = new URLSearchParams({
+    layer: requestedLayer,
+    limit: String(requestedLayer === 'staging' ? state.batchTable.pageSize : 100),
+    offset: String(requestedLayer === 'staging' ? state.batchTable.offset : 0),
+  });
+  if (requestedLayer === 'staging' && Object.keys(state.batchTable.filters).length) {
+    params.set('filters', JSON.stringify(state.batchTable.filters));
+  }
+  const result = await request(`/api/ingestions/${nextBatchId}?${params}`);
+  if (requestId !== state.batchTable.requestId) return;
   if (!layer && result.lote.qtd_linhas_staging) return selectBatch(batchId, 'staging');
   state.activeBatchLayer = requestedLayer;
   renderBatch(result);
   renderBatchList();
+}
+
+function renderGridSummary(result) {
+  const totalGeral = result.totalGeral ?? result.total;
+  const hasFilters = result.camada === 'staging' && Object.keys(state.batchTable.filters).length > 0;
+  byId('grid-caption').textContent = hasFilters
+    ? `${formatNumber(result.total)} resultados filtrados de ${formatNumber(totalGeral)} · exibindo ${result.linhas.length}`
+    : `${formatNumber(totalGeral)} registros · exibindo ${result.linhas.length}`;
+}
+
+function renderStagingControls(result) {
+  const controls = byId('staging-controls');
+  controls.hidden = result.camada !== 'staging';
+  if (controls.hidden) return;
+
+  const total = result.total;
+  const pageCount = Math.ceil(total / state.batchTable.pageSize);
+  const currentPage = total ? Math.floor(state.batchTable.offset / state.batchTable.pageSize) + 1 : 0;
+  byId('staging-page-size').value = String(state.batchTable.pageSize);
+  byId('staging-page-label').textContent = total
+    ? `Página ${currentPage} de ${pageCount}`
+    : 'Sem resultados';
+  byId('staging-previous').disabled = state.batchTable.offset === 0;
+  byId('staging-next').disabled = state.batchTable.offset + result.linhas.length >= total;
+}
+
+async function loadStagingPage() {
+  if (!state.activeBatchId || state.activeBatchLayer !== 'staging') return;
+  const requestId = ++state.batchTable.requestId;
+  const params = new URLSearchParams({
+    layer: 'staging',
+    limit: String(state.batchTable.pageSize),
+    offset: String(state.batchTable.offset),
+    rowsOnly: 'true',
+  });
+  if (Object.keys(state.batchTable.filters).length) {
+    params.set('filters', JSON.stringify(state.batchTable.filters));
+  }
+
+  const result = await request(`/api/ingestions/${state.activeBatchId}?${params}`);
+  if (requestId !== state.batchTable.requestId || state.activeBatchLayer !== 'staging') return;
+  renderGridSummary(result);
+  renderStagingControls(result);
+  renderStagingTable(byId('batch-grid'), result.linhas);
+}
+
+function updateStagingFilter(field, debounce = false) {
+  const key = field.dataset.columnFilter;
+  const value = field.value.trim();
+  if (value) state.batchTable.filters[key] = value;
+  else delete state.batchTable.filters[key];
+  state.batchTable.offset = 0;
+
+  window.clearTimeout(state.batchTable.filterTimer);
+  if (debounce) {
+    state.batchTable.filterTimer = window.setTimeout(() => {
+      loadStagingPage().catch((error) => showToast(error.message, true));
+    }, 250);
+  } else {
+    loadStagingPage().catch((error) => showToast(error.message, true));
+  }
+}
+
+function bindStagingTable() {
+  const grid = byId('batch-grid');
+  grid.addEventListener('input', (event) => {
+    if (event.target.matches('input[data-column-filter]')) updateStagingFilter(event.target, true);
+  });
+  grid.addEventListener('change', (event) => {
+    if (event.target.matches('select[data-column-filter]')) updateStagingFilter(event.target);
+  });
+  byId('staging-page-size').addEventListener('change', (event) => {
+    state.batchTable.pageSize = Number(event.target.value);
+    state.batchTable.offset = 0;
+    loadStagingPage().catch((error) => showToast(error.message, true));
+  });
+  byId('staging-previous').addEventListener('click', () => {
+    state.batchTable.offset = Math.max(0, state.batchTable.offset - state.batchTable.pageSize);
+    loadStagingPage().catch((error) => showToast(error.message, true));
+  });
+  byId('staging-next').addEventListener('click', () => {
+    state.batchTable.offset += state.batchTable.pageSize;
+    loadStagingPage().catch((error) => showToast(error.message, true));
+  });
 }
 
 function renderBatch(result) {
@@ -251,8 +539,10 @@ function renderBatch(result) {
   byId('batch-title').textContent = batch.nome_arquivo;
   byId('batch-type').textContent = `${batch.tipo_arquivo} · lote ${batch.id_lote}`;
   byId('grid-title').textContent = `Tabela ${result.camada}`;
-  byId('grid-caption').textContent = `${total} registros · exibindo ${linhas.length}`;
+  renderGridSummary(result);
+  renderStagingControls(result);
   renderStats(batch);
+  renderBatchErrors(batch, result.camada);
   renderPipeline(batch);
 
   const actions = [];
@@ -876,6 +1166,7 @@ async function initialize() {
     });
   }
   bindUpload();
+  bindStagingTable();
   bindFilters();
   bindExports();
 

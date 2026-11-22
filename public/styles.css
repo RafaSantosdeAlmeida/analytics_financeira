@@ -160,20 +160,38 @@ h4 { margin: 0; font: 600 13px 'Manrope', sans-serif; letter-spacing: 0; }
 .pipeline-step.is-current .step-index, .pipeline-step.is-done .step-index { color: #fff; background: var(--green); border-color: var(--green); }
 .pipeline-connector { height: 1px; background: #dce4df; }
 .pipeline-connector.is-done { background: var(--green); }
-.batch-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-bottom: 22px; }
+.batch-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin-bottom: 22px; }
 .stat { min-width: 0; padding: 10px 11px; background: #f7f9f7; border-radius: 4px; }
 .stat-label { display: block; color: var(--muted); font-size: 9px; }
 .stat-value { display: block; margin-top: 5px; color: var(--ink); font: 600 17px 'DM Mono', monospace; }
 .stat.is-error .stat-value { color: #bd5b41; }
+.batch-errors { margin-bottom: 20px; padding: 0 0 17px; border-bottom: 1px solid var(--line); }
+.batch-errors-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.batch-errors-heading h4 { margin: 0 0 4px; color: var(--ink); font-size: 13px; font-weight: 600; }
+.batch-error-block + .batch-error-block { margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--line); }
+.batch-error-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.batch-error-heading h5 { margin: 0; color: var(--ink); font-size: 11px; font-weight: 600; }
+.batch-errors-total { color: var(--muted); font: 9px 'DM Mono', monospace; white-space: nowrap; }
+.batch-error-canvas { min-height: 190px; margin-top: 10px; }
+.batch-errors .empty-state { padding: 17px 10px 4px; }
 .table-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 10px; }
 .table-toolbar > div:first-child { display: flex; align-items: baseline; gap: 9px; min-width: 0; }
 .muted { color: var(--muted); font-size: 10px; }
 .table-actions, .export-actions { display: flex; flex-wrap: wrap; gap: 7px; }
 .table-actions .button { min-height: 32px; font-size: 10px; }
+.staging-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 10px; }
+.staging-page-size { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 10px; }
+.staging-page-size select { height: 30px; padding: 0 8px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 4px; font-size: 10px; }
+.staging-pagination { display: flex; align-items: center; gap: 10px; color: var(--muted); font: 10px 'DM Mono', monospace; }
+.staging-pagination .button { width: 30px; min-height: 30px; padding: 0; font-size: 13px; }
+.staging-pagination .button:disabled { opacity: .4; cursor: not-allowed; }
 .table-frame { width: 100%; max-height: 380px; overflow: auto; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
 table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 11px; }
 th, td { min-width: 100px; max-width: 300px; padding: 9px 11px; border-bottom: 1px solid #edf1ee; text-align: left; vertical-align: top; }
 th { position: sticky; z-index: 1; top: 0; color: #596961; background: #f3f6f3; font: 500 9px 'DM Mono', monospace; white-space: nowrap; }
+.table-filter-row th { top: 28px; z-index: 2; padding: 5px 7px; background: #fff; }
+.column-filter { width: 100%; min-width: 90px; height: 29px; padding: 0 7px; color: var(--ink); background: #fff; border: 1px solid #d9e2dc; border-radius: 3px; font: 10px 'DM Sans', sans-serif; }
+.column-filter:focus { border-color: #5e9d7e; outline: 2px solid rgb(34 117 82 / 10%); }
 td { color: #46534c; overflow-wrap: anywhere; }
 tbody tr:hover td { background: #fafcf9; }
 tbody tr:last-child td { border-bottom: 0; }
@@ -291,6 +309,8 @@ tbody tr:last-child td { border-bottom: 0; }
   .batch-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .table-toolbar { align-items: start; flex-direction: column; }
   .table-toolbar > div:first-child { flex-wrap: wrap; }
+  .staging-controls { align-items: stretch; flex-direction: column; }
+  .staging-pagination { justify-content: space-between; }
   .filter-panel { padding: 14px; }
   .filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 9px; }
   .filter-footer { align-items: start; flex-wrap: wrap; }

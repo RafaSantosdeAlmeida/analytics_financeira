@@ -120,10 +120,41 @@ export function getBatch(database, batchId) {
     WHERE id_lote = ?
     GROUP BY status_validacao
   `).all(batchId);
+  const batchErrors = database.prepare(`
+    SELECT status_validacao, erro_validacao
+    FROM stg_linha
+    WHERE id_lote = ? AND status_validacao IN ('INVALIDO', 'REVISAR')
+      AND erro_validacao IS NOT NULL
+  `).all(batchId);
+  const errorCounts = new Map([
+    ['INVALIDO', new Map()],
+    ['REVISAR', new Map()],
+  ]);
+  for (const row of batchErrors) {
+    const rowErrors = new Set(row.status_validacao === 'INVALIDO'
+      ? row.erro_validacao.split('; ').map((error) => error.trim()).filter(Boolean)
+      : [normalizeReviewError(row.erro_validacao)]);
+    const counts = errorCounts.get(row.status_validacao);
+    for (const error of rowErrors) counts.set(error, (counts.get(error) ?? 0) + 1);
+  }
+  const sortedErrors = (counts) => [...counts]
+    .map(([tipo, quantidade]) => ({ tipo, quantidade }))
+    .sort((left, right) => right.quantidade - left.quantidade
+      || (left.tipo < right.tipo ? -1 : left.tipo > right.tipo ? 1 : 0));
+
   return {
     ...batch,
     contagem_status: Object.fromEntries(counts.map((row) => [row.status_validacao, row.quantidade])),
+    contagem_erros_validacao: sortedErrors(errorCounts.get('INVALIDO')),
+    contagem_erros_revisao: sortedErrors(errorCounts.get('REVISAR')),
   };
+}
+
+function normalizeReviewError(error) {
+  return error
+    .replace(/(?:\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}|\b\d{11,14}\b)/g, '{CNPJ}')
+    .replace(/(Conta empresarial )[^ ]+( não carregada para )/g, '$1{conta}$2')
+    .replace(/(O período )[^ ]+( já existe)/g, '$1{período}$2');
 }
 
 export function listBatches(database) {
@@ -137,24 +168,65 @@ export function listBatches(database) {
   `).all();
 }
 
-export function getBatchRows(database, batchId, layer, limit, offset) {
+export function getBatchRows(database, batchId, layer, limit, offset, filters = {}) {
   if (!['raw', 'staging'].includes(layer)) throw new Error('Camada inválida.');
   const table = layer === 'raw' ? 'raw_linha' : 'stg_linha';
+  const { clause, parameters } = buildBatchRowFilters(layer, filters);
   const rows = layer === 'raw'
     ? database.prepare(`
         SELECT id_raw_linha AS id, numero_linha_origem, dados_json
-        FROM ${table} WHERE id_lote = ? ORDER BY numero_linha_origem LIMIT ? OFFSET ?
-      `).all(batchId, limit, offset)
+        FROM ${table} WHERE id_lote = ?${clause} ORDER BY numero_linha_origem LIMIT ? OFFSET ?
+      `).all(batchId, ...parameters, limit, offset)
     : database.prepare(`
         SELECT id_stg_linha AS id, id_raw_linha, dados_json, status_validacao, erro_validacao
-        FROM ${table} WHERE id_lote = ? ORDER BY id_stg_linha LIMIT ? OFFSET ?
-      `).all(batchId, limit, offset);
+        FROM ${table} WHERE id_lote = ?${clause} ORDER BY id_stg_linha LIMIT ? OFFSET ?
+      `).all(batchId, ...parameters, limit, offset);
 
   return rows.map((row) => ({
     ...row,
     dados: JSON.parse(row.dados_json),
     dados_json: undefined,
   }));
+}
+
+export function countBatchRows(database, batchId, layer, filters = {}) {
+  if (!['raw', 'staging'].includes(layer)) throw new Error('Camada inválida.');
+  const table = layer === 'raw' ? 'raw_linha' : 'stg_linha';
+  const { clause, parameters } = buildBatchRowFilters(layer, filters);
+  return database.prepare(`
+    SELECT COUNT(*) AS count FROM ${table} WHERE id_lote = ?${clause}
+  `).get(batchId, ...parameters).count;
+}
+
+function buildBatchRowFilters(layer, filters) {
+  const conditions = [];
+  const parameters = [];
+  const columns = {
+    id_raw_linha: 'id_raw_linha',
+    status_validacao: 'status_validacao',
+    erro_validacao: 'erro_validacao',
+  };
+
+  for (const [key, value] of Object.entries(filters ?? {})) {
+    if (typeof value !== 'string' || !value.trim()) continue;
+    const column = layer === 'staging' ? columns[key] : null;
+    if (column) {
+      conditions.push(`instr(lower(CAST(${column} AS TEXT)), lower(?)) > 0`);
+      parameters.push(value.trim());
+    } else if (layer === 'staging' && key.startsWith('dados.') && key.length > 6) {
+      conditions.push(`EXISTS (
+        SELECT 1 FROM json_each(stg_linha.dados_json) AS filter_value
+        WHERE filter_value.key = ?
+          AND instr(lower(CAST(filter_value.value AS TEXT)), lower(?)) > 0
+      )`);
+      parameters.push(key.slice(6), value.trim());
+    }
+  }
+
+  return {
+    clause: conditions.length ? ` AND ${conditions.join(' AND ')}` : '',
+    parameters,
+  };
 }
 
 function value(database, query, ...parameters) {
