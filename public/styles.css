@@ -329,6 +329,7 @@ tbody tr:last-child td { border-bottom: 0; }
   .environment { font-size: 10px; }
   .brand-name { font-size: 13px; }
   .pipeline-step small { white-space: normal; }
+
   .sidebar { padding-right: 10px; padding-left: 10px; }
   .sidebar-link { font-size: 9px; }
 }
@@ -776,4 +777,74 @@ tbody tr:last-child td { border-bottom: 0; }
   #view-dashboard #view-comparative .kpi-grid { grid-template-columns: minmax(0, 1fr); }
   #view-dashboard .dashboard-filter-heading { flex-direction: column; gap: 8px; }
   #view-dashboard .filter-tools { align-items: center; flex-direction: row; }
+
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+
+  body {
+    min-width: 0;
+    background: #fff;
+  }
+
+  .topbar,
+  .tabs,
+  .filter-panel,
+  .analysis-empty,
+  .export-actions,
+  .toast-region {
+    display: none !important;
+  }
+
+  .app-shell {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .page-heading {
+    padding-bottom: 12px;
+  }
+
+  .view {
+    display: block !important;
+  }
+
+  .view:not(.is-active) {
+    display: none !important;
+  }
+
+  .analysis-results {
+    margin-top: 8px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .chart-panel,
+  .data-panel {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .line-canvas,
+  .bar-canvas {
+    height: 220px;
+  }
+
+  .table-frame {
+    max-height: none;
+    overflow: visible;
+  }
+
+  th,
+  td {
+    padding: 5px 7px;
+  }
+
 }

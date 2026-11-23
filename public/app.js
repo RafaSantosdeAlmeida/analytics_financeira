@@ -1133,6 +1133,8 @@ function bindFilters() {
 
 function bindExports() {
   for (const mode of ['individual', 'comparative']) {
+    byId(`view-${mode}`).querySelector('.export-pdf')
+      .addEventListener('click', () => window.print());
     byId(`view-${mode}`).querySelector('.export-csv')
       .addEventListener('click', () => downloadExport(mode, 'csv'));
     byId(`view-${mode}`).querySelector('.export-xlsx')
