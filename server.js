@@ -151,6 +151,7 @@ app.get('/api/options', (request, response) => {
     companyId: request.query.companyId,
     tipoPeriodo: request.query.tipoPeriodo,
     grupoDfp: request.query.grupoDfp,
+    includeDetails: request.query.includeDetails === 'true',
   }));
 });
 
@@ -166,6 +167,7 @@ function analysisParams(query) {
     periodStart: query.periodStart,
     periodEnd: query.periodEnd,
     axisSecondary: query.axisSecondary === 'true',
+    includeDetails: query.includeDetails === 'true',
   };
 }
 
@@ -195,12 +197,13 @@ const exportColumns = [
   ['ds_conta_segmento', 'Descrição do segmento'],
   ['moeda', 'Moeda'],
   ['escala_moeda', 'Escala'],
-  ['vl_conta', 'Valor reportado'],
+  ['vl_conta', 'Valor na escala indicada'],
+  ['origem_valor', 'Origem do valor'],
   ['st_conta_fixa', 'Conta fixa'],
 ];
 
 function exportRows(mode, query) {
-  return queryAnalysis(database, mode, analysisParams(query)).linhas;
+  return queryAnalysis(database, mode, analysisParams(query)).linhasVisao;
 }
 
 app.get('/api/export/:mode', async (request, response, next) => {

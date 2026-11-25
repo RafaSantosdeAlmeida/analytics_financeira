@@ -2,7 +2,12 @@ import PDFDocument from 'pdfkit';
 import { queryAnalysis } from './analysis.js';
 
 const MARGIN = 40;
-const FOOTER_SPACE = 34;
+const FOOTER_SPACE = 52;
+const PDF_BOTTOM_MARGIN = 32;
+const TABLE_HEADER_HEIGHT = 20;
+const CHART_HEIGHT = 164;
+const TABLE_ROW_MIN_HEIGHT = 19;
+const TABLE_CELL_PADDING = 4;
 const COLORS = {
   ink: '#1d2926',
   muted: '#6f7d77',
@@ -148,14 +153,16 @@ export function buildFinancialReportData(database, mode, params = {}) {
         ORDER BY e.denom_cia
       `).all(...companyIds)
     : [];
-  const rows = analysis.linhas;
-  const periods = [...new Map(rows.map((row) => [row.dt_fim_exerc, {
+  const rows = params.includeDetails ? analysis.linhas : analysis.linhasPrincipais;
+  const sourceRows = analysis.linhas;
+  const principalRows = analysis.linhasPrincipais;
+  const periods = [...new Map(sourceRows.map((row) => [row.dt_fim_exerc, {
     periodo: row.periodo,
     dt_fim_exerc: row.dt_fim_exerc,
     dt_ini_exerc: row.dt_ini_exerc,
   }])).values()].sort((a, b) => a.dt_fim_exerc.localeCompare(b.dt_fim_exerc));
-  const metricIndex = makeMetricIndex(rows, companies, periods, mode);
-  const currencies = uniqueValues(rows.map((row) => row.moeda));
+  const metricIndex = makeMetricIndex(principalRows, companies, periods, mode);
+  const currencies = uniqueValues(sourceRows.map((row) => row.moeda));
   const latestPeriod = periods.at(-1) ?? null;
   const lastUpdate = database.prepare(`
     SELECT MAX(persistido_em) AS ultima_atualizacao
@@ -179,6 +186,8 @@ export function buildFinancialReportData(database, mode, params = {}) {
     analysis,
     companies,
     rows,
+    sourceRows,
+    principalRows,
     periods,
     metricIndex,
     latestPeriod,
@@ -252,7 +261,7 @@ function shortDateRange(data) {
 function prepareDocument(doc, section = '') {
   doc.addPage({
     size: 'A4',
-    margins: { top: 52, bottom: 48, left: MARGIN, right: MARGIN },
+    margins: { top: 52, bottom: PDF_BOTTOM_MARGIN, left: MARGIN, right: MARGIN },
   });
   const { width } = doc.page;
   doc.save();
@@ -271,8 +280,13 @@ function prepareDocument(doc, section = '') {
   doc.y = 56;
 }
 
-function startSection(doc, title, description = '') {
-  prepareDocument(doc, title);
+function startSection(doc, title, description = '', keepWithNext = 32) {
+  const width = doc.page.width - 2 * MARGIN;
+  doc.font('Helvetica').fontSize(9);
+  const descriptionHeight = description
+    ? doc.heightOfString(description, { width, lineGap: 2 }) + 10
+    : 0;
+  ensureSpace(doc, 55 + descriptionHeight + keepWithNext, title);
   doc.fillColor(COLORS.green).font('Helvetica-Bold').fontSize(8)
     .text('RELATÓRIO ANALÍTICO', MARGIN, doc.y, { characterSpacing: 0.6 });
   doc.moveDown(0.5);
@@ -290,19 +304,48 @@ function ensureSpace(doc, height, section) {
   prepareDocument(doc, `${section} · continuação`);
 }
 
+function wrapTextToWidth(doc, value, width) {
+  const lines = [];
+  for (const sourceLine of String(value ?? '—').split(/\r\n|\n|\r/)) {
+    let line = '';
+    const tokens = sourceLine.match(/\S+\s*|\s+/g) ?? [''];
+    for (const token of tokens) {
+      if (doc.widthOfString(token) <= width) {
+        if (line && doc.widthOfString(line + token) > width) {
+          lines.push(line);
+          line = token;
+        } else {
+          line += token;
+        }
+        continue;
+      }
+
+      for (const character of Array.from(token)) {
+        if (line && doc.widthOfString(line + character) > width) {
+          lines.push(line);
+          line = '';
+        }
+        line += character;
+      }
+    }
+    lines.push(line);
+  }
+  return lines;
+}
+
 function drawTable(doc, columns, rows, section) {
   const tableWidth = columns.reduce((total, column) => total + column.width, 0);
   const xStart = MARGIN;
   const drawHeader = () => {
     const y = doc.y;
     doc.save();
-    doc.rect(xStart, y, tableWidth, 24).fill(COLORS.greenDark);
+    doc.rect(xStart, y, tableWidth, TABLE_HEADER_HEIGHT).fill(COLORS.greenDark);
     doc.font('Helvetica-Bold').fontSize(7).fillColor('#ffffff');
     let x = xStart;
     for (const column of columns) {
-      doc.text(column.title, x + 5, y + 7, {
+      doc.text(column.title, x + 5, y + 5, {
         width: column.width - 10,
-        height: 12,
+        height: 11,
         align: column.align ?? 'left',
         lineBreak: false,
         ellipsis: true,
@@ -310,7 +353,7 @@ function drawTable(doc, columns, rows, section) {
       x += column.width;
     }
     doc.restore();
-    doc.y = y + 24;
+    doc.y = y + TABLE_HEADER_HEIGHT;
   };
 
   if (!rows.length) {
@@ -320,45 +363,92 @@ function drawTable(doc, columns, rows, section) {
     return;
   }
 
-  ensureSpace(doc, 30, section);
-  drawHeader();
+  doc.font('Helvetica').fontSize(7.5);
+  const lineHeight = doc.heightOfString('Ag', { lineGap: 1 });
+  const pageBottom = doc.page.height - FOOTER_SPACE;
+  const maxLinesPerPage = Math.max(1, Math.floor(
+    (pageBottom - 56 - TABLE_HEADER_HEIGHT - TABLE_CELL_PADDING * 2) / lineHeight,
+  ));
+  const currentPageIndex = () => {
+    const pageRange = doc.bufferedPageRange();
+    return pageRange.start + pageRange.count - 1;
+  };
+  let headerPage = null;
+  const drawHeaderOnCurrentPage = () => {
+    const pageIndex = currentPageIndex();
+    if (headerPage === pageIndex) return false;
+    drawHeader();
+    headerPage = pageIndex;
+    return true;
+  };
+
   for (let index = 0; index < rows.length; index += 1) {
     const row = rows[index];
-    doc.font('Helvetica').fontSize(7.5);
-    const height = Math.max(25, ...columns.map((column, columnIndex) => {
-      const value = String(row[columnIndex] ?? '—');
-      return doc.heightOfString(value, {
-        width: column.width - 10,
-        lineGap: 1,
-      }) + 10;
-    }));
-    if (doc.y + height > doc.page.height - FOOTER_SPACE) {
+    const cells = columns.map((column, columnIndex) =>
+      wrapTextToWidth(doc, row[columnIndex], column.width - 10));
+    const rowLineCount = Math.max(1, ...cells.map((lines) => lines.length));
+    const fullRowHeight = Math.max(
+      TABLE_ROW_MIN_HEIGHT,
+      rowLineCount * lineHeight + TABLE_CELL_PADDING * 2,
+    );
+    if (rowLineCount <= maxLinesPerPage
+      && doc.y + (headerPage === currentPageIndex() ? 0 : TABLE_HEADER_HEIGHT)
+        + fullRowHeight > pageBottom) {
       prepareDocument(doc, `${section} · continuação`);
-      drawHeader();
     }
-    const y = doc.y;
-    if (index % 2 === 0) {
-      doc.save();
-      doc.rect(xStart, y, tableWidth, height).fill(COLORS.pale);
-      doc.restore();
+    let lineOffset = 0;
+    let fragment = 0;
+
+    while (lineOffset < rowLineCount) {
+      const needsHeader = headerPage !== currentPageIndex();
+      const availableLines = Math.floor(
+        (pageBottom - doc.y - (needsHeader ? TABLE_HEADER_HEIGHT : 0)
+          - TABLE_CELL_PADDING * 2) / lineHeight,
+      );
+      if (availableLines < 1) {
+        prepareDocument(doc, `${section} · continuação`);
+        continue;
+      }
+
+      const fragmentLines = Math.min(rowLineCount - lineOffset, availableLines, maxLinesPerPage);
+      const height = Math.max(
+        TABLE_ROW_MIN_HEIGHT,
+        fragmentLines * lineHeight + TABLE_CELL_PADDING * 2,
+      );
+      drawHeaderOnCurrentPage();
+      const y = doc.y;
+      if (index % 2 === 0) {
+        doc.save();
+        doc.rect(xStart, y, tableWidth, height).fill(COLORS.pale);
+        doc.restore();
+      }
+
+      let x = xStart;
+      for (let columnIndex = 0; columnIndex < columns.length; columnIndex += 1) {
+        const column = columns[columnIndex];
+        let value = cells[columnIndex].slice(lineOffset, lineOffset + fragmentLines).join('\n');
+        if (fragment > 0 && columnIndex === 0 && !value) value = '(continuação)';
+        if (value) {
+          doc.fillColor(COLORS.ink).font('Helvetica').fontSize(7.5)
+            .text(value, x + 5, y + TABLE_CELL_PADDING, {
+              width: column.width - 10,
+              height: height - TABLE_CELL_PADDING,
+              align: column.align ?? 'left',
+              lineGap: 1,
+              ellipsis: false,
+            });
+        }
+        x += column.width;
+      }
+      doc.moveTo(xStart, y + height).lineTo(xStart + tableWidth, y + height)
+        .strokeColor(COLORS.line).lineWidth(0.35).stroke();
+      doc.y = y + height;
+      lineOffset += fragmentLines;
+      fragment += 1;
+      if (lineOffset < rowLineCount) {
+        prepareDocument(doc, `${section} · continuação`);
+      }
     }
-    let x = xStart;
-    for (let columnIndex = 0; columnIndex < columns.length; columnIndex += 1) {
-      const column = columns[columnIndex];
-      const value = String(row[columnIndex] ?? '—');
-      doc.fillColor(COLORS.ink).font('Helvetica').fontSize(7.5)
-        .text(value, x + 5, y + 5, {
-          width: column.width - 10,
-          height: height - 8,
-          align: column.align ?? 'left',
-          lineGap: 1,
-          ellipsis: true,
-        });
-      x += column.width;
-    }
-    doc.moveTo(xStart, y + height).lineTo(xStart + tableWidth, y + height)
-      .strokeColor(COLORS.line).lineWidth(0.35).stroke();
-    doc.y = y + height;
   }
   doc.moveDown(0.7);
 }
@@ -372,7 +462,7 @@ function drawParagraph(doc, text, section, options = {}) {
     width,
     lineGap: 2,
   });
-  doc.moveDown(options.gap ?? 0.7);
+  doc.moveDown(options.gap ?? 0.45);
 }
 
 function drawMetricCards(doc, data) {
@@ -389,13 +479,16 @@ function drawMetricCards(doc, data) {
   }));
   const width = (doc.page.width - 2 * MARGIN - 12) / 2;
   const height = 55;
+  const cardRows = Math.ceil(metrics.length / 2);
+  const gridHeight = cardRows * height + (cardRows - 1) * 8 + 10;
+  ensureSpace(doc, gridHeight, 'Sumário executivo');
+  const gridStartY = doc.y;
   for (let index = 0; index < metrics.length; index += 1) {
     const item = metrics[index];
     const column = index % 2;
     const row = Math.floor(index / 2);
     const x = MARGIN + column * (width + 12);
-    const y = doc.y + row * (height + 8);
-    ensureSpace(doc, height + 10, 'Sumário executivo');
+    const y = gridStartY + row * (height + 8);
     doc.save();
     doc.roundedRect(x, y, width, height, 5).fill(COLORS.pale);
     doc.roundedRect(x, y, 3, height, 1.5).fill(COLORS.green);
@@ -403,16 +496,18 @@ function drawMetricCards(doc, data) {
       .text(displayMetricTitle(item.metric, item.row, data.mode), x + 12, y + 9, {
         width: width - 22,
         ellipsis: true,
+        lineBreak: false,
       });
     doc.fillColor(item.value !== null && item.value < 0 ? COLORS.coral : COLORS.ink)
       .font('Helvetica-Bold').fontSize(12)
       .text(formatMoney(item.value, data.currencies[0]), x + 12, y + 25, {
         width: width - 22,
         ellipsis: true,
+        lineBreak: false,
       });
     doc.restore();
   }
-  doc.y += Math.ceil(metrics.length / 2) * (height + 8) + 10;
+  doc.y = gridStartY + gridHeight;
 }
 
 function latestAndPrevious(data, company) {
@@ -450,7 +545,8 @@ function createInsights(data) {
 
 function drawExecutiveSummary(doc, data) {
   startSection(doc, '1. Sumário executivo',
-    `Período de referência: ${shortDateRange(data)}. Valores analíticos normalizados para unidade-base conforme escala reportada; moeda ${data.currencies.join(', ') || 'não informada'}.`);
+    `Período de referência: ${shortDateRange(data)}. Valores analíticos normalizados para unidade-base conforme escala reportada; moeda ${data.currencies.join(', ') || 'não informada'}.`,
+    data.mode === 'individual' ? 140 : 55);
 
   if (data.mode === 'individual') {
     drawMetricCards(doc, data);
@@ -473,6 +569,27 @@ function drawExecutiveSummary(doc, data) {
       ? `Resumo por empresa para o último período com dados (${latest.periodo}). Os valores não são somados entre empresas.`
       : 'Não há registros financeiros para os critérios selecionados.', 'Sumário executivo');
     drawTable(doc, columns, rows, 'Sumário executivo');
+  }
+
+  const principalAccounts = data.principalRows.filter((row) =>
+    row.dt_fim_exerc === data.latestPeriod?.dt_fim_exerc
+      && (data.mode === 'individual'
+        ? row.nivel_conta === 1
+        : row.nivel_conta_segmento === 1 && row.cd_conta_segmento !== null));
+  if (principalAccounts.length) {
+    drawParagraph(doc, `Contas principais no período final ${data.latestPeriod.periodo}:`,
+      'Sumário executivo', { bold: true, gap: 0.35 });
+    drawTable(doc, [
+      { title: 'Empresa', width: 90 },
+      { title: 'Código', width: 60 },
+      { title: 'Conta principal', width: 255 },
+      { title: 'Valor normalizado', width: 110, align: 'right' },
+    ], principalAccounts.map((row) => [
+      rowCompanyName(data, row),
+      accountCode(row, data.mode),
+      accountDescription(row, data.mode),
+      formatMoney(row.valor_normalizado, row.moeda),
+    ]), 'Sumário executivo');
   }
 
   const insights = createInsights(data);
@@ -509,7 +626,8 @@ function criteriaValue(data, key, companyField) {
 
 function drawCriteria(doc, data) {
   startSection(doc, '2. Critérios da análise',
-    'Parâmetros usados na consulta financeira que originou este documento.');
+    'Parâmetros usados na consulta financeira que originou este documento.',
+    TABLE_HEADER_HEIGHT + TABLE_ROW_MIN_HEIGHT);
   const companyLabel = data.companies.length === 1
     ? companyName(data.companies[0])
     : `${data.companies.length} empresas selecionadas`;
@@ -522,6 +640,7 @@ function drawCriteria(doc, data) {
     ['Segmento', criteriaValue(data, 'segmento', 'segmento')],
     ['Conta da análise', `${data.params.accountCode ?? 'Não informada'}${accountRow
       ? ` · ${accountDescription(accountRow, data.mode)}` : ''}`],
+    ['Visão contábil', data.params.includeDetails ? 'Detalhada' : 'Contas principais'],
     ['Modalidade', data.params.grupoDfp ?? data.analysis.grupoDfp],
     ['Tipo de período', data.params.tipoPeriodo ?? data.analysis.tipoPeriodo],
     ['Intervalo', data.requestedRange],
@@ -612,30 +731,68 @@ function chartNumber(value) {
   return formatNumber(value, 0);
 }
 
+export function chartLegendRows(doc, series, chartWidth) {
+  doc.font('Helvetica').fontSize(7);
+  const lineHeight = doc.heightOfString('Ag', { lineGap: 1 });
+  const rows = [];
+  let current = { items: [], width: 0, height: lineHeight };
+
+  for (const [index, item] of series.entries()) {
+    const label = item.company.codigo_negociacao || item.company.denom_cia;
+    const lines = wrapTextToWidth(doc, label, chartWidth - 18);
+    const textWidth = Math.max(...lines.map((line) => doc.widthOfString(line)));
+    const width = Math.min(chartWidth, Math.max(108, textWidth + 18));
+    if (current.items.length && current.width + 8 + width > chartWidth) {
+      rows.push(current);
+      current = { items: [], width: 0, height: lineHeight };
+    }
+    current.items.push({
+      label,
+      lines,
+      width,
+      height: Math.max(lineHeight, lines.length * lineHeight),
+      color: CHART_COLORS[index % CHART_COLORS.length],
+    });
+    current.width += (current.items.length > 1 ? 8 : 0) + width;
+    current.height = Math.max(current.height, lines.length * lineHeight);
+  }
+  if (current.items.length) rows.push(current);
+  return { rows, lineHeight };
+}
+
 function drawTrendChart(doc, data, metricKey, title, section) {
-  const chartHeight = 218;
-  ensureSpace(doc, chartHeight + 20, section);
-  const chartX = MARGIN;
-  const chartY = doc.y;
-  const chartWidth = doc.page.width - 2 * MARGIN;
-  doc.fillColor(COLORS.ink).font('Helvetica-Bold').fontSize(10).text(title, chartX, chartY);
-  const plotX = chartX + 54;
-  const plotY = chartY + 28;
-  const plotWidth = chartWidth - 68;
-  const plotHeight = 122;
   const allSeries = data.companies.map((company) => ({
     company,
     values: chartPointValues(data, metricKey, company),
   })).filter((series) => series.values.some((value) => value !== null));
-  if (!allSeries.length || !data.periods.length) {
-    doc.fillColor(COLORS.muted).font('Helvetica').fontSize(8)
-      .text('Sem valores comparáveis para desenhar este gráfico.', chartX, plotY + 35);
-    doc.y = chartY + chartHeight;
-    return;
-  }
   const sortedSeries = [...allSeries].sort((a, b) =>
     Math.abs(b.values.at(-1) ?? 0) - Math.abs(a.values.at(-1) ?? 0));
   const visibleSeries = sortedSeries.slice(0, 6);
+  const chartWidth = doc.page.width - 2 * MARGIN;
+  const legend = chartLegendRows(doc, visibleSeries, chartWidth);
+  const legendYFromTop = 28 + 90 + 18;
+  const legendHeight = legend.rows.reduce((height, row) => height + row.height, 0)
+    + Math.max(0, legend.rows.length - 1) * 4;
+  const noteHeight = allSeries.length > visibleSeries.length ? 12 : 0;
+  const contentHeight = allSeries.length && data.periods.length
+    ? Math.max(CHART_HEIGHT,
+    legendYFromTop + legendHeight + (legend.rows.length ? 6 : 0) + noteHeight + 4)
+    : CHART_HEIGHT;
+  ensureSpace(doc, contentHeight + 12, section);
+  const chartX = MARGIN;
+  const chartY = doc.y;
+  doc.fillColor(COLORS.ink).font('Helvetica-Bold').fontSize(10)
+    .text(title, chartX, chartY, { lineBreak: false });
+  const plotX = chartX + 54;
+  const plotY = chartY + 28;
+  const plotWidth = chartWidth - 68;
+  const plotHeight = 90;
+  if (!allSeries.length || !data.periods.length) {
+    doc.fillColor(COLORS.muted).font('Helvetica').fontSize(8)
+      .text('Sem valores comparáveis para desenhar este gráfico.', chartX, plotY + 35);
+    doc.y = chartY + CHART_HEIGHT;
+    return;
+  }
   const values = visibleSeries.flatMap((series) => series.values.filter((value) => value !== null));
   let min = Math.min(0, ...values);
   let max = Math.max(0, ...values);
@@ -689,36 +846,42 @@ function drawTrendChart(doc, data, metricKey, title, section) {
   });
   doc.restore();
 
-  const legendY = plotY + plotHeight + 21;
-  let legendX = chartX + 2;
-  visibleSeries.forEach((series, index) => {
-    const label = series.company.codigo_negociacao || series.company.denom_cia;
-    const width = Math.min(125, doc.widthOfString(label, { font: 'Helvetica', size: 7 }) + 16);
-    if (legendX + width > chartX + chartWidth) return;
-    doc.save();
-    doc.moveTo(legendX, legendY + 3).lineTo(legendX + 9, legendY + 3)
-      .strokeColor(CHART_COLORS[index % CHART_COLORS.length]).lineWidth(2).stroke();
-    doc.fillColor(COLORS.muted).font('Helvetica').fontSize(7)
-      .text(label, legendX + 12, legendY, { width: width - 12, ellipsis: true, lineBreak: false });
-    doc.restore();
-    legendX += width + 10;
-  });
+  let legendY = chartY + legendYFromTop;
+  for (const row of legend.rows) {
+    let legendX = chartX;
+    for (const item of row.items) {
+      doc.save();
+      doc.moveTo(legendX, legendY + Math.min(5, row.height / 2))
+        .lineTo(legendX + 9, legendY + Math.min(5, row.height / 2))
+        .strokeColor(item.color).lineWidth(2).stroke();
+      doc.fillColor(COLORS.muted).font('Helvetica').fontSize(7)
+        .text(item.lines.join('\n'), legendX + 13, legendY, {
+          width: item.width - 13,
+          height: item.height,
+          lineGap: 1,
+          ellipsis: false,
+        });
+      doc.restore();
+      legendX += item.width + 8;
+    }
+    legendY += row.height + 4;
+  }
   if (allSeries.length > visibleSeries.length) {
     doc.fillColor(COLORS.muted).font('Helvetica-Oblique').fontSize(7)
       .text(`Gráfico: 6 empresas com maior valor absoluto no período final; tabela completa inclui ${allSeries.length}.`,
-        chartX, legendY + 13, { width: chartWidth });
-    doc.y = legendY + 28;
-  } else {
-    doc.y = legendY + 12;
+        chartX, legendY + 2, { width: chartWidth, lineBreak: false });
   }
-  doc.moveDown(0.5);
+  doc.y = chartY + contentHeight;
+  doc.moveDown(0.3);
 }
 
 function drawAccountSection(doc, data, { title, description, prefix, metricKey, chart = true, expenses = false }) {
-  startSection(doc, title, description);
+  startSection(doc, title, description, chart && metricKey ? CHART_HEIGHT + 12 : 42);
   if (chart && metricKey) drawTrendChart(doc, data, metricKey, `Evolução — ${title.replace(/^\d+\.\s*/, '')}`, title);
 
-  const accountRows = rowsForPrefix(data, prefix);
+  const accountRows = rowsForPrefix(data, prefix, {
+    directOnly: !data.params.includeDetails,
+  });
   const tableRows = accountTableRows(data, accountRows, prefix);
   drawTable(doc, [
     { title: 'Período', width: 50 },
@@ -728,7 +891,7 @@ function drawAccountSection(doc, data, { title, description, prefix, metricKey, 
     { title: 'Valor normalizado', width: 100, align: 'right' },
     { title: 'Participação*', width: 72, align: 'right' },
   ], tableRows, title);
-  if (expenses) {
+  if (expenses && data.params.includeDetails) {
     drawParagraph(doc,
       '* Participação calculada sobre a rubrica 3.04 para cada empresa e período. Cada conta mantém seu código e descrição original; contas não são reclassificadas nem somadas entre si.',
       title,
@@ -736,7 +899,9 @@ function drawAccountSection(doc, data, { title, description, prefix, metricKey, 
     drawExpenseChart(doc, data, accountRows, title);
   } else {
     drawParagraph(doc,
-      '* Participação de cada subconta calculada sobre o total da rubrica indicada. As linhas de totais e subcontas são apresentadas separadamente e não devem ser somadas entre níveis.',
+      data.params.includeDetails
+        ? '* Participação de cada subconta calculada sobre o total da rubrica indicada. As linhas de totais e subcontas são apresentadas separadamente e não devem ser somadas entre níveis.'
+        : '* A visão principal usa o valor reportado na conta sintética; quando ausente, consolida os descendentes disponíveis sem somar pais e filhos.',
       title,
       { fontSize: 7.5, color: COLORS.muted });
   }
@@ -755,7 +920,7 @@ function drawExpenseChart(doc, data, rows, section) {
     .sort((a, b) => Math.abs(b.value) - Math.abs(a.value))
     .slice(0, 8);
   if (!ranked.length) return;
-  ensureSpace(doc, 55 + ranked.length * 22, section);
+  ensureSpace(doc, 50 + ranked.length * 18, section);
   const startY = doc.y;
   const width = doc.page.width - 2 * MARGIN;
   doc.fillColor(COLORS.ink).font('Helvetica-Bold').fontSize(10)
@@ -767,12 +932,12 @@ function drawExpenseChart(doc, data, rows, section) {
   const barWidth = width - labelWidth - valueWidth - 6;
   const max = Math.max(1, ...ranked.map((item) => Math.abs(item.value)));
   ranked.forEach((item, index) => {
-    const y = chartY + index * 22;
+    const y = chartY + index * 18;
     doc.fillColor(COLORS.muted).font('Helvetica').fontSize(7)
       .text(item.label, MARGIN, y + 4, { width: labelWidth - 8, ellipsis: true, lineBreak: false });
     doc.save();
-    doc.roundedRect(barX, y + 3, barWidth, 10, 3).fill(COLORS.pale);
-    doc.roundedRect(barX, y + 3, Math.max(2, barWidth * Math.abs(item.value) / max), 10, 3)
+    doc.roundedRect(barX, y + 3, barWidth, 8, 3).fill(COLORS.pale);
+    doc.roundedRect(barX, y + 3, Math.max(2, barWidth * Math.abs(item.value) / max), 8, 3)
       .fill(item.value < 0 ? COLORS.coral : COLORS.green);
     doc.restore();
     doc.fillColor(COLORS.ink).font('Helvetica').fontSize(7)
@@ -783,7 +948,7 @@ function drawExpenseChart(doc, data, rows, section) {
         ellipsis: true,
       });
   });
-  doc.y = chartY + ranked.length * 22 + 10;
+  doc.y = chartY + ranked.length * 18 + 8;
   if (latestRows.length > ranked.length) {
     drawParagraph(doc, `Gráfico limitado às 8 contas com maior valor absoluto; a tabela acima mantém todas as rubricas do recorte.`,
       section, { fontSize: 7.5, color: COLORS.muted });
@@ -803,7 +968,8 @@ function financialRootCodes(data) {
 
 function drawFinancialResultSection(doc, data) {
   startSection(doc, '6. Análise do resultado financeiro',
-    'Receitas, despesas e resultado financeiro são exibidos somente quando há rubricas correspondentes na DRE selecionada.');
+    'Receitas, despesas e resultado financeiro são exibidos somente quando há rubricas correspondentes na DRE selecionada.',
+    CHART_HEIGHT + 12);
   drawTrendChart(doc, data, 'financialResult', 'Resultado financeiro por período', 'Análise do resultado financeiro');
 
   const rootCodes = financialRootCodes(data);
@@ -812,7 +978,8 @@ function drawFinancialResultSection(doc, data) {
     const code = accountCode(row, data.mode);
     return rootCode && (code === rootCode
       || (code.startsWith(`${rootCode}.`)
-        && code.split('.').length === rootCode.split('.').length + 1));
+        && (data.params.includeDetails
+          || code.split('.').length === rootCode.split('.').length + 1)));
   }).sort((a, b) => a.dt_fim_exerc.localeCompare(b.dt_fim_exerc)
     || rowCompanyName(data, a).localeCompare(rowCompanyName(data, b))
     || a.cd_conta.localeCompare(b.cd_conta));
@@ -834,7 +1001,8 @@ function drawFinancialResultSection(doc, data) {
 
 function drawComparativeSection(doc, data) {
   startSection(doc, '7. Análise comparativa',
-    'Comparação por empresa e período, sem consolidar valores entre companhias. Percentuais de custos/despesas usam a magnitude da rubrica dividida pela receita.');
+    'Comparação por empresa e período, sem consolidar valores entre companhias. Percentuais de custos/despesas usam a magnitude da rubrica dividida pela receita.',
+    55);
   if (!data.latestPeriod) {
     drawParagraph(doc, 'Não há dados suficientes para uma comparação no recorte selecionado.', 'Análise comparativa');
     return;
@@ -871,9 +1039,14 @@ function drawComparativeSection(doc, data) {
 }
 
 function drawFullDetail(doc, data) {
-  startSection(doc, '8. Detalhamento da base financeira',
-    'Registros retornados pela mesma consulta do dashboard. Valores e escalas nesta seção permanecem conforme reportados na base.');
-  const tableRows = data.rows.map((row) => [
+  const detailRows = data.params.includeDetails ? data.sourceRows : data.rows;
+  startSection(doc,
+    data.params.includeDetails ? '8. Detalhamento da base financeira' : '8. Contas principais consolidadas',
+    data.params.includeDetails
+      ? 'Registros retornados pela mesma consulta do dashboard. Valores e escalas nesta seção permanecem conforme reportados na base.'
+      : 'Contas principais por empresa e período; usa o valor reportado na conta sintética ou consolida os descendentes mais próximos quando o valor principal não existe.',
+    42);
+  const tableRows = detailRows.map((row) => [
     row.periodo,
     rowCompanyName(data, row),
     row.cd_conta,
@@ -946,7 +1119,7 @@ function addPageNumbers(doc) {
   for (let index = pages.start; index < pages.start + pages.count; index += 1) {
     doc.switchToPage(index);
     const { width, height } = doc.page;
-    const y = height - 27;
+    const y = height - 42;
     doc.save();
     doc.moveTo(MARGIN, y - 7).lineTo(width - MARGIN, y - 7)
       .strokeColor(COLORS.line).lineWidth(0.5).stroke();
@@ -963,7 +1136,7 @@ export function generateFinancialReportPdf(data) {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({
       size: 'A4',
-      margins: { top: 52, bottom: 48, left: MARGIN, right: MARGIN },
+      margins: { top: 52, bottom: PDF_BOTTOM_MARGIN, left: MARGIN, right: MARGIN },
       bufferPages: true,
       info: {
         Title: 'Relatório de Análise Financeira',
@@ -981,19 +1154,25 @@ export function generateFinancialReportPdf(data) {
       drawCriteria(doc, data);
       drawAccountSection(doc, data, {
         title: '3. Análise de receitas',
-        description: 'Receita pela rubrica 3.01 e subcontas de primeiro nível, preservando código e descrição do plano de contas.',
+        description: data.params.includeDetails
+          ? 'Receita pela rubrica 3.01 e suas contas subordinadas, preservando códigos e descrições do plano de contas.'
+          : 'Valor principal da receita pela hierarquia de contas da empresa.',
         prefix: '3.01',
         metricKey: 'revenue',
       });
       drawAccountSection(doc, data, {
         title: '4. Análise de custos',
-        description: 'Custos pela rubrica 3.02 e subcontas de primeiro nível. Os valores seguem sinal e escala originais da DRE, convertidos para unidade-base nas análises.',
+        description: data.params.includeDetails
+          ? 'Custos pela rubrica 3.02 e suas contas subordinadas, preservando os valores reportados.'
+          : 'Valor principal dos custos pela hierarquia de contas da empresa.',
         prefix: '3.02',
         metricKey: 'costs',
       });
       drawAccountSection(doc, data, {
         title: '5. Análise de despesas',
-        description: 'Rubrica 3.04 e suas subcontas diretas são exibidas por código e classificação contábil original, sem reclassificar nem agregar contas distintas.',
+        description: data.params.includeDetails
+          ? 'Rubrica 3.04 e suas contas subordinadas, preservando códigos e classificações contábeis originais.'
+          : 'Valor principal das despesas pela hierarquia de contas da empresa.',
         prefix: '3.04',
         metricKey: 'operatingExpenses',
         expenses: true,

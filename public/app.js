@@ -18,6 +18,7 @@ const analysisHeaders = [
   ['moeda', 'Moeda'],
   ['escala_moeda', 'Escala'],
   ['vl_conta', 'Valor'],
+  ['origem_valor', 'Origem do valor'],
   ['st_conta_fixa', 'Fixa'],
 ];
 
@@ -801,7 +802,9 @@ function filterValues(panel) {
   const result = {};
   for (const control of panel.querySelectorAll('[data-filter]')) {
     const key = control.dataset.filter;
-    result[key] = control.multiple ? selectedValues(control) : control.value;
+    result[key] = control.type === 'checkbox'
+      ? control.checked
+      : control.multiple ? selectedValues(control) : control.value;
   }
   return result;
 }
@@ -813,6 +816,7 @@ async function loadOptions(panel) {
   for (const key of ['setor', 'subsetor', 'segmento', 'companyId', 'tipoPeriodo', 'grupoDfp']) {
     if (filters[key]) query.set(key, filters[key]);
   }
+  if (filters.includeDetails) query.set('includeDetails', 'true');
   const options = await request(`/api/options?${query}`);
   const sector = panel.querySelector('[data-filter="setor"]');
   const subsector = panel.querySelector('[data-filter="subsetor"]');
@@ -883,10 +887,13 @@ function updateFilterSummary(panel) {
   const count = controls.reduce((total, control) => {
     if (control.dataset.filter === 'axisSecondary'
       || (control.dataset.filter === 'grupoDfp' && control.value === 'CONSOLIDADO')) return total;
+    if (control.type === 'checkbox') return total + Number(control.checked);
     return total + (control.multiple ? selectedValues(control).length : Number(Boolean(control.value)));
   }, 0);
   for (const control of controls) {
-    const active = control.multiple ? selectedValues(control).length > 0 : Boolean(control.value);
+    const active = control.type === 'checkbox'
+      ? control.checked
+      : control.multiple ? selectedValues(control).length > 0 : Boolean(control.value);
     if (control.type !== 'select-one' && control.type !== 'select-multiple') {
       control.closest('.filter-field')?.classList.toggle('has-value', active);
     }
@@ -927,6 +934,7 @@ function analysisQuery(panel) {
   ]) {
     if (values[key]) query.set(key, values[key]);
   }
+  if (values.includeDetails) query.set('includeDetails', 'true');
   if (values.axisSecondary) query.set('axisSecondary', 'true');
   return { values, query };
 }
@@ -1169,21 +1177,24 @@ async function runAnalysis(panel) {
     renderKpis(mode, result);
     byId(`view-${mode}`).querySelector('[data-chart-currency]').textContent = result.moeda ?? 'Sem dados';
     byId(`view-${mode}`).querySelector('[data-chart-period]').textContent = result.dataBarras ? formatDate(result.dataBarras) : 'Sem dados';
-    byId(`view-${mode}`).querySelector('[data-row-count]').textContent = `${result.linhas.length} registros`;
-    renderAnalysisTable(byId(`view-${mode}`).querySelector('.analysis-table'), result.linhas);
+    const visibleRows = result.linhasVisao ?? result.linhas;
+    byId(`view-${mode}`).querySelector('[data-analysis-table-title]').textContent =
+      values.includeDetails ? 'Detalhamento das contas' : 'Contas principais';
+    byId(`view-${mode}`).querySelector('[data-row-count]').textContent = `${visibleRows.length} registros`;
+    renderAnalysisTable(byId(`view-${mode}`).querySelector('.analysis-table'), visibleRows);
     state.analysisParams[mode] = query;
     state.analysisPeriods[mode] = result.dataBarras ? formatDate(result.dataBarras) : 'Sem dados no período';
     byId('view-dashboard').querySelector('[data-reference-date]').textContent =
       state.analysisPeriods[mode];
-    status.textContent = result.linhas.length
-      ? `${formatNumber(result.linhas.length)} registros · análise atualizada`
+    status.textContent = visibleRows.length
+      ? `${formatNumber(visibleRows.length)} registros · análise atualizada`
       : 'Consulta concluída · nenhum registro encontrado.';
     status.classList.remove('is-stale', 'is-error');
     resultsPanel.classList.remove('is-stale');
     for (const exportButton of byId(`view-${mode}`).querySelectorAll('.export-actions .button')) {
       exportButton.disabled = false;
     }
-    showToast(result.linhas.length ? 'Análise atualizada.' : 'Nenhum registro encontrado para esses filtros.');
+    showToast(visibleRows.length ? 'Análise atualizada.' : 'Nenhum registro encontrado para esses filtros.');
   } catch (error) {
     status.textContent = error.message;
     status.classList.add('is-error');

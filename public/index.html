@@ -240,6 +240,7 @@
             <div class="filter-field"><span id="individual-segmento-label">Segmento</span><button class="filter-trigger" type="button" data-picker-trigger="segmento" aria-labelledby="individual-segmento-label">Todos os segmentos</button><select data-filter="segmento" hidden><option value="">Todos</option></select></div>
             <div class="filter-field"><span id="individual-companyId-label">Empresa</span><button class="filter-trigger" type="button" data-picker-trigger="companyId" aria-labelledby="individual-companyId-label">Selecione uma empresa</button><select data-filter="companyId" hidden><option value="">Selecione</option></select></div>
             <div class="filter-field"><span id="individual-accountCode-label">Conta da empresa</span><button class="filter-trigger" type="button" data-picker-trigger="accountCode" aria-labelledby="individual-accountCode-label" disabled>Selecione uma conta</button><select data-filter="accountCode" hidden disabled><option value="">Selecione</option></select></div>
+            <label class="filter-field account-detail-toggle"><span>Detalhamento de contas</span><span class="account-detail-control"><input data-filter="includeDetails" type="checkbox"><span>Incluir contas analíticas</span></span></label>
             <div class="filter-field"><span id="individual-grupoDfp-label">Modalidade</span><button class="filter-trigger" type="button" data-picker-trigger="grupoDfp" aria-labelledby="individual-grupoDfp-label">Consolidado</button><select data-filter="grupoDfp" hidden><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></div>
             <div class="filter-field"><span id="individual-tipoPeriodo-label">Tipo de período</span><button class="filter-trigger" type="button" data-picker-trigger="tipoPeriodo" aria-labelledby="individual-tipoPeriodo-label">Selecione um tipo</button><select data-filter="tipoPeriodo" hidden><option value="">Selecione</option></select></div>
             <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
@@ -267,7 +268,7 @@
           </div>
           <section class="data-panel">
             <div class="data-heading">
-              <div><p class="eyebrow">BASE ANALÍTICA</p><h3>Detalhamento dos registros</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div><p class="eyebrow">BASE ANALÍTICA</p><h3 data-analysis-table-title>Contas principais</h3><span class="muted" data-row-count>0 registros</span></div>
               <div class="export-actions">
                 <button class="button button-secondary export-pdf" type="button"><span class="button-icon" aria-hidden="true">↓</span>PDF</button>
                 <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>
@@ -296,6 +297,7 @@
             <div class="filter-field"><span id="comparative-segmento-label">Segmento</span><button class="filter-trigger" type="button" data-picker-trigger="segmento" aria-labelledby="comparative-segmento-label">Todos os segmentos</button><select data-filter="segmento" hidden><option value="">Todos</option></select></div>
             <div class="filter-field"><span id="comparative-companyIds-label">Empresas</span><button class="filter-trigger" type="button" data-picker-trigger="companyIds" aria-labelledby="comparative-companyIds-label">Selecione empresas</button><select data-filter="companyIds" multiple hidden></select></div>
             <div class="filter-field"><span id="comparative-accountCode-label">Conta do segmento</span><button class="filter-trigger" type="button" data-picker-trigger="accountCode" aria-labelledby="comparative-accountCode-label" disabled>Selecione uma conta</button><select data-filter="accountCode" hidden disabled><option value="">Selecione</option></select></div>
+            <label class="filter-field account-detail-toggle"><span>Detalhamento de contas</span><span class="account-detail-control"><input data-filter="includeDetails" type="checkbox"><span>Incluir contas analíticas</span></span></label>
             <div class="filter-field"><span id="comparative-grupoDfp-label">Modalidade</span><button class="filter-trigger" type="button" data-picker-trigger="grupoDfp" aria-labelledby="comparative-grupoDfp-label">Consolidado</button><select data-filter="grupoDfp" hidden><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></div>
             <div class="filter-field"><span id="comparative-tipoPeriodo-label">Tipo de período</span><button class="filter-trigger" type="button" data-picker-trigger="tipoPeriodo" aria-labelledby="comparative-tipoPeriodo-label">Selecione um tipo</button><select data-filter="tipoPeriodo" hidden><option value="">Selecione</option></select></div>
             <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
@@ -325,7 +327,7 @@
           </div>
           <section class="data-panel">
             <div class="data-heading">
-              <div><p class="eyebrow">BASE ANALÍTICA</p><h3>Detalhamento dos registros</h3><span class="muted" data-row-count>0 registros</span></div>
+              <div><p class="eyebrow">BASE ANALÍTICA</p><h3 data-analysis-table-title>Contas principais</h3><span class="muted" data-row-count>0 registros</span></div>
               <div class="export-actions">
                 <button class="button button-secondary export-pdf" type="button"><span class="button-icon" aria-hidden="true">↓</span>PDF</button>
                 <button class="button button-secondary export-csv" type="button"><span class="button-icon" aria-hidden="true">↓</span>CSV</button>

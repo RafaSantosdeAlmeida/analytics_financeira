@@ -38,6 +38,7 @@ Carregue as referências na ordem `setor_subsetor_segmento`, `empresas`, `plano_
 - Individual: uma empresa e uma conta do plano empresarial.
 - Comparativa: duas ou mais empresas e conta de nível 1 do plano do segmento. Eixo secundário disponível somente para duas empresas.
 - Períodos anuais, trimestrais e trimestrais acumulados permanecem separados.
+- A análise apresenta por padrão as contas principais do plano de cada empresa/segmento. Se uma conta principal não tiver valor reportado, seu valor é consolidado a partir dos descendentes mais próximos disponíveis, sem somar simultaneamente pais e filhos. Ative **Incluir contas analíticas** para consultar e exportar o detalhamento.
 - Valores dos gráficos são normalizados pela escala reportada. Comparações entre moedas diferentes são bloqueadas; não há conversão cambial.
 - As barras exibem as contas do período mais recente dentro do intervalo selecionado. Na análise comparativa, usam as contas-raiz de segmento para evitar somar níveis hierárquicos duplicados.
 - A exportação em PDF gera um relatório analítico independente, com critérios da consulta, indicadores, variações disponíveis, tabelas, gráficos e detalhamento dos registros retornados pela mesma análise. CSV e XLSX continuam disponíveis.

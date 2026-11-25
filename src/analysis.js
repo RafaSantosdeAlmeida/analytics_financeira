@@ -58,22 +58,23 @@ export function getFilterOptions(database, filters = {}) {
     : [];
 
   let accounts = [];
+  const includeDetails = filters.includeDetails === true || filters.includeDetails === 'true';
   if (filters.mode === 'individual' && filters.companyId) {
     accounts = database.prepare(`
       SELECT DISTINCT p.cd_conta, p.nivel_conta, p.ds_conta_empresa AS descricao
       FROM plano_conta_empresa p
-      WHERE p.id_empresa = ?
+      WHERE p.id_empresa = ? AND (? = 1 OR p.nivel_conta = 1)
       ORDER BY p.cd_conta
-    `).all(Number(filters.companyId));
+    `).all(Number(filters.companyId), Number(includeDetails));
   } else if (filters.mode === 'comparative' && filters.segmento) {
     const segmentId = findSegmentId(database, filters);
     if (segmentId) {
       accounts = database.prepare(`
         SELECT DISTINCT p.cd_conta, p.nivel_conta, p.ds_conta_segmento AS descricao
         FROM plano_conta_segmento p
-        WHERE p.id_segmento = ? AND p.nivel_conta = 1
+        WHERE p.id_segmento = ? AND (? = 1 OR p.nivel_conta = 1)
         ORDER BY p.cd_conta
-      `).all(segmentId);
+      `).all(segmentId, Number(includeDetails));
     }
   }
 
@@ -101,6 +102,80 @@ function normalizeValue(value, scale) {
   return value * scaleMultiplier(scale);
 }
 
+function rootAccountCode(code) {
+  const parts = String(code ?? '').split('.');
+  return parts.length >= 2 ? parts.slice(0, 2).join('.') : null;
+}
+
+function buildPrincipalRows(rows, mode, companyPlans, segmentPlans) {
+  const codeField = mode === 'individual' ? 'cd_conta' : 'cd_conta_segmento';
+  const groups = new Map();
+  for (const row of rows) {
+    const code = row[codeField];
+    if (!code) continue;
+    const rootCode = rootAccountCode(code);
+    if (!rootCode) continue;
+    const key = `${row.id_empresa}|${row.id_periodo}|${rootCode}`;
+    if (!groups.has(key)) groups.set(key, { rootCode, rows: [] });
+    groups.get(key).rows.push(row);
+  }
+
+  const companyDescriptions = new Map(companyPlans.map((row) => [
+    `${row.id_empresa}|${row.cd_conta}`,
+    row.ds_conta_empresa,
+  ]));
+  const segmentDescriptions = new Map(segmentPlans.map((row) => [
+    `${row.id_segmento}|${row.cd_conta}`,
+    row.ds_conta_segmento,
+  ]));
+  const principalRows = [];
+
+  for (const { rootCode, rows: accountRows } of groups.values()) {
+    const reportedRoot = accountRows.find((row) => row[codeField] === rootCode);
+    if (reportedRoot) {
+      principalRows.push(reportedRoot);
+      continue;
+    }
+
+    const descendants = accountRows.filter((row) =>
+      row[codeField].startsWith(`${rootCode}.`));
+    const frontier = descendants.filter((row) => !descendants.some((parent) =>
+      parent !== row && row[codeField].startsWith(`${parent[codeField]}.`)));
+    if (!frontier.length) continue;
+
+    const companyRoot = rootAccountCode(frontier[0].cd_conta);
+    const segmentRoot = rootAccountCode(frontier[0].cd_conta_segmento);
+    const description = mode === 'individual'
+      ? companyDescriptions.get(`${frontier[0].id_empresa}|${rootCode}`)
+      : segmentDescriptions.get(`${frontier[0].id_segmento}|${rootCode}`);
+    const total = frontier.reduce((sum, row) => sum + row.valor_normalizado, 0);
+    principalRows.push({
+      ...frontier[0],
+      cd_conta: companyRoot,
+      cd_conta_segmento: mode === 'comparative' ? rootCode : segmentRoot,
+      nivel_conta: 1,
+      nivel_conta_segmento: segmentRoot ? 1 : null,
+      ds_conta_empresa: companyDescriptions.get(`${frontier[0].id_empresa}|${companyRoot}`)
+        ?? companyRoot,
+      ds_conta_segmento: mode === 'comparative'
+        ? description ?? rootCode
+        : segmentRoot
+          ? segmentDescriptions.get(`${frontier[0].id_segmento}|${segmentRoot}`) ?? segmentRoot
+          : null,
+      vl_conta: total,
+      escala_moeda: 'UNIDADE',
+      valor_normalizado: total,
+      consolidada_da_hierarquia: true,
+      origem_valor: 'Consolidado dos descendentes',
+    });
+  }
+
+  return principalRows.sort((left, right) =>
+    left.dt_fim_exerc.localeCompare(right.dt_fim_exerc)
+      || left.id_empresa - right.id_empresa
+      || String(left.cd_conta).localeCompare(String(right.cd_conta), 'pt-BR', { numeric: true }));
+}
+
 export function queryAnalysis(database, mode, params = {}) {
   if (!['individual', 'comparative'].includes(mode)) {
     throw new Error('Modo de análise inválido.');
@@ -126,12 +201,13 @@ export function queryAnalysis(database, mode, params = {}) {
   const companyMarks = placeholders(companies.length);
   const rows = database.prepare(`
     SELECT
-      e.id_empresa, e.cnpj_cia, e.denom_cia, e.codigo_negociacao,
+      e.id_empresa, e.id_segmento, e.cnpj_cia, e.denom_cia, e.codigo_negociacao,
       st.nome_setor AS setor, ss.nome_subsetor AS subsetor, sg.nome_segmento AS segmento,
-      p.periodo, p.tipo_periodo, p.dt_ini_exerc, p.dt_fim_exerc,
+      p.id_periodo, p.periodo, p.tipo_periodo, p.dt_ini_exerc, p.dt_fim_exerc,
       d.grupo_dfp, d.dt_refer, d.versao, d.ordem_exerc,
       pc.cd_conta, pc.nivel_conta, pc.ds_conta_empresa,
-      ps.cd_conta AS cd_conta_segmento, ps.ds_conta_segmento,
+      ps.cd_conta AS cd_conta_segmento, ps.nivel_conta AS nivel_conta_segmento,
+      ps.ds_conta_segmento,
       d.moeda, d.escala_moeda, d.vl_conta, d.st_conta_fixa
     FROM demonstracao_financeira d
     JOIN empresas e ON e.id_empresa = d.id_empresa
@@ -165,17 +241,38 @@ export function queryAnalysis(database, mode, params = {}) {
   const mappedRows = rows.map((row) => ({
     ...row,
     valor_normalizado: normalizeValue(row.vl_conta, row.escala_moeda),
+    origem_valor: 'Valor reportado',
   }));
-  const lineRows = mappedRows.filter((row) => mode === 'individual'
+  const companyPlans = database.prepare(`
+    SELECT id_empresa, cd_conta, ds_conta_empresa
+    FROM plano_conta_empresa
+    WHERE id_empresa IN (${companyMarks}) AND nivel_conta = 1
+  `).all(...companies);
+  const segmentIds = [...new Set(mappedRows.map((row) => row.id_segmento))];
+  const segmentPlans = segmentIds.length
+    ? database.prepare(`
+        SELECT id_segmento, cd_conta, ds_conta_segmento
+        FROM plano_conta_segmento
+        WHERE id_segmento IN (${placeholders(segmentIds.length)}) AND nivel_conta = 1
+      `).all(...segmentIds)
+    : [];
+  const principalRows = buildPrincipalRows(mappedRows, mode, companyPlans, segmentPlans);
+  const principalCodes = mode === 'individual'
+    ? new Set(companyPlans.filter((row) => row.id_empresa === companies[0])
+      .map((row) => row.cd_conta))
+    : new Set(segmentPlans.map((row) => row.cd_conta));
+  const isPrincipalAccount = principalCodes.has(params.accountCode);
+  const lineSource = isPrincipalAccount ? principalRows : mappedRows;
+  const lineRows = lineSource.filter((row) => mode === 'individual'
     ? row.cd_conta === params.accountCode
     : row.cd_conta_segmento === params.accountCode);
   const latestDate = mappedRows.reduce(
     (latest, row) => row.dt_fim_exerc > latest ? row.dt_fim_exerc : latest,
     '',
   );
-  const barRows = mappedRows.filter((row) => row.dt_fim_exerc === latestDate
-    && (mode === 'individual'
-      || (row.cd_conta_segmento !== null && row.cd_conta === row.cd_conta_segmento)));
+  const visibleRows = params.includeDetails ? mappedRows : principalRows;
+  const barRows = visibleRows.filter((row) => row.dt_fim_exerc === latestDate
+    && (mode === 'individual' || row.cd_conta_segmento !== null));
   const companyNames = new Map(companies.map((id) => {
     const company = rows.find((row) => row.id_empresa === id);
     return [id, company?.codigo_negociacao || company?.denom_cia || `Empresa ${id}`];
@@ -200,7 +297,7 @@ export function queryAnalysis(database, mode, params = {}) {
   const bars = barRows.map((row) => ({
     idEmpresa: row.id_empresa,
     empresa: companyNames.get(row.id_empresa),
-    cdConta: row.cd_conta,
+    cdConta: mode === 'comparative' ? row.cd_conta_segmento : row.cd_conta,
     descricao: mode === 'individual' ? row.ds_conta_empresa : row.ds_conta_segmento,
     moeda: row.moeda,
     escala: row.escala_moeda,
@@ -219,5 +316,7 @@ export function queryAnalysis(database, mode, params = {}) {
     series: [...seriesByCompany.values()],
     barras: bars,
     linhas: mappedRows,
+    linhasPrincipais: principalRows,
+    linhasVisao: visibleRows,
   };
 }
