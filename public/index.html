@@ -235,13 +235,13 @@
             <div class="filter-tools"><span class="filter-count" data-filter-count>0 critérios ativos</span><button class="clear-filters" type="button" data-clear-filters>Limpar filtros</button></div>
           </div>
           <div class="filter-grid">
-            <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
-            <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
-            <label class="filter-field"><span>Segmento</span><select data-filter="segmento"><option value="">Todos</option></select></label>
-            <label class="filter-field"><span>Empresa</span><select data-filter="companyId"><option value="">Selecione</option></select></label>
-            <label class="filter-field"><span>Conta da empresa</span><select data-filter="accountCode"><option value="">Selecione</option></select></label>
-            <label class="filter-field"><span>Modalidade</span><select data-filter="grupoDfp"><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></label>
-            <label class="filter-field"><span>Tipo de período</span><select data-filter="tipoPeriodo"><option value="">Selecione</option></select></label>
+            <div class="filter-field"><span id="individual-setor-label">Setor</span><button class="filter-trigger" type="button" data-picker-trigger="setor" aria-labelledby="individual-setor-label">Todos os setores</button><select data-filter="setor" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="individual-subsetor-label">Subsetor</span><button class="filter-trigger" type="button" data-picker-trigger="subsetor" aria-labelledby="individual-subsetor-label">Todos os subsetores</button><select data-filter="subsetor" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="individual-segmento-label">Segmento</span><button class="filter-trigger" type="button" data-picker-trigger="segmento" aria-labelledby="individual-segmento-label">Todos os segmentos</button><select data-filter="segmento" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="individual-companyId-label">Empresa</span><button class="filter-trigger" type="button" data-picker-trigger="companyId" aria-labelledby="individual-companyId-label">Selecione uma empresa</button><select data-filter="companyId" hidden><option value="">Selecione</option></select></div>
+            <div class="filter-field"><span id="individual-accountCode-label">Conta da empresa</span><button class="filter-trigger" type="button" data-picker-trigger="accountCode" aria-labelledby="individual-accountCode-label" disabled>Selecione uma conta</button><select data-filter="accountCode" hidden disabled><option value="">Selecione</option></select></div>
+            <div class="filter-field"><span id="individual-grupoDfp-label">Modalidade</span><button class="filter-trigger" type="button" data-picker-trigger="grupoDfp" aria-labelledby="individual-grupoDfp-label">Consolidado</button><select data-filter="grupoDfp" hidden><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></div>
+            <div class="filter-field"><span id="individual-tipoPeriodo-label">Tipo de período</span><button class="filter-trigger" type="button" data-picker-trigger="tipoPeriodo" aria-labelledby="individual-tipoPeriodo-label">Selecione um tipo</button><select data-filter="tipoPeriodo" hidden><option value="">Selecione</option></select></div>
             <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
             <label class="filter-field date-field"><span>Até</span><input data-filter="periodEnd" type="date"></label>
           </div>
@@ -291,13 +291,13 @@
             <div class="filter-tools"><span class="filter-count" data-filter-count>0 critérios ativos</span><button class="clear-filters" type="button" data-clear-filters>Limpar filtros</button></div>
           </div>
           <div class="filter-grid">
-            <label class="filter-field"><span>Setor</span><select data-filter="setor"><option value="">Todos</option></select></label>
-            <label class="filter-field"><span>Subsetor</span><select data-filter="subsetor"><option value="">Todos</option></select></label>
-            <label class="filter-field"><span>Segmento</span><select data-filter="segmento"><option value="">Todos</option></select></label>
-            <label class="filter-field multi-field"><span>Empresas <small>Ctrl ou ⌘ para múltiplas</small></span><select data-filter="companyIds" multiple size="3"></select></label>
-            <label class="filter-field"><span>Conta do segmento</span><select data-filter="accountCode"><option value="">Selecione</option></select></label>
-            <label class="filter-field"><span>Modalidade</span><select data-filter="grupoDfp"><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></label>
-            <label class="filter-field"><span>Tipo de período</span><select data-filter="tipoPeriodo"><option value="">Selecione</option></select></label>
+            <div class="filter-field"><span id="comparative-setor-label">Setor</span><button class="filter-trigger" type="button" data-picker-trigger="setor" aria-labelledby="comparative-setor-label">Todos os setores</button><select data-filter="setor" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="comparative-subsetor-label">Subsetor</span><button class="filter-trigger" type="button" data-picker-trigger="subsetor" aria-labelledby="comparative-subsetor-label">Todos os subsetores</button><select data-filter="subsetor" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="comparative-segmento-label">Segmento</span><button class="filter-trigger" type="button" data-picker-trigger="segmento" aria-labelledby="comparative-segmento-label">Todos os segmentos</button><select data-filter="segmento" hidden><option value="">Todos</option></select></div>
+            <div class="filter-field"><span id="comparative-companyIds-label">Empresas</span><button class="filter-trigger" type="button" data-picker-trigger="companyIds" aria-labelledby="comparative-companyIds-label">Selecione empresas</button><select data-filter="companyIds" multiple hidden></select></div>
+            <div class="filter-field"><span id="comparative-accountCode-label">Conta do segmento</span><button class="filter-trigger" type="button" data-picker-trigger="accountCode" aria-labelledby="comparative-accountCode-label" disabled>Selecione uma conta</button><select data-filter="accountCode" hidden disabled><option value="">Selecione</option></select></div>
+            <div class="filter-field"><span id="comparative-grupoDfp-label">Modalidade</span><button class="filter-trigger" type="button" data-picker-trigger="grupoDfp" aria-labelledby="comparative-grupoDfp-label">Consolidado</button><select data-filter="grupoDfp" hidden><option value="CONSOLIDADO">Consolidado</option><option value="INDIVIDUAL">Individual</option></select></div>
+            <div class="filter-field"><span id="comparative-tipoPeriodo-label">Tipo de período</span><button class="filter-trigger" type="button" data-picker-trigger="tipoPeriodo" aria-labelledby="comparative-tipoPeriodo-label">Selecione um tipo</button><select data-filter="tipoPeriodo" hidden><option value="">Selecione</option></select></div>
             <label class="filter-field date-field"><span>De</span><input data-filter="periodStart" type="date"></label>
             <label class="filter-field date-field"><span>Até</span><input data-filter="periodEnd" type="date"></label>
           </div>
@@ -341,6 +341,28 @@
     </main>
 
     <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <dialog class="item-picker" id="item-picker" aria-labelledby="item-picker-title">
+      <div class="item-picker-panel">
+        <div class="item-picker-heading">
+          <div><p class="eyebrow">PESQUISAR E SELECIONAR</p><h2 id="item-picker-title">Selecionar itens</h2></div>
+          <button class="picker-close" type="button" data-picker-close aria-label="Fechar janela">×</button>
+        </div>
+        <label class="picker-search">
+          <svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"></circle><path d="m13 13 4 4"></path></svg>
+          <input type="search" data-picker-search aria-label="Pesquisar opções" placeholder="Pesquisar por nome, descrição ou código" autocomplete="off">
+        </label>
+        <div class="picker-toolbar">
+          <span class="picker-selection-count" data-picker-count>0 selecionados</span>
+          <div><button type="button" class="picker-text-button" data-picker-select-all>Selecionar todos</button><button type="button" class="picker-text-button" data-picker-clear>Limpar seleção</button></div>
+        </div>
+        <div class="picker-options" data-picker-options></div>
+        <p class="picker-empty" data-picker-empty hidden>Nenhum resultado encontrado.</p>
+        <div class="item-picker-footer">
+          <button class="button button-secondary" type="button" data-picker-cancel>Cancelar</button>
+          <button class="button button-primary" type="button" data-picker-apply>Aplicar filtros</button>
+        </div>
+      </div>
+    </dialog>
     </div>
     </div>
   </body>

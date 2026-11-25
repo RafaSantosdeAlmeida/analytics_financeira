@@ -40,6 +40,7 @@ Carregue as referências na ordem `setor_subsetor_segmento`, `empresas`, `plano_
 - Períodos anuais, trimestrais e trimestrais acumulados permanecem separados.
 - Valores dos gráficos são normalizados pela escala reportada. Comparações entre moedas diferentes são bloqueadas; não há conversão cambial.
 - As barras exibem as contas do período mais recente dentro do intervalo selecionado. Na análise comparativa, usam as contas-raiz de segmento para evitar somar níveis hierárquicos duplicados.
+- A exportação em PDF gera um relatório analítico independente, com critérios da consulta, indicadores, variações disponíveis, tabelas, gráficos e detalhamento dos registros retornados pela mesma análise. CSV e XLSX continuam disponíveis.
 
 ## Observações
 

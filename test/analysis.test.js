@@ -4,6 +4,10 @@ import { DatabaseSync } from 'node:sqlite';
 import { initializeDatabase } from '../src/database.js';
 import { queryAnalysis } from '../src/analysis.js';
 import { ingestCsv, persistBatch, stageBatch } from '../src/service.js';
+import {
+  buildFinancialReportData,
+  generateFinancialReportPdf,
+} from '../src/financial-report.js';
   
 const companies = [
   ['00.000.000/0001-91', 'Empresa A', 'A'],
@@ -105,4 +109,27 @@ test('rejects mixed currencies and secondary axis for more than two companies', 
     axisSecondary: true,
   }), /eixo secundário disponível somente para duas empresas/i);
   mixedDatabase.close();
+});
+
+test('builds a financial report from the filtered SQLite analysis and generates a PDF', async () => {
+  const database = createAnalysisDatabase();
+  const report = buildFinancialReportData(database, 'individual', {
+    companyIds: [1],
+    accountCode: '3.01',
+    tipoPeriodo: 'ANUAL',
+    grupoDfp: 'CONSOLIDADO',
+    periodStart: '2025-01-01',
+    periodEnd: '2025-12-31',
+  });
+
+  assert.equal(report.companies.length, 1);
+  assert.equal(report.rows.length, 2);
+  assert.equal(
+    report.metricIndex.get('1|2025-12-31').get('revenue').value,
+    10_000,
+  );
+  const pdf = await generateFinancialReportPdf(report);
+  assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
+  assert.ok(pdf.includes(Buffer.from('%%EOF')));
+  database.close();
 });

@@ -37,6 +37,7 @@ const state = {
   analysisParams: { individual: null, comparative: null },
   analysisPeriods: { individual: null, comparative: null },
   charts: { individual: {}, comparative: {} },
+  activePicker: null,
 };
 
 const byId = (id) => document.getElementById(id);
@@ -613,6 +614,189 @@ function setOptions(select, rows, valueKey, labelBuilder, placeholder = 'Todos',
   }
 }
 
+function filterDefaultLabel(key) {
+  return {
+    setor: 'Todos os setores',
+    subsetor: 'Todos os subsetores',
+    segmento: 'Todos os segmentos',
+    companyId: 'Selecione uma empresa',
+    companyIds: 'Selecione empresas',
+    accountCode: 'Selecione uma conta',
+    grupoDfp: 'Consolidado',
+    tipoPeriodo: 'Selecione um tipo',
+  }[key] ?? 'Selecione';
+}
+
+function updateFilterTriggers(panel) {
+  for (const control of panel.querySelectorAll('select[data-filter]')) {
+    const key = control.dataset.filter;
+    const trigger = panel.querySelector(`[data-picker-trigger="${key}"]`);
+    if (!trigger) continue;
+
+    const label = trigger.closest('.filter-field').querySelector('span');
+    trigger.removeAttribute('aria-labelledby');
+    const selected = control.multiple
+      ? [...control.selectedOptions]
+      : control.value ? [control.selectedOptions[0]].filter(Boolean) : [];
+    const summary = selected.length > 1
+      ? `${selected.length} selecionados`
+      : selected[0]?.textContent ?? filterDefaultLabel(key);
+    trigger.textContent = summary;
+    trigger.disabled = control.disabled;
+    trigger.title = summary;
+    trigger.setAttribute('aria-label', `${label.textContent.trim()}: ${summary}`);
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-controls', 'item-picker');
+    trigger.setAttribute('aria-expanded', String(
+      state.activePicker?.trigger === trigger && byId('item-picker').open,
+    ));
+
+    const isDefault = key === 'grupoDfp' && control.value === 'CONSOLIDADO';
+    const active = selected.length > 0 && !isDefault;
+    control.closest('.filter-field')?.classList.toggle('has-value', active);
+  }
+}
+
+function renderPickerOptions() {
+  const active = state.activePicker;
+  if (!active) return;
+
+  const container = byId('item-picker').querySelector('[data-picker-options]');
+  const search = byId('item-picker').querySelector('[data-picker-search]').value
+    .trim().toLocaleLowerCase('pt-BR');
+  const fragment = document.createDocumentFragment();
+  for (const option of active.options) {
+    const row = document.createElement('label');
+    row.className = 'picker-option';
+    const input = document.createElement('input');
+    input.type = active.multiple ? 'checkbox' : 'radio';
+    input.name = 'picker-selection';
+    input.value = option.value;
+    input.checked = active.draft.includes(option.value);
+    row.classList.toggle('is-selected', input.checked);
+    const label = document.createElement('span');
+    label.textContent = option.label;
+    row.append(input, label);
+    row.hidden = Boolean(search) && !option.label.toLocaleLowerCase('pt-BR').includes(search);
+    fragment.append(row);
+  }
+  container.replaceChildren(fragment);
+  const visibleCount = container.querySelectorAll('.picker-option:not([hidden])').length;
+  byId('item-picker').querySelector('[data-picker-empty]').hidden = visibleCount > 0;
+  const count = active.draft.length;
+  byId('item-picker').querySelector('[data-picker-count]').textContent =
+    `${count} ${count === 1 ? 'item selecionado' : 'itens selecionados'}`;
+  byId('item-picker').querySelector('[data-picker-clear]').disabled = count === 0;
+}
+
+function updatePickerSelection() {
+  const active = state.activePicker;
+  if (!active) return;
+  for (const row of byId('item-picker').querySelectorAll('.picker-option')) {
+    const input = row.querySelector('input');
+    input.checked = active.draft.includes(input.value);
+    row.classList.toggle('is-selected', input.checked);
+  }
+  const count = active.draft.length;
+  byId('item-picker').querySelector('[data-picker-count]').textContent =
+    `${count} ${count === 1 ? 'item selecionado' : 'itens selecionados'}`;
+  byId('item-picker').querySelector('[data-picker-clear]').disabled = count === 0;
+}
+
+function openPicker(panel, trigger) {
+  const key = trigger.dataset.pickerTrigger;
+  const control = panel.querySelector(`select[data-filter="${key}"]`);
+  if (!control || control.disabled) return;
+
+  const dialog = byId('item-picker');
+  const options = [...control.options]
+    .filter((option) => option.value)
+    .map((option) => ({ value: option.value, label: option.textContent }));
+  const title = trigger.closest('.filter-field').querySelector('span').textContent.trim();
+  state.activePicker = {
+    control,
+    draft: control.multiple ? selectedValues(control) : control.value ? [control.value] : [],
+    multiple: control.multiple,
+    options,
+    panel,
+    trigger,
+  };
+  dialog.querySelector('#item-picker-title').textContent = `Selecionar ${title.toLocaleLowerCase('pt-BR')}`;
+  dialog.querySelector('[data-picker-search]').value = '';
+  const selectAll = dialog.querySelector('[data-picker-select-all]');
+  selectAll.disabled = !control.multiple || options.length === 0;
+  selectAll.title = control.multiple ? '' : 'Este filtro permite selecionar um item por vez.';
+  dialog.querySelector('[data-picker-clear]').disabled = state.activePicker.draft.length === 0;
+  renderPickerOptions();
+  dialog.showModal();
+  trigger.setAttribute('aria-expanded', 'true');
+  dialog.querySelector('[data-picker-search]').focus();
+}
+
+function bindPicker() {
+  const dialog = byId('item-picker');
+  for (const panel of document.querySelectorAll('.filter-panel')) {
+    panel.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-picker-trigger]');
+      if (trigger) openPicker(panel, trigger);
+    });
+  }
+  dialog.querySelector('[data-picker-search]').addEventListener('input', renderPickerOptions);
+  dialog.querySelector('[data-picker-options]').addEventListener('change', (event) => {
+    const active = state.activePicker;
+    if (!active || !event.target.matches('input')) return;
+    if (active.multiple) {
+      active.draft = event.target.checked
+        ? [...new Set([...active.draft, event.target.value])]
+        : active.draft.filter((value) => value !== event.target.value);
+    } else {
+      active.draft = event.target.checked ? [event.target.value] : [];
+    }
+    updatePickerSelection();
+  });
+  dialog.querySelector('[data-picker-select-all]').addEventListener('click', () => {
+    const active = state.activePicker;
+    if (!active?.multiple) return;
+    active.draft = active.options.map((option) => option.value);
+    updatePickerSelection();
+  });
+  dialog.querySelector('[data-picker-clear]').addEventListener('click', () => {
+    if (!state.activePicker) return;
+    state.activePicker.draft = [];
+    updatePickerSelection();
+  });
+  const closePicker = () => dialog.close();
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !state.activePicker || !dialog.open) return;
+    event.preventDefault();
+    closePicker();
+  }, true);
+  dialog.querySelector('[data-picker-close]').addEventListener('click', closePicker);
+  dialog.querySelector('[data-picker-cancel]').addEventListener('click', closePicker);
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) closePicker();
+  });
+  dialog.addEventListener('close', () => {
+    if (state.activePicker) {
+      state.activePicker.trigger.setAttribute('aria-expanded', 'false');
+      state.activePicker = null;
+    }
+  });
+  dialog.querySelector('[data-picker-apply]').addEventListener('click', () => {
+    const active = state.activePicker;
+    if (!active) return;
+    const { control, draft, multiple, panel } = active;
+    if (multiple) {
+      for (const option of control.options) option.selected = draft.includes(option.value);
+    } else {
+      control.value = draft[0] ?? '';
+    }
+    updateFilterTriggers(panel);
+    dialog.close();
+    control.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+}
+
 function filterValues(panel) {
   const result = {};
   for (const control of panel.querySelectorAll('[data-filter]')) {
@@ -691,17 +875,21 @@ async function loadOptions(panel) {
 
   updateComparativeControls(panel);
   updateFilterSummary(panel);
+  updateFilterTriggers(panel);
 }
 
 function updateFilterSummary(panel) {
   const controls = [...panel.querySelectorAll('[data-filter]')];
   const count = controls.reduce((total, control) => {
-    if (control.dataset.filter === 'axisSecondary') return total;
+    if (control.dataset.filter === 'axisSecondary'
+      || (control.dataset.filter === 'grupoDfp' && control.value === 'CONSOLIDADO')) return total;
     return total + (control.multiple ? selectedValues(control).length : Number(Boolean(control.value)));
   }, 0);
   for (const control of controls) {
     const active = control.multiple ? selectedValues(control).length > 0 : Boolean(control.value);
-    control.closest('.filter-field')?.classList.toggle('has-value', active);
+    if (control.type !== 'select-one' && control.type !== 'select-multiple') {
+      control.closest('.filter-field')?.classList.toggle('has-value', active);
+    }
   }
   const output = panel.querySelector('[data-filter-count]');
   output.textContent = `${count} ${count === 1 ? 'critério ativo' : 'critérios ativos'}`;
@@ -733,7 +921,10 @@ function analysisQuery(panel) {
     ? values.companyId ? [values.companyId] : []
     : values.companyIds;
   if (companies.length) query.set('companyIds', companies.join(','));
-  for (const key of ['accountCode', 'tipoPeriodo', 'grupoDfp', 'periodStart', 'periodEnd']) {
+  for (const key of [
+    'setor', 'subsetor', 'segmento', 'accountCode', 'tipoPeriodo', 'grupoDfp',
+    'periodStart', 'periodEnd',
+  ]) {
     if (values[key]) query.set(key, values[key]);
   }
   if (values.axisSecondary) query.set('axisSecondary', 'true');
@@ -1134,7 +1325,7 @@ function bindFilters() {
 function bindExports() {
   for (const mode of ['individual', 'comparative']) {
     byId(`view-${mode}`).querySelector('.export-pdf')
-      .addEventListener('click', () => window.print());
+      .addEventListener('click', () => downloadExport(mode, 'pdf'));
     byId(`view-${mode}`).querySelector('.export-csv')
       .addEventListener('click', () => downloadExport(mode, 'csv'));
     byId(`view-${mode}`).querySelector('.export-xlsx')
@@ -1169,6 +1360,7 @@ async function initialize() {
   }
   bindUpload();
   bindStagingTable();
+  bindPicker();
   bindFilters();
   bindExports();
 

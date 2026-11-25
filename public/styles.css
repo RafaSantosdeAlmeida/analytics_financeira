@@ -219,11 +219,43 @@ tbody tr:last-child td { border-bottom: 0; }
 .filter-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 12px; }
 .filter-field { display: flex; flex-direction: column; min-width: 0; gap: 6px; color: #5e6d65; font-size: 10px; font-weight: 600; }
 .filter-field select, .filter-field input { width: 100%; min-width: 0; height: 37px; padding: 0 10px; color: var(--ink); background: #fff; border: 1px solid #d9e2dc; border-radius: 4px; outline: none; font-size: 11px; }
+.filter-trigger { position: relative; width: 100%; min-width: 0; height: 37px; overflow: hidden; padding: 0 31px 0 10px; color: var(--ink); background: #fff; border: 1px solid #d9e2dc; border-radius: 4px; text-align: left; text-overflow: ellipsis; white-space: nowrap; outline: none; font-size: 11px; font-weight: 400; }
+.filter-trigger::after { position: absolute; top: 50%; right: 12px; width: 7px; height: 7px; content: ''; border-right: 1.5px solid #718078; border-bottom: 1.5px solid #718078; transform: translateY(-70%) rotate(45deg); }
+.filter-trigger:hover:not(:disabled) { border-color: #a9beb0; background: #fff; }
+.filter-trigger:focus-visible { border-color: #5e9d7e; box-shadow: 0 0 0 3px rgb(34 117 82 / 10%); }
+.filter-trigger:disabled { color: #9ca8a1; background: #f4f6f4; }
 .filter-field select:focus, .filter-field input:focus { border-color: #5e9d7e; box-shadow: 0 0 0 3px rgb(34 117 82 / 10%); }
 .filter-field select:disabled, .filter-field input:disabled { color: #9ca8a1; background: #f4f6f4; }
 .multi-field select { min-height: 76px; height: 76px; padding: 4px 8px; }
 .multi-field option { padding: 4px; }
 .multi-field small { display: block; margin-top: 2px; color: #9aa69f; font-size: 9px; font-weight: 400; }
+.item-picker { width: min(540px, calc(100vw - 28px)); max-width: none; max-height: min(690px, calc(100vh - 28px)); max-height: min(690px, calc(100dvh - 28px)); margin: auto; padding: 0; overflow: hidden; color: var(--ink); background: transparent; border: 0; border-radius: 10px; }
+.item-picker::backdrop { background: rgb(17 35 26 / 40%); backdrop-filter: blur(2px); }
+.item-picker-panel { display: flex; max-height: min(690px, calc(100vh - 28px)); max-height: min(690px, calc(100dvh - 28px)); flex-direction: column; padding: 20px; background: #fff; border: 1px solid #e1e8e2; border-radius: 10px; box-shadow: 0 22px 70px rgb(16 38 27 / 22%); }
+.item-picker-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 15px; }
+.item-picker-heading .eyebrow { margin-bottom: 5px; font-size: 9px; }
+.item-picker-heading h2 { font-size: 18px; }
+.picker-close { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; padding: 0; color: #728078; background: #f4f7f4; border: 1px solid #e6ece7; border-radius: 6px; font-size: 21px; line-height: 1; }
+.picker-search { height: 40px; flex: 0 0 40px; display: flex; align-items: center; gap: 9px; padding: 0 11px; background: #fbfcfb; border: 1px solid #dfe7e0; border-radius: 6px; }
+.picker-search:focus-within { background: #fff; border-color: #83a48d; box-shadow: 0 0 0 3px rgb(57 116 78 / 9%); }
+.picker-search svg { width: 17px; height: 17px; flex: 0 0 17px; fill: none; stroke: #77877c; stroke-width: 1.7; stroke-linecap: round; }
+.picker-search input { width: 100%; min-width: 0; height: 100%; padding: 0; color: var(--ink); background: transparent; border: 0; outline: 0; font-size: 11px; }
+.picker-search input::placeholder { color: #9aa69e; }
+.picker-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 1px 9px; }
+.picker-selection-count { color: #7a887f; font: 10px 'DM Mono', monospace; }
+.picker-toolbar > div { display: flex; gap: 13px; }
+.picker-text-button { padding: 2px 0; color: var(--green); background: transparent; border: 0; font-size: 10px; font-weight: 600; }
+.picker-text-button:hover:not(:disabled) { color: var(--green-dark); text-decoration: underline; text-underline-offset: 3px; }
+.picker-text-button:disabled { color: #9ca8a1; }
+.picker-options { min-height: 112px; max-height: min(330px, 42vh); overflow: auto; border: 1px solid #e8eee9; border-radius: 6px; }
+.picker-option { min-height: 40px; display: flex; align-items: center; gap: 10px; padding: 8px 11px; color: #526158; background: #fff; border-bottom: 1px solid #eff3f0; cursor: pointer; font-size: 11px; font-weight: 400; line-height: 1.45; overflow-wrap: anywhere; }
+.picker-option:last-child { border-bottom: 0; }
+.picker-option:hover { background: #f7faf7; }
+.picker-option.is-selected { color: #28523a; background: #eff6f0; }
+.picker-option input { width: 15px; height: 15px; flex: 0 0 15px; margin: 0; accent-color: var(--green); }
+.picker-empty { margin: 0; padding: 27px 12px; color: #829087; background: #fbfcfb; border: 1px solid #e8eee9; border-radius: 6px; font-size: 11px; text-align: center; }
+.item-picker-footer { display: flex; justify-content: flex-end; gap: 8px; padding-top: 15px; }
+.item-picker-footer .button { min-height: 35px; border-radius: 5px; font-size: 11px; }
 .filter-footer { display: flex; align-items: center; gap: 14px; min-height: 49px; margin-top: 15px; padding-top: 13px; border-top: 1px solid #edf1ee; }
 .filter-footer .run-analysis { margin-left: auto; }
 .axis-toggle { display: inline-flex; align-items: center; gap: 8px; color: #64736a; font-size: 10px; cursor: pointer; }
@@ -359,7 +391,8 @@ tbody tr:last-child td { border-bottom: 0; }
 #view-dashboard .filter-panel { padding: 20px; }
 #view-dashboard .filter-field { gap: 7px; color: #4e6056; font-size: 11px; }
 #view-dashboard .filter-field select,
-#view-dashboard .filter-field input {
+#view-dashboard .filter-field input,
+#view-dashboard .filter-field .filter-trigger {
   height: 40px;
   padding-right: 11px;
   padding-left: 11px;
@@ -610,14 +643,16 @@ tbody tr:last-child td { border-bottom: 0; }
   font-size: 11px;
 }
 #view-dashboard .filter-field select:focus,
-#view-dashboard .filter-field input:focus {
+#view-dashboard .filter-field input:focus,
+#view-dashboard .filter-field .filter-trigger:focus {
   background: #fff;
   border-color: #83a48d;
   box-shadow: 0 0 0 3px rgb(57 116 78 / 9%);
 }
 #view-dashboard .filter-field.has-value > span { color: #42684e; }
 #view-dashboard .filter-field.has-value select:not(:disabled),
-#view-dashboard .filter-field.has-value input:not(:disabled) {
+#view-dashboard .filter-field.has-value input:not(:disabled),
+#view-dashboard .filter-field.has-value .filter-trigger:not(:disabled) {
   background-color: #f7faf7;
   border-color: #c5d6c8;
 }

@@ -6,6 +6,7 @@ import path from 'node:path';
 import ExcelJS from 'exceljs';
 import { getFilterOptions, queryAnalysis } from './src/analysis.js';
 import { initializeDatabase } from './src/database.js';
+import { createFinancialReportPdf } from './src/financial-report.js';
 import {
   countBatchRows,
   getBatch,
@@ -157,6 +158,9 @@ function analysisParams(query) {
   return {
     companyIds: query.companyIds,
     accountCode: query.accountCode,
+    setor: query.setor,
+    subsetor: query.subsetor,
+    segmento: query.segmento,
     tipoPeriodo: query.tipoPeriodo,
     grupoDfp: query.grupoDfp,
     periodStart: query.periodStart,
@@ -201,10 +205,23 @@ function exportRows(mode, query) {
 
 app.get('/api/export/:mode', async (request, response, next) => {
   try {
-    const rows = exportRows(request.params.mode, request.query);
-    const format = request.query.format === 'xlsx' ? 'xlsx' : 'csv';
+    const format = ['pdf', 'xlsx'].includes(request.query.format) ? request.query.format : 'csv';
     const baseName = `analytics-financeira-${request.params.mode}`;
 
+    if (format === 'pdf') {
+      const pdf = await createFinancialReportPdf(
+        database,
+        request.params.mode,
+        analysisParams(request.query),
+      );
+      response.setHeader('Content-Type', 'application/pdf');
+      response.setHeader('Content-Disposition', `attachment; filename="${baseName}-relatorio.pdf"`);
+      response.setHeader('Content-Length', pdf.length);
+      response.send(pdf);
+      return;
+    }
+
+    const rows = exportRows(request.params.mode, request.query);
     if (format === 'csv') {
       const escape = (value) => {
         const text = value === null || value === undefined ? '' : String(value);
